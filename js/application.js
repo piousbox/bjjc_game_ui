@@ -1,8 +1,8 @@
 
 function px2int(px) {
-  var tmp = px.substring(0, px.length - 2)
-  tmp = parseInt(tmp)
-  return tmp
+  var tmp = px.substring(0, px.length - 2);
+  tmp = parseInt(tmp);
+  return tmp;
 }
 
 function doResize() {
@@ -16,7 +16,7 @@ function doResize() {
   });
 
   // fix top of inventoryCollapse
-  var newTop = ($("#worldMap").height() - 30) + "px";
+  var newTop = ($("#worldMap2").height() - 30) + "px";
   $("#inventoryCollapse").css('top', newTop);
 }
 
@@ -38,38 +38,38 @@ function doResize() {
       if (settings.scrollVertical) return 'row-resize';
       if (settings.scrollHorizontal) return 'col-resize';
     }
-
+   
+    // height: 750
+    // width 1333
     var updateScrollPos = function(e, el) {
       var $el = $(el);
 
       $('html').css('cursor', getCursor());
 
-      // settings.scrollVertical && $el.scrollTop($el.scrollTop() + (clickY - e.pageY));
-      // settings.scrollHorizontal && $el.scrollLeft($el.scrollLeft() + (clickX - e.pageX));
+      var setTop = $el.offset().top + (clickY - e.pageY)
 
-      var setTop = px2int($el.css('top')) + (clickY - e.pageY);
-      var maxTop = $el.height() - $("#worldMap").height();
+      var maxTop = $el.height() - $("#worldMap2").height();
 
-      var setLeft = $el.css('left');
-      setLeft = setLeft.substring(0, setLeft.length - 2);
-      setLeft = parseInt(setLeft) + (clickX - e.pageX);
-      var maxLeft = $el.width() - $("#worldMap").width();
+      var setLeft = $el.offset().left + (clickX - e.pageX);
+      var maxLeft = $el.width() - $("#worldMap2").width();
+
+      console.log("+++ +++ set top, left:", setTop, setLeft)
 
       if (settings.scrollVertical && setTop < 0 && setTop > -maxTop) {
-        $el.css('top', setTop);
+        $el.offset({top: setTop});
       }
-      if (settings.scrollHorizontal && setLeft < 0 && setLeft > -maxLeft) {
-        $el.css('left', setLeft);
+      if (settings.scrollHorizontal && setLeft < 0 && setLeft > -846) {
+        $el.offset({left: setLeft});
       }
     }
 
     $(document).on({
       'mousemove': function(e) {
-        clicked && updateScrollPos(e, '#worldMap .container');
+        clicked && updateScrollPos(e, '#worldMap2 .container');
       },
       'mousedown': function(e) {
-        if (e.pageY < $("#worldMap").height() &&
-            e.pageX < $("#worldMap").width()
+        if (e.pageY < $("#worldMap2").height() &&
+            e.pageX < $("#worldMap2").width()
         ) {
           clicked = true;
         }
@@ -88,6 +88,20 @@ $.dragScroll();
 
 $(document).ready(function () {
   doResize();
+
+  $("#worldMap2").scroll(function(e) {
+    console.log("+++ scrolling event:", e)
+
+    $e = $(e.target);
+    window.e = e;
+    if ($e.offset().left > 0 ) {
+      $e.offset({left: 0 });
+    }
+    if ($e.offset().left < -845) {
+      $e.offset({ left: -1333 });
+    }
+  });
+
 });
 
 window.onresize = function () { doResize() };
@@ -95,14 +109,14 @@ window.onresize = function () { doResize() };
 var worldMapCollapsed = false;
 function worldMapCollapse () {
   if (worldMapCollapsed) {
-    $("#worldMap").css('width', '33%');
-    $("#worldMapCollapse").css('left', '33%');
+    $("#worldMap2").css('width', '33%');
+    $("#worldMap2Collapse").css('left', '33%');
     $("#locationMap").css('left', '33%');
     $("#locationMap").css('width', '67%');
     worldMapCollapsed = false;
   } else {
-    $("#worldMap").css('width', '2%');
-    $("#worldMapCollapse").css('left', '2%');
+    $("#worldMap2").css('width', '2%');
+    $("#worldMap2Collapse").css('left', '2%');
     $("#locationMap").css('left', '2%');
     $("#locationMap").css('width', '98%');
     worldMapCollapsed = true;
@@ -110,4 +124,3 @@ function worldMapCollapse () {
   doResize();
 };
 
-$("#worldMap .container").dragend();

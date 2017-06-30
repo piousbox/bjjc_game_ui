@@ -8,7 +8,7 @@ html, body {
   display: none;
 }
 #worldMap {
-  overflow: hidden; 
+  overflow: scroll;
 
   border-right: 10px solid #666666;
   box-sizing: border-box;
@@ -19,6 +19,20 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
+
+  z-index: -10;
+}
+#worldMap2 {
+  overflow: scroll;
+
+  height: 80%;
+  width: 33%;
+}
+#worldMap2 .container { 
+  background: url('images/world_1.jpg') #339933;
+  background-size: 1333px 750px;
+  width: 1333px;
+  height: 750px;
 
   z-index: -10;
 }

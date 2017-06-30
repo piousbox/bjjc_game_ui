@@ -1,0 +1,2 @@
+0.0.0 - works on desktop but not on mobile
+0.0.1 - let's make the world map work on mobile (doesn't work)
