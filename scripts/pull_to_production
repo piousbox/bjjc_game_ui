@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -ex
+
+cd /home/ubuntu/projects/tgm_react
+git reset origin/master --hard
+git pull
+sudo service apache2 reload

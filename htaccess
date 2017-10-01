@@ -1,0 +1,11 @@
+
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteRule ^(en|ru|pt)/reports/view/(.*)$ http://travel-guide.mobi/$1/reports/show/$2 [R=301,L]
+
+## rewrite for react v2
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^ index.html [L]

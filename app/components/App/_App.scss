@@ -1,0 +1,25 @@
+@import "toolkit";
+
+.app {
+  font-size: inherit;
+  @include my-padding-mixin(20px);
+}
+
+.wrap {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 3px solid #ccc;
+  text-align: center
+}
+.wrap p { 
+  text-align: left;
+}
+.topRow {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.services {
+  padding-top: 3em;
+}

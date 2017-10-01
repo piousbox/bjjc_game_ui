@@ -1,0 +1,21 @@
+@import "toolkit";
+
+.footer1 {
+  margin-top: 1em;
+  padding-top: 1em;
+}
+
+/* social media icons  */
+ul.socialMediaIcons {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ul.socialMediaIcons li {
+  display: inline;
+  list-style-type: none;
+}
+.socialMediaIcons img {
+  width: 40px;
+  margin-left: 10px;
+}
