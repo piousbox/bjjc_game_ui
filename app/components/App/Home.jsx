@@ -59,7 +59,7 @@ class Home extends React.Component {
   }
 
   render () {
-    // console.log('+++ +++ rendering Home:', this.props)
+    // console.log('+++ +++ rendering Home:', this.props, this.state)
 
     let newsitems = []
     if (this.props.siteNewsitems) {
@@ -71,6 +71,23 @@ class Home extends React.Component {
     return (
       <div style={{ marginTop: '60px' }}>
         <Grid>
+          <Row>
+            <Col xs={12}>
+              <h1>Hello!</h1>
+              <ul>
+                <li>
+                  <ul style={{ marginLeft: '1em' }} >
+                    <li><Link to="/categories/technique">BJJ Technique</Link></li>
+                    <li><Link to="/categories/salsa">Salsa</Link></li>
+                    <li><Link to="/categories/billiards">Playing Pool</Link></li>
+                  </ul>
+                </li>
+                <li><Link to="/tgm2">Gameui</Link></li>
+                <li><Link to="/shop">Shop</Link></li>
+              </ul>
+            </Col>
+          </Row>
+
           <Features features={this.props.site.features} />
 
           <Row>

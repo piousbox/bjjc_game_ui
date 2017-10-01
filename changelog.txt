@@ -39,3 +39,4 @@
          maybe map marginally works in react?
 0.1.4  - let's have fb login, with bjjc backend, and work on stripe integration
          major changes to fb auth
+0.1.5 - let's merge fg (the categorization tree) into the game ui
