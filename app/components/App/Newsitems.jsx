@@ -9,8 +9,6 @@ import styles from './_Newsitems.scss'
 
 import { siteNewsitemsAction, siteShow } from '../../actions'
 
-import Leaderboard from './Leaderboard'
-
 class Newsitems extends React.Component {
 
   constructor(props) {
@@ -44,12 +42,7 @@ class Newsitems extends React.Component {
       newsitems.forEach((n, _) => {
         listitems.push(
           <Newsitem key={idx++} newsitem={ n } />
-        )
-        
-        if (Math.random() < 0.5 && nAds) {
-          listitems.push(<Leaderboard key={idx++} />)
-          nAds--
-        }
+        )        
       })
     }
     

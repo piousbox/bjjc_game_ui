@@ -9,8 +9,6 @@ import { Link } from 'react-router'
 
 import { Panel } from 'react-bootstrap'
 
-import LargeSquare from '../App/LargeSquare'
-
 class VideosIndex extends React.Component {
 
   constructor(props) {
@@ -34,10 +32,6 @@ class VideosIndex extends React.Component {
             <div dangerouslySetInnerHTML={{ __html: video.descr }} />
           </Panel>
         )
-        if (idx === 1) {
-          videos.push(<LargeSquare key={idx++} />)
-          videos.push(<hr key={idx++} />)
-        }
       })
     }
 

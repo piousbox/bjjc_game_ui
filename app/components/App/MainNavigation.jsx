@@ -11,12 +11,8 @@ import { connect } from 'react-redux'
 
 import styles from './_App.scss'
 import Footer from './Footer'
-import Leaderboard from './Leaderboard'
 
 import config from 'config'
-import {
-  SET_API_URL,
-} from '../../constants/AppConstants'
 
 import AppDispatcher from '../../dispatcher/AppDispatcher'
 import { LinkContainer } from 'react-router-bootstrap'
@@ -83,7 +79,6 @@ class MainNavigation extends React.Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Leaderboard />
         { this.props.children }
         <Footer apiUrl={this.props.apiUrl} domain={this.props.domain} />
       </div>

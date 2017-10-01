@@ -5,7 +5,7 @@
 
 import {
   SET_GALLERY,
-} from '../constants/AppConstants'
+} from '../constants'
 
 import AppDispatcher from '../dispatcher/AppDispatcher'
 import config from 'config'

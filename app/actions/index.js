@@ -1,49 +1,20 @@
 
 /*
- * tgm_react (of bjjc) appActions.js
+ * bjjc_react appActions.js
  */
-
-// import ReduxThunk from 'redux-thunk'
 
 import AppDispatcher from '../dispatcher/AppDispatcher'
 
 import {
-  DO_LOGOUT,
-
-  ITEMS_GET_SUCCESS,
-  ITEMS_GET_ERROR,
-
   SET_API_URL,
 
-  SET_CITIES_INDEX,
-  SET_CITIES_SHOW,
-  SET_CITY,
+  SET_INDEX_CATEGORY,
+  SET_SHOW_CATEGORY,
 
-  SET_GALLERY,
-  SET_GALLERIES,
-
-  SET_LOCATION,
-
-  SET_MY_GALLERIES,
-  SET_MY_REPORTS,
-
-  SET_PROFILE,
-
-  SET_REPORT,
-  SET_REPORTS,
-
-  SET_SITE,
-  SET_SITE_NEWSITEMS,
-
-  SET_TGM2_HOME,
-
-  SET_VENUE,
-
-} from '../constants/AppConstants';
+  SET_VIDEO,
+} from '../constants';
 
 import config from 'config'
-
-import TgmApi from '../components/App/TgmApi'
 
 const setApiUrl = () => {
   return {
@@ -52,61 +23,81 @@ const setApiUrl = () => {
   }
 }
 
-const setLocation = (locationName) => {
+const categoriesIndex = (params) => {
   return (dispatch, getState) => {
-    let url = `${config.apiUrl}/api/locations/${locationName}.json`
+    let state = getState()
+    let url = `${config.apiUrl}/api/categories`
+    if (params.slug_0) {
+      url = `${url}/${params.slug_0}`
+      if (params.slug_1) {
+        url = `${url}/${params.slug_1}`
+        if (params.slug_2) {
+          url = `${url}/${params.slug_2}`
+          if (params.slug_3) {
+            url = `${url}/${params.slug_3}`
+            if (params.slug_4) {
+              url = `${url}/${params.slug_4}`
+              if (params.slug_5) {
+                url = `${url}/${params.slug_5}`
+                if (params.slug_6) {
+                  url = `${url}/${params.slug_6}`
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    // console.log('+++ +++ categoriesIndex() action params:', params, 'url:', url)
+    fetch(url).then(r => r.json()).then(_data => {
+      console.log('+++ +++ categoriesIndex() action got data:', _data)
+      let obj = Object.assign({}, _data, { type: SET_INDEX_CATEGORY })
+      dispatch(obj)
+    })
+  }
+}
+
+const videosShowAction = (youtubeId) => {
+  return (dispatch, getState) => {
+    let state = getState()
+    let url = `${config.apiUrl}/api/videos/view/${youtubeId}`
+    fetch(url).then(r => r.json()).then(_data => {
+      console.log("+++ +++ got video data:", _data)
+      let obj = Object.assign({}, _data, { type: SET_VIDEO })
+      dispatch(obj)
+    })
+  }
+}
+
+const categoriesShow = (variables) => {
+  return (dispatch, getState) => {
+    let state = getState()
+    let url = `${config.apiUrl}/api/categories.json`    
     fetch(url).then(r => r.json()).then(_data => {
       dispatch({
-        type: SET_LOCATION,
-        location: _data,
+        type: SET_CATEGORIES_INDEX,
+        categories: _data,
       })
     })
   }
 }
 
-const profileAction = () => {
-  return (dispatch, getState) => {
-    if (localStorage.getItem('fbAccount')) {
-      let fbAccount = JSON.parse(localStorage.getItem('fbAccount'))
-      fetch(TgmApi.profile, {
-        method: 'POST',
-        headers: new Headers({
-          'Content-Type': 'application/json',
-        }),
-        body: localStorage.getItem('fbAccount'),
-      }).then(r => r.json()).then(_data => {
-        fbAccount = Object.assign({}, fbAccount, _data)
-        dispatch({ type: SET_PROFILE, fbAccount: fbAccount })
-      })
-    }
-    dispatch({ type: SET_PROFILE, fbAccount: null })
-  }
-}
 
-const loginAction = (r2) => {
-  return (dispatch, getState) => {
-    localStorage.setItem('fbAccount', JSON.stringify(r2))
-    dispatch(profileAction())
-  }
-}
-
-const logoutAction = () => {
-  localStorage.removeItem('fbAccount')
-  return({ type: SET_PROFILE, fbAccount: null }) 
-}
-
-const citiesIndex = () => {
+/* const citiesIndex = () => {
   return (dispatch, getState) => { 
     let state = getState()
     let url = config.apiUrl + "/api/cities.json"
     
-    if (state.cities.length > 0) {
+    if (state.citiesIndex.length > 0) {
       dispatch({
         type: SET_CITIES_INDEX,
-        cities: state.cities
+        cities: state.citiesIndex
       })
     } else {
       fetch(url).then(r => r.json()).then(_data => {
+
+        console.log('+++ +++ _data is:', _data)
+
         dispatch({
           type: SET_CITIES_INDEX,
           cities: _data,
@@ -121,6 +112,7 @@ const citiesShow = (args) => {
     let state = getState()
     let url = `${config.apiUrl}/api/cities/view/${args.cityname}.json`
     fetch(url).then(r => r.json()).then(_data => {
+      console.log("+++ +++ citiesShow() data:", _data)
       dispatch({
         type: SET_CITY,
         cityname: args.cityname,
@@ -131,22 +123,13 @@ const citiesShow = (args) => {
   }
 }
 
-const galleriesIndex = (args) => {
-  return (dispatch, getState) => {
-    let url = `${config.apiUrl}/api/galleries.json?cityname=${args.cityname}`
-    fetch(url).then(r => r.json()).then(_data => {
-      dispatch({
-        type: SET_GALLERIES,
-        galleries: _data,
-      })
-    })
-  }
-}
-
 const galleriesShow = (args) => {
+  console.log("+++ +++ start action galleriesShow:", args)
+
   return (dispatch, getState) => {
     let url = `${config.apiUrl}/api/galleries/view/${args.galleryname}.json`
     fetch(url).then(r => r.json()).then(_data => {
+      console.log("+++ +++ galleriesShow() data:", _data)
       dispatch({
         type: SET_GALLERY,
         galleryname: args.galleryname,
@@ -156,57 +139,19 @@ const galleriesShow = (args) => {
   }
 }
 
-const myGalleriesAction = (args) => {
-  return (dispatch, getState) => {
-    dispatch({
-      type: SET_MY_GALLERIES,
-    })
-  }
-}
-
-const myReportsAction = (args) => {
-  return (dispatch, getState) => {
-    dispatch({
-      type: SET_MY_REPORTS,
-    })
-  }
-}
-
 const reportsShow = (args) => {
   return (dispatch, getState) => {
     let url = `${config.apiUrl}/api/reports/view/${args.reportname}.json`
     fetch(url).then(r => r.json()).then(_data => {
+      console.log("+++ +++ reportsShow data:", _data)
       dispatch({
         type: SET_REPORT,
         report: _data.report,
       })
     })
   }
-}
+} */
 
-const reportsIndex = (args) => {
-  return (dispatch, getState) => {
-    let url = `${config.apiUrl}/api/reports.json?cityname=${args.cityname}`
-    fetch(url).then(r => r.json()).then(_data => {
-      dispatch({
-        type: SET_REPORTS,
-        reports: _data,
-      })
-    })
-  }
-}
-
-const venuesShow = (args) => {
-  return (dispatch, getState) => {
-    let url = `${config.apiUrl}/api/venues/view/${args.venuename}.json`
-    fetch(url).then(r => r.json()).then(_data => {
-      dispatch({
-        type: SET_VENUE,
-        venue: _data.venue,
-      })
-    })
-  }
-}
 
 const siteNewsitemsAction = (args = {}) => {
   return (dispatch, getState) => {
@@ -240,26 +185,12 @@ const siteShow = () => {
 }
 
 export default {
-  citiesIndex,
-  citiesShow,
-
-  galleriesIndex,
-  galleriesShow,
-
-  loginAction,
-  logoutAction,
-  profileAction,
-
-  myReportsAction,
-  myGalleriesAction,
-
-  reportsShow,
-  reportsIndex,
-
   setApiUrl,
-  setLocation,
-  siteShow,
   siteNewsitemsAction,
+  siteShow,
 
-  venuesShow,
+  categoriesIndex,
+  categoriesShow,
+
+  videosShowAction,
 }

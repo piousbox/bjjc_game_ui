@@ -17,11 +17,8 @@ import CitiesShowMap  from './CitiesShowMap'
 import { citiesShow } from '../../actions'
 
 import Newsitems      from '../App/Newsitems'
-import Leaderboard    from '../App/Leaderboard'
 
 import VideoPreview   from '../Videos/VideoPreview'
-
-import LargeSquare    from '../App/LargeSquare'
 
 class CitiesShow extends React.Component {
   constructor(props) {

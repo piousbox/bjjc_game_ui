@@ -18,12 +18,7 @@ import config from 'config'
 import styles      from './_App.scss'
 import Features    from './Features'
 import Footer      from './Footer'
-import Leaderboard from './Leaderboard'
 import Newsitems   from './Newsitems'
-
-import {
-  SET_API_URL,
-} from '../../constants/AppConstants'
 
 import { LinkContainer } from 'react-router-bootstrap'
 
@@ -108,7 +103,6 @@ Home.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    apiUrl: state.apiUrl,
     site: state.site,
   }
 }

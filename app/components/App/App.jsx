@@ -19,7 +19,10 @@ import MainNavigation from './MainNavigation'
 import Profile from './Profile'
 import TgmRouter from './TgmRouter'
 
-import { 
+import { CategoriesIndex } from '../Categories'
+import Location from '../Locations/LocationShow'
+
+/* import { 
   CitiesIndex, CitiesShow, Cities2Show, CitiesWrapper,
 } from '../Cities'
 import { EventsShow } from '../Events'
@@ -29,11 +32,12 @@ import {
 import { ReportsIndex, ReportsShow } from '../Reports'
 import { TagsShow } from '../Tags/TagsShow'
 import { VenuesShow } from '../Venues'
-import VideosShow from '../Videos/VideosShow'
-import Location from '../Locations/LocationShow'
+ */
 
 import Tgm2     from './Tgm2'
 import Tgm2Home from './Tgm2Home'
+
+import VideosShow from '../Videos/VideosShow'
 
 import { citiesIndex, profileAction } from '../../actions'
 
@@ -90,8 +94,7 @@ class App extends React.Component {
 
     return (
       <Provider store={store} >
-        <Router history={browserHistory} routes={routes} onUpdate={() => window.scrollTo(0, 0)} >
-        </Router>
+        <Router history={browserHistory} routes={routes} onUpdate={() => window.scrollTo(0, 0)} />
       </Provider>
     );
   }

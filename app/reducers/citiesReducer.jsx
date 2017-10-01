@@ -8,7 +8,7 @@ import {
   SET_CITIES_SHOW,
   SET_CITY,
 
-} from '../constants/AppConstants'
+} from '../constants'
 
 import AppDispatcher from '../dispatcher/AppDispatcher'
 import config from 'config'

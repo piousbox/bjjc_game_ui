@@ -10,13 +10,7 @@ import config from 'config'
 import Center from '../Center'
 import Clearfix from '../Clearfix'
 
-import {
-  SET_CITIES_INDEX,
-} from '../../constants/AppConstants'
-
 import { citiesIndex } from '../../actions'
-
-import Leaderboard from '../App/Leaderboard'
 
 class CitiesIndex extends React.Component {
 
