@@ -7,20 +7,14 @@
   "config": {
     "buildDir": {
       "production": "./build",
-      "piousbox": "./build_piousbox",
-      "tgm": "./build_tgm",
       "development": "./build",
-      "development_bjjc": "./build_bjjc",
-      "production_bjjc": "./build_bjjc",
       "test": "./build_test"
     },
     "buildDirTests": "./build_tests",
     "devHost": "localhost",
     "devPort": {
       "tgm": 8004,
-      "development_tgm": 8004,
-      "development": 8005,
-      "development_bjjc": 8006,
+      "development": 8006,
       "test": 8088
     }
   },
