@@ -7,7 +7,7 @@ import { Grid, Row, Col,
 import { connect } from 'react-redux'
 import { Link }    from 'react-router'
 
-import TgmRouter from './TgmRouter'
+import BjjcRouter from './BjjcRouter'
 
 class Features extends React.Component {
 
@@ -39,7 +39,7 @@ class Features extends React.Component {
           features.push(
             <Col key={idx} xs={12/perRow} >
               <Panel>
-                <h3><Link to={TgmRouter.reportLink(f.reportname)}  >{ f.name }</Link></h3>
+                <h3><Link to={BjjcRouter.reportLink(f.reportname)}  >{ f.name }</Link></h3>
                 <img src={f.photo_url} alt={f.name} />
                 <br />
                 { f.subhead }
@@ -50,7 +50,7 @@ class Features extends React.Component {
           features.push(
             <Col key={idx} xs={12/perRow} >
               <Panel>
-                <h3><Link to={TgmRouter.galleryPhotoLink(f.galleryname)}  >{ f.name }</Link></h3>
+                <h3><Link to={BjjcRouter.galleryPhotoLink(f.galleryname)}  >{ f.name }</Link></h3>
                 <img src={f.photo_url} alt={f.name} />
                 <br />
                 { f.subhead }

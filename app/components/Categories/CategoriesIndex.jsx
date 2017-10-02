@@ -107,7 +107,7 @@ class CategoriesIndex extends React.Component {
       <Grid>
         <Row>
           <Col sm={12}>
-            <BjjcBreadcrumbs path={this.props.params} />
+            { /* <BjjcBreadcrumbs path={this.props.params} /> */ }
             <Center><h3>{ this.state.thisIndexCategory.title } ({this.state.thisIndexCategory.n_videos})</h3></Center>
           </Col>
         </Row>

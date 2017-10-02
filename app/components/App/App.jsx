@@ -16,10 +16,12 @@ import store      from '../../stores'
 import Home from './Home'
 
 import Profile from './Profile'
-import TgmRouter from './TgmRouter'
+import BjjcRouter from './BjjcRouter'
 
 import { CategoriesIndex } from '../Categories'
 import Location from '../Locations/LocationShow'
+
+import Navigation from './Navigation'
 
 import Tgm2     from './Tgm2'
 import Tgm2Home from './Tgm2Home'
@@ -31,11 +33,11 @@ import { citiesIndex,
 } from '../../actions'
 
 const routes = [
-  { path: TgmRouter.tgm2Path,
+  { path: BjjcRouter.tgm2Path,
     component: Tgm2,
     indexRoute: { component: Tgm2Home },
     childRoutes: [
-      { path: TgmRouter.locationPath, component: Location },
+      { path: BjjcRouter.locationPath, component: Location },
       // { path: '/tgm2/cities/:cityname',               component: Cities2Show },
       // { path: '/tgm2/cities/:cityname/tags/:tagname', component: TagsShow },
     ],
@@ -44,11 +46,11 @@ const routes = [
     component: Tgm2,
     indexRoute: { component: Home },
     childRoutes: [
-      { path: TgmRouter.videosShowPath, component: VideosShow },
+      { path: BjjcRouter.videosShowPath, component: VideosShow },
     ],
   },
   { path: '/categories',
-    component: Tgm2,
+    component: Navigation,
     indexRoute: { component: Home },
     childRoutes: [
       { path: '/categories/:slug_0', component: CategoriesIndex,

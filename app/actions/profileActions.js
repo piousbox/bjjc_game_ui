@@ -1,6 +1,10 @@
 
 import TgmApi from '../components/App'
 
+import {
+  SET_PROFILE 
+} from '../constants'
+
 const profileAction = () => {
   return (dispatch, getState) => {
     if (localStorage.getItem('fbAccount')) {

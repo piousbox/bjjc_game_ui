@@ -1,5 +1,9 @@
 
 let TgmRouter = {
+
+  categoriesPath: '/categories',
+  categoriesLink: () => { return `/categoriees` },
+
   categoryLink: (c) => { return `/categories/${c.path}` },
   categoryPath: '/categories/:categoryPath',
 

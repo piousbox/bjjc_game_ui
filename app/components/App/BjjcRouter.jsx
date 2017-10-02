@@ -1,13 +1,19 @@
 
 let BjjcRouter = {
+
+  categoriesPath: '/categories',
+  categoriesLink: () => { return `/categoriees` },
+
   categoryLink: (c) => { return `/technique/${c.path}` },
   categoryPath: '/technique/:categoryPath',
 
-  // galleriesShowPath: '/en/galleries/show/:galleryname',
-  // galleriesShowLink: (g) => { return `/en/galleries/show/${g}` },
+  locationPath: '/tgm2/locations/:locationname',
+  locationLink: (v) => { return `/tgm2/locations/${v}` },
 
-  videosShowLink: (v) => { return `/videos/view/${v.youtube_id}` },
+  tgm2Path: '/tgm2',
+
   videosShowPath: '/videos/view/:youtubeId',
+  videosShowLink: (v) => { return `/videos/view/${v.youtube_id}` },
 
 }
 
