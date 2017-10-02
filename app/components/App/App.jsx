@@ -62,10 +62,10 @@ const routes = [
     component: MainNavigation,
     indexRoute: { component: Home },
     childRoutes: [
-      { path: '/:slug_0', component: CategoriesIndex,
+      { path: '/categories/:slug_0', component: CategoriesIndex,
         // indexRoute: { component: CategoriesIndex },
         childRoutes: [
-          { path: '/:slug_0/:slug_1', component: CategoriesIndex },
+          { path: '/categories/:slug_0/:slug_1', component: CategoriesIndex },
         ],
       },
     ],

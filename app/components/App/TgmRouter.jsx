@@ -1,7 +1,7 @@
 
 let TgmRouter = {
-  categoryLink: (c) => { return `/technique/${c.path}` },
-  categoryPath: '/technique/:categoryPath',
+  categoryLink: (c) => { return `/categories/${c.path}` },
+  categoryPath: '/categories/:categoryPath',
 
   locationPath: '/tgm2/locations/:locationname',
   locationLink: (v) => { return `/tgm2/locations/${v}` },

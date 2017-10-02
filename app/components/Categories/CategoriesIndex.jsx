@@ -19,8 +19,6 @@ import CategoriesShowView from './CategoriesShowView'
 
 import VideosIndex from '../Videos/VideosIndex'
 
-import { LargeSquare, Leaderboard } from '../App'
-
 class CategoriesIndex extends React.Component {
 
   constructor(props) {
@@ -53,9 +51,9 @@ class CategoriesIndex extends React.Component {
       }
     }
 
-    if (this.props.allCategories[path]) {
+    if (this.props.allCategories && this.props.allCategories[path]) {
       this.setState(Object.assign({}, this.state, { thisIndexCategory: this.props.allCategories[path] }))
-    } else if (nextProps.allCategories[path]) {
+    } else if (nextProps.allCategories && nextProps.allCategories[path]) {
       this.setState(Object.assign({}, this.state, { thisIndexCategory: nextProps.allCategories[path] }))
     } else {
       this.props.dispatch(categoriesIndex( this.props.params ))
@@ -63,8 +61,7 @@ class CategoriesIndex extends React.Component {
   }
 
   render () {
-    // console.log('+++ +++ categoriesIndex props:', this.props)
-    // console.log('+++ +++ categoriesIndex state:', this.state)
+    console.log('+++ +++ categoriesIndex render:', this.props, this.state)
 
     let categories = []
     let parentIdx = 0
@@ -102,9 +99,6 @@ class CategoriesIndex extends React.Component {
             </Panel>
           )
         }
-        if (parentIdx === 1) {
-          categories.push(<LargeSquare key={parentIdx++} />)
-        }
       })
     } else {
       categories.push(<div key={parentIdx++} >This category does not have subcategories.</div>)
@@ -112,7 +106,6 @@ class CategoriesIndex extends React.Component {
 
     return (
       <Grid>
-        <Leaderboard />
         <Row>
           <Col sm={12}>
             <BjjcBreadcrumbs path={this.props.params} />

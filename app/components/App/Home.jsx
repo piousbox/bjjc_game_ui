@@ -42,7 +42,7 @@ class Home extends React.Component {
 
   constructor(props) {
     super(props) 
-    this.props.dispatch(siteShow());
+    // this.props.dispatch(siteShow());
 
     console.log('+++ +++ home:', this.props)
     if (this.props.site) {
@@ -54,7 +54,7 @@ class Home extends React.Component {
   }
 
   render () {
-    // console.log('+++ +++ rendering Home:', this.props, this.state)
+    console.log('+++ +++ rendering Home:', this.props, this.state)
 
     let newsitems = []
     if (this.props.siteNewsitems) {
