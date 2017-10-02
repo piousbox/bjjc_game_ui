@@ -17,9 +17,12 @@ class BjjcBreadcrumbs extends React.Component {
   render () {
     console.log('+++ +++ bjjcBreadcrumbs:', this.props, this.state)
 
-    let links = [<Link key={-1} to={ BjjcRouter.categoryLink({path: ''})}><i className="fa fa-2x fa-home" /></Link>]
+    let links = []
+    links.push(<Link key={-3} to={ BjjcRouter.rootPath }><i className="fa fa-2x fa-home" /></Link>)
+    links.push(<span key={-2} >&nbsp;&gt;&nbsp;</span>)
 
     if (this.props.path.slug_0) {
+      links.push(<Link key={-1} to={ BjjcRouter.categoryLink({path: ''})}>Categories</Link>)
       let e_0 = this.props.path.slug_0
       links.push(<span key={0} >&nbsp;&gt;&nbsp;</span>)
       links.push(<Link key={1} to={ BjjcRouter.categoryLink({ path: e_0 }) }>{ this.props.path.slug_0 }</Link>)

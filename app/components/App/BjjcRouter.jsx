@@ -1,6 +1,8 @@
 
 let BjjcRouter = {
 
+  rootPath: '/',
+
   categoriesPath: '/categories',
   categoriesLink: () => { return `/categoriees` },
 
