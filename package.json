@@ -16,6 +16,11 @@
       "tgm": 8004,
       "development": 8006,
       "test": 8088
+    },
+    "static_domain": { 
+      "_default": "static.piousbox.com",
+      "development": "static.local",
+      "production": "static.piousbox.com"
     }
   },
   "dependencies": {

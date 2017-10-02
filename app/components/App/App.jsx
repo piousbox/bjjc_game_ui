@@ -1,7 +1,7 @@
 import React    from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, browserHistory, Redirect,
-         IndexRoute
+         IndexRoute,
 } from 'react-router'
 import { Provider, connect } from 'react-redux'
 import 'whatwg-fetch'
@@ -15,31 +15,20 @@ import store      from '../../stores'
 
 import Home from './Home'
 
-import MainNavigation from './MainNavigation'
 import Profile from './Profile'
 import TgmRouter from './TgmRouter'
 
 import { CategoriesIndex } from '../Categories'
 import Location from '../Locations/LocationShow'
 
-/* import { 
-  CitiesIndex, CitiesShow, Cities2Show, CitiesWrapper,
-} from '../Cities'
-import { EventsShow } from '../Events'
-import { 
-  GalleriesIndex, GalleriesShow, GalleriesPhotoShow, 
-} from '../Galleries'
-import { ReportsIndex, ReportsShow } from '../Reports'
-import { TagsShow } from '../Tags/TagsShow'
-import { VenuesShow } from '../Venues'
- */
-
 import Tgm2     from './Tgm2'
 import Tgm2Home from './Tgm2Home'
 
 import VideosShow from '../Videos/VideosShow'
 
-import { citiesIndex, profileAction } from '../../actions'
+import { citiesIndex, 
+         // profileAction,
+} from '../../actions'
 
 const routes = [
   { path: TgmRouter.tgm2Path,
@@ -52,14 +41,14 @@ const routes = [
     ],
   },
   { path: '/',
-    component: MainNavigation,
+    component: Tgm2,
     indexRoute: { component: Home },
     childRoutes: [
       { path: TgmRouter.videosShowPath, component: VideosShow },
     ],
   },
   { path: '/categories',
-    component: MainNavigation,
+    component: Tgm2,
     indexRoute: { component: Home },
     childRoutes: [
       { path: '/categories/:slug_0', component: CategoriesIndex,

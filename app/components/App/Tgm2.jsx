@@ -15,32 +15,33 @@ import Report2 from '../Reports/Reports2Show'
 import { setLocation } from '../../actions'
 import FbConnect from './FbConnect'
 
-class Headerz extends React.Component {
+class Headers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {}
   }
 
   render () {
-    return(<div>
-  <div className="header header-slim">
-    <a href="#">T.G.M</a>
-  </div>
-  <ul className="header" >
-    <li><a href="#">Cities</a></li>
-    <li><a href="#">Tags</a></li>
-    <li><a href="#">News</a></li>
-    <li><a href="#">Profile</a></li>
-  </ul>
-  <div className="header-2">
-    <a href="#">Home</a> &gt; <a href="#">Tags</a> &gt; <a href="#">Dancing</a> &gt; <a href="#">Salsa</a>
-  </div>
-    </div>)
+    return(
+      <div>
+        <div className="header header-slim">
+          <a href="#">T.G.M</a>
+        </div>
+        <ul className="header" >
+          <li><a href="#">Cities</a></li>
+          <li><a href="#">Tags</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+        <div className="header-2">
+          <a href="#">Home</a> &gt; <a href="#">Tags</a> &gt; <a href="#">Dancing</a> &gt; <a href="#">Salsa</a>
+        </div>
+      </div>
+    )
   }
 }
 
 class Tgm2 extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = { collapseState: 'center',
@@ -131,7 +132,7 @@ class Tgm2 extends React.Component {
 
     return(
       <div className="container">
-        <Headerz />
+        <Headers />
         
         <div className={ `folder folder-both folder-collapse-${this.state.collapseState} footer-${this.state.collapseFooter}` } >
           <div className="folder folder-left folder-half">

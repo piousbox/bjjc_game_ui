@@ -49,7 +49,7 @@ class BjjcBreadcrumbs extends React.Component {
 
     return (
       <div>
-        <Link to={ TgmRouter.categoryLink({path: ''})}>Technique</Link>
+        <Link to={ TgmRouter.categoryLink({path: ''})}><i className="fa fa-2x fa-home" /></Link>
         { links }
       </div>
     )

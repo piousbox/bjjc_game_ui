@@ -31,7 +31,7 @@ class Footer extends React.Component {
 
   constructor(props) {
     super(props)
-    this.props.dispatch(siteShow())
+    // this.props.dispatch(siteShow())
   }
 
   logout = () => {
@@ -39,26 +39,12 @@ class Footer extends React.Component {
   }
 
   render () {
-    console.log('+++ +++ Footer props:', this.props)
+    // console.log('+++ +++ Footer:', this.props, this.state)
 
     let langs = []
     if (this.props.site && this.props.site.langs) {
       this.props.site.langs.forEach( lang => {
-        let flag = null
-        switch (lang) {
-          case 'es':
-            flag = es
-            break
-          case 'ru':
-            flag = ru
-            break
-          case 'pt':
-            flag = pt
-            break
-          case 'en':
-          default:
-            flag = en
-        }            
+        let flag = require(`./images/flags/${lang}.png`)
         langs.push(<li key={lang} ><Link to={TgmRouter.siteLink(lang)}><img src={flag} alt={lang} /></Link></li>)
       })
     }

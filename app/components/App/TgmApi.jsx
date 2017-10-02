@@ -1,4 +1,6 @@
 
+// @TODO: merge this with tgmrouter.
+
 import config from 'config'
 
 let TgmApi = {

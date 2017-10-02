@@ -17,6 +17,8 @@ import { galleriesShowReducer } from './galleriesReducer'
 import { reportsShowReducer, reportsReducer } from './reportsReducer'
 import { sitesReducer } from './sitesReducer'
 import { venuesShowReducer } from './venuesReducer'
+import { categoriesReducer, categoryReducer } from './categoriesReducer'
+import { videoReducer, } from './videosReducer'
 
 import TgmApi from '../components/App/TgmApi'
 
@@ -65,24 +67,24 @@ function profileReducer (state = {}, action) {
 }
 
 export default combineReducers({
+
+  categories: categoriesReducer,
+  category: categoryReducer,
+
+  video: videoReducer,
+
+  // trash
   cities: citiesIndexReducer,
   city: citiesShowReducer,
-
   gallery: galleriesShowReducer,
-
   location: locationReducer,
-
   myReports: myReportsReducer,
   myGalleries: myGalleriesReducer,
-
   newsitems: newsitemsReducer,
-
   profile: profileReducer,
-
   report: reportsShowReducer,
   reports: reportsReducer,
-
   site: sitesReducer,
-
   venue: venuesShowReducer,
+
 })

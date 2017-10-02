@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 
 import { Grid, Row, Col,
          Panel,
@@ -11,8 +10,9 @@ import { categoriesIndex } from '../../actions'
 
 import Center from '../Center'
 import Debug from '../Debug'
-import BjjcRouter from '../App/BjjcRouter'
-import BjjcBreadcrumbs from '../App/BjjcBreadcrumbs'
+import { Clearfix, BjjcRouter, BjjcBreadcrumbs,
+} from '../App'
+
 
 import styles from './_Categories.scss'
 import CategoriesShowView from './CategoriesShowView'
@@ -75,8 +75,7 @@ class CategoriesIndex extends React.Component {
             </Col>
           )
           if ((idx_2 + 1) % 3 === 0) {
-            childrenCategories.push(<div style={{ clear: 'both' }} />)
-            childrenCategories.push(<br />)
+            childrenCategories.push(<Clearfix />)
           }
         })
         if (item.photo_url) {
@@ -114,7 +113,7 @@ class CategoriesIndex extends React.Component {
         </Row>
         <Row>
           <Col sm={4}>
-            { /* <h3>Subcategories</h3> */ }
+            <h3>Subcategories</h3>
             { categories }
           </Col>
           <Col sm={8}>

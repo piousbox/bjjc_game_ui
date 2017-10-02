@@ -48,9 +48,7 @@ const categoriesIndex = (params) => {
         }
       }
     }
-    // console.log('+++ +++ categoriesIndex() action params:', params, 'url:', url)
     fetch(url).then(r => r.json()).then(_data => {
-      console.log('+++ +++ categoriesIndex() action got data:', _data)
       let obj = Object.assign({}, _data, { type: SET_INDEX_CATEGORY })
       dispatch(obj)
     })
@@ -184,6 +182,8 @@ const siteShow = () => {
   }
 }
 
+import { profileAction, } from './profileActions'
+
 export default {
   setApiUrl,
   siteNewsitemsAction,
@@ -193,4 +193,6 @@ export default {
   categoriesShow,
 
   videosShowAction,
+
+  profileAction,
 }

@@ -16,6 +16,7 @@ var htmlLoader = [
     'engine=lodash',
     'version=' + pkg.version,
     'title=' + pkg.name,
+    'static_domain=' + (pkg.config.static_domain[process.env.NODE_ENV] || pkg.config.static_domain._default),
     'debug=' + DEBUG
   ].join('&')
 ].join('!');
