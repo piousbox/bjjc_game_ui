@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link }    from 'react-router'
+import { connect } from 'react-redux'
 
 import BjjcRouter from './BjjcRouter'
 
@@ -14,7 +15,9 @@ class BjjcBreadcrumbs extends React.Component {
   }
 
   render () {
-    let links = []
+    console.log('+++ +++ bjjcBreadcrumbs:', this.props, this.state)
+
+    let links = [<Link key={-1} to={ BjjcRouter.categoryLink({path: ''})}><i className="fa fa-2x fa-home" /></Link>]
 
     if (this.props.path.slug_0) {
       let e_0 = this.props.path.slug_0
@@ -48,12 +51,18 @@ class BjjcBreadcrumbs extends React.Component {
     }
 
     return (
-      <div>
-        <Link to={ BjjcRouter.categoryLink({path: ''})}><i className="fa fa-2x fa-home" /></Link>
-        { links }
-      </div>
+      <div>{ links }</div>
     )
   }
 }
 
-export default BjjcBreadcrumbs
+BjjcBreadcrumbs.propTypes = {
+}
+
+const mapStateToProps = (store, ownprops) => {
+  return {
+    path: store.path,
+  }
+}
+
+export default connect(mapStateToProps)(BjjcBreadcrumbs)

@@ -3,13 +3,10 @@ import { combineReducers } from 'redux'
 
 import {
   DO_LOGOUT,
-
   SET_LOCATION,
-
   SET_PROFILE,
-
   SET_SITE_NEWSITEMS,
-
+  SET_PATH,
 } from '../constants'
 
 import { citiesIndexReducer, citiesShowReducer } from './citiesReducer'
@@ -56,6 +53,15 @@ function newsitemsReducer(state = {}, action) {
   }
 }
 
+function pathReducer (state={}, action) {
+  switch (action.type) {
+    case SET_PATH:
+      return action.path
+    default:
+      return state
+  }
+}
+
 function profileReducer (state = {}, action) {
   switch (action.type) {
     case SET_PROFILE:
@@ -66,10 +72,14 @@ function profileReducer (state = {}, action) {
   }
 }
 
+
+
 export default combineReducers({
 
   categories: categoriesReducer,
   category: categoryReducer,
+
+  path: pathReducer,
 
   video: videoReducer,
 

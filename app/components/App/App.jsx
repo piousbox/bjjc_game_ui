@@ -54,9 +54,33 @@ const routes = [
     indexRoute: { component: Home },
     childRoutes: [
       { path: '/categories/:slug_0', component: CategoriesIndex,
-        // indexRoute: { component: CategoriesIndex },
         childRoutes: [
-          { path: '/categories/:slug_0/:slug_1', component: CategoriesIndex },
+          { path: '/categories/:slug_0/:slug_1', component: CategoriesIndex,
+            childRoutes: [
+              { path: '/categories/:slug_0/:slug_1/:slug_2', component: CategoriesIndex,
+                childRoutes: [
+                  { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3', component: CategoriesIndex,
+                    childRoutes: [
+                      { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4', component: CategoriesIndex,
+                        childRoutes: [
+                          { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5', component: CategoriesIndex,
+                            childRoutes: [
+                              { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5/:slug_6', component: CategoriesIndex,
+                                childRoutes: [
+                                  { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5/:slug_6/:slug_7', component: CategoriesIndex,
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+          },
         ],
       },
     ],

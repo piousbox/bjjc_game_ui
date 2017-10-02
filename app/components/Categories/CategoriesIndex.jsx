@@ -107,7 +107,6 @@ class CategoriesIndex extends React.Component {
       <Grid>
         <Row>
           <Col sm={12}>
-            { /* <BjjcBreadcrumbs path={this.props.params} /> */ }
             <Center><h3>{ this.state.thisIndexCategory.title } ({this.state.thisIndexCategory.n_videos})</h3></Center>
           </Col>
         </Row>
@@ -128,10 +127,10 @@ class CategoriesIndex extends React.Component {
 CategoriesIndex.propTypes = {
 }
 
-const mapStateToProps = (stor, ownprops) => {
+const mapStateToProps = (store, ownprops) => {
   return {
-    allCategories: stor.categories,
-    thisCategory: stor.category,
+    allCategories: store.categories,
+    thisCategory: store.category,
   }
 }
 

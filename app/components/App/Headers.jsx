@@ -2,7 +2,8 @@ import React from 'react'
 
 import { Link } from 'react-router'
 
-import BjjcRouter from './BjjcRouter'
+import BjjcRouter      from './BjjcRouter'
+import BjjcBreadcrumbs from './BjjcBreadcrumbs'
 
 class Headers extends React.Component {
   constructor(props) {
@@ -22,14 +23,8 @@ class Headers extends React.Component {
           <li><a href="#">News</a></li>
           <li><a href="#">Profile</a></li>
         </ul>
-        <div className="header-2">
-          <Link to={ BjjcRouter.categoryLink({path: ''})}>
-            <i className="fa fa-2x fa-home" />
-          </Link>
-          <span>&nbsp;&gt;&nbsp;</span>
-          <Link to={BjjcRouter.categoriesPath}>Categories</Link>
-          <span>&nbsp;&gt;&nbsp;</span>
-          <Link to={BjjcRouter.categoriesPath}>technique</Link>
+        <div className="header-2"  >
+          <BjjcBreadcrumbs />
         </div>
       </div>
     )
