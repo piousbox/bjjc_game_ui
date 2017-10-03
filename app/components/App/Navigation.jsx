@@ -13,15 +13,31 @@ class Navigation extends React.Component {
   constructor(props) {
     super(props)
 
-    if (Object.keys(props.params).length > 0) {
+    console.log('+++ +++ navigation constructor:', props)
+
+    if (Object.keys(props.params).length > 0) { 
+      // I'm deep in categories
       props.dispatch({ type: SET_PATH, path: props.params })
     } else {
+      // I'm categoriesToplevel or other
       props.dispatch({ type: SET_PATH, path: props.route.path })
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('+++ +++ navigation will receive props:', nextProps)
+
+    if (Object.keys(nextProps.params).length > 0) { 
+      // I'm deep in categories
+      this.props.dispatch({ type: SET_PATH, path: nextProps.params })
+    } else {
+      // I'm categoriesToplevel or other
+      this.props.dispatch({ type: SET_PATH, path: nextProps.route.path })
+    }
+  }
+
   render () {
-    console.log("+++ +++ navigation:", this.props, this.stats)
+    console.log("+++ +++ navigation render:", this.props, this.stats)
 
     return (
       <div>

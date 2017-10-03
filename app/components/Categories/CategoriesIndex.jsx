@@ -13,6 +13,7 @@ import Debug from '../Debug'
 import { Clearfix, BjjcRouter, BjjcBreadcrumbs,
 } from '../App'
 
+import { SET_PATH } from '../../constants'
 
 import styles from './_Categories.scss'
 import CategoriesShowView from './CategoriesShowView'
@@ -23,8 +24,12 @@ class CategoriesIndex extends React.Component {
 
   constructor(props) {
     super(props)
+
+    console.log('+++ +++ categoriesIndex constructor:', props)
+
     this.state = { allCategories: {}, thisIndexCategory: {}, thisShowCategory: {} }
-    this.props.dispatch(categoriesIndex( props.params ))
+    props.dispatch(categoriesIndex( props.params ))
+    props.dispatch({ type: SET_PATH, path: props.params })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -66,18 +71,19 @@ class CategoriesIndex extends React.Component {
     console.log('+++ +++ categoriesIndex render:', this.props, this.state)
 
     let categories = []
-    let parentIdx = 0
+    let parentIdx  = 0
+    let tempKey    = 0
     if (this.state.thisIndexCategory.categories && this.state.thisIndexCategory.categories.length > 0) {
       this.state.thisIndexCategory.categories.forEach((item, idx) => {
         let childrenCategories = []
         item.categories.forEach((child, idx_2) => {
           childrenCategories.push(
-            <Col key={idx_2} xs={4}>
+            <Col key={tempKey++} xs={4}>
               <CategoriesShowView child={ child } />
             </Col>
           )
           if ((idx_2 + 1) % 3 === 0) {
-            childrenCategories.push(<Clearfix />)
+            childrenCategories.push(<Clearfix key={tempKey++} />)
           }
         })
         if (item.photo_url) {

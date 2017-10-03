@@ -49,12 +49,7 @@ const routes = [
     indexRoute: { component: Home },
     childRoutes: [
       { path: BjjcRouter.videosShowPath, component: VideosShow },
-    ],
-  },
-  { path: '/categories',
-    component: Navigation,
-    indexRoute: { component: CategoriesToplevel },
-    childRoutes: [
+      { path: '/categories',             component: CategoriesToplevel },
       { path: '/categories/:slug_0', component: CategoriesIndex,
         childRoutes: [
           { path: '/categories/:slug_0/:slug_1', component: CategoriesIndex,
@@ -69,18 +64,17 @@ const routes = [
                             childRoutes: [
                               { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5/:slug_6', component: CategoriesIndex,
                                 childRoutes: [
-                                  { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5/:slug_6/:slug_7', component: CategoriesIndex,
-                                  }
-                                ]
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
+                                  { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5/:slug_6/:slug_7', component: CategoriesIndex, },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
             ],
           },
         ],

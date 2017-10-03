@@ -15,7 +15,7 @@ class Headers extends React.Component {
     return(
       <div>
         <div className="header header-slim">
-          <a href="#">T.G.M</a>
+          <Link to={BjjcRouter.rootPath} >T.G.M</Link>
         </div>
         <ul className="header" >
           <li><a href="#">Cities</a></li>
