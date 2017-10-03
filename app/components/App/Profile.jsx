@@ -89,8 +89,7 @@ class Profile extends React.Component {
   }
 
   render() {
-    console.log("+++ +++ Profile render props:", this.props)
-    console.log("+++ +++ Profile render state:", this.state)
+    console.log("+++ +++ Profile render props:", this.props, this.state)
 
     let menuContent = null
     switch (this.state.activeKey) {
