@@ -88,6 +88,7 @@ const setBreadcrumbs = (params) => {
 }
 
 const setLocation = (name) => {
+  console.log('+++ +++ setLocation:', name)
   return (dispatch, getState) => {
     let state = getState()
     let url = `${config.apiUrl}/api/locations/${name}.json`

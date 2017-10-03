@@ -11,7 +11,7 @@ class LocationShow extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
-    this.props.dispatch(setLocation(props.params.locationname))
+    // this.props.dispatch(setLocation(props.params.locationname))
   }
 
   componentWillReceiveProps (nextProps) {
@@ -20,6 +20,10 @@ class LocationShow extends React.Component {
 
   render () {
     console.log("+++ +++ LocationShow render:", this.props, this.state)
+
+    if (!this.props.location) {
+      return (<span></span>)
+    }
 
     let oWidth  = 200
     let oHeight = 200
@@ -70,7 +74,7 @@ LocationShow.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    location: state.location,
+    // location: state.location,
   }
 }
 

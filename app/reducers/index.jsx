@@ -45,20 +45,28 @@ function breadcrumbsReducer(state={}, action) {
   }
 }
 
+function leftPaneReducer (state = {}, action) {
+  switch (action.type) {
+    case SET_LOCATION:
+      console.log('+++ +++ leftPaneReducer:', action)
+      return { location: action.location }
+    default:
+      return state
+  }
+}
+
+
 function locationReducer (state = {}, action) {
   switch (action.type) {
     case SET_LOCATION:
-      /* fetch(TgmApi.location( action.locationname )).then(r => r.json()).then(_data => {
-        console.log("+++ +++ locationReducer data is:", _data)
-        return _data.location
-      }) */
+      console.log('+++ +++ locationReducer:', action)
       return action.location
     default:
       return state
   }
 }
 
-function newsitemsReducer(state = {}, action) {
+function newsitemsReducer (state = {}, action) {
   switch (action.type) {
     case SET_SITE_NEWSITEMS:
       return action.newsitems
@@ -77,6 +85,10 @@ function profileReducer (state = {}, action) {
   }
 }
 
+function rightPaneReducer (state={}, action) {
+  return state
+}
+
 export default combineReducers({
 
   badge: badgeReducer,
@@ -84,12 +96,15 @@ export default combineReducers({
   categories: categoriesReducer,
   category: categoryReducer,
  
-  location: locationReducer,
+  blocation: locationReducer,
 
   path: breadcrumbsReducer,
   profile: profileReducer,
 
   video: videoReducer,
+  
+  leftPane: leftPaneReducer,
+  rightPane: rightPaneReducer,
 
   // trash
   cities: citiesIndexReducer,

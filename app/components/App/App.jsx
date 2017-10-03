@@ -25,9 +25,10 @@ import Location from '../Locations/LocationShow'
 
 import Navigation from './Navigation'
 
-import Tgm2     from './Tgm2'
-import Tgm3     from './Tgm3'
-import Tgm2Home from './Tgm2Home'
+import Tgm2      from './Tgm2'
+import Tgm2Home  from './Tgm2Home'
+import Tgm3      from './Tgm3'
+import Tgm3Child from './Tgm3Child'
 
 import VideosShow from '../Videos/VideosShow'
 
@@ -49,17 +50,12 @@ const routes = [
       },
     ],
   },
-  { path: '/tgm3',
-    component: Tgm3,
-    indexRoute: { component: Tgm2Home },
+  { path: '/tgm3', component: Tgm3,
     childRoutes: [
-      { path: BjjcRouter.locationPath, component: Tgm3, 
-        childRoutes: [
-          { path: BjjcRouter.locationBadgePath, component: Tgm3 },
-        ],
-      },
-    ],
-  },    
+      { path: '/tgm3/locations/:locationname', component: Tgm3Child },
+      { path: '/tgm3/locations/:locationname/badges/:badgename', component: Tgm3Child },
+    ]
+  },
   { path: '/',
     component: Navigation,
     indexRoute: { component: Home },

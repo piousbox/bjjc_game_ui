@@ -19,6 +19,7 @@ import FbConnect from './FbConnect'
 import BjjcRouter from './BjjcRouter'
 import BjjcBreadcrumbs from './BjjcBreadcrumbs'
 import Badge from './Badge'
+import { LocationShow } from '../Locations'
 
 class Tgm3 extends React.Component {
   constructor(props) {
@@ -92,8 +93,17 @@ class Tgm3 extends React.Component {
   componentWillReceiveProps (nextProps) {
     console.log('+++ +++ Tgm3 will receive props:', this.props, nextProps)
 
-    this.props.dispatch(setPath(nextProps.params))
-    this.props.dispatch(setBadge(nextProps.params))
+    this.props.dispatch(setPath(nextProps.props.params))
+    if (nextProps.props.params.locationname && this.props.params.locationname !== nextProps.props.params.locationname) {
+      this.props.dispatch(setLocation(nextProps.params.locationname))
+    }
+    if (nextProps.props.params.badgename && this.props.params.badgename !== nextProps.props.params.badgename) {
+      this.props.dispatch(setBadge(nextProps.params))
+    }
+  }
+
+  componentWillUpdate (what) {
+    console.log('+++ +++ Tgm3 componentWillUpdate:', what)
   }
 
   componentDidMount () { window.addEventListener('resize', this.onWindowResize) }
@@ -102,7 +112,13 @@ class Tgm3 extends React.Component {
   render () {
     console.log('+++ +++ Tgm3 render:', this.props, this.state)
     
-    let rightPane = (<div><Panel><h2>default rightPane</h2></Panel></div>)
+    let leftPane = (<div><Panel>default leftPane</Panel></div>)
+    if (this.props.leftPane && this.props.leftPane.location) {
+      console.log('+++ rendering this location:', this.props.leftPane.location)
+      leftPane = (<LocationShow location={this.props.leftPane.location} />)
+    }
+
+    let rightPane = (<Panel>default rightPane</Panel>)
     if (this.props.badge) {
       let rightPane = (
         <Row>
@@ -142,7 +158,7 @@ class Tgm3 extends React.Component {
             <div className="tab-wrapper">
               <div className="tab-content">
                 <div className="tab-pane active" id="web-design-6">
-                  { this.props.children }
+                  { leftPane }
                 </div>
               </div>
             </div>
@@ -173,6 +189,7 @@ class Tgm3 extends React.Component {
             </div>
           </div>
         </div>
+        <div style={{ display: 'none' }}>{ this.props.children }</div>
       </div>
     )
   }
@@ -184,10 +201,11 @@ Tgm3.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     badge: state.badge,
+    blocation: state.blocation, // b to not conflict
     path: state.path,
 
-    // leftPane: state.leftPane,
-    // rightPane: state.rightPane,
+    leftPane: state.leftPane,
+    rightPane: state.rightPane,
   }
 }
 
