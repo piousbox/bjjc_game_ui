@@ -74,6 +74,7 @@ const categoriesShow = (variables) => {
 const setBadge = (badgename) => {
   return (dispatch, getState) => {
     let url = `${config.apiUrl}/api/badges/${badgename}.json`
+    // console.log('+++ +++ action setBadge', url)
     fetch(url).then(r => r.json()).then(_data => {
       dispatch({ type: SET_BADGE, badge: _data })
     })

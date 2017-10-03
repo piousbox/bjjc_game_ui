@@ -35,8 +35,6 @@ let BjjcRouter = {
     return `/tgm2/locations/${lname}/badges/${bname}` 
   },
 
-  tgm2Path: '/tgm2',
-
   videosShowPath: '/videos/view/:youtubeId',
   videosShowLink: (v) => { return `/videos/view/${v.youtube_id}` },
 

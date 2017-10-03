@@ -16,14 +16,15 @@ class Badge extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     console.log('+++ +++ Badge will receive props:', this.props, nextProps)
-    // this.props.dispatch({ type: SET_PATH, path: nextProps.params })
+    if (this.props.params.badgename !== nextProps.params.badgename) {
+      this.props.dispatch(setBadge(nextProps.params.badgename))
+    }
   }
 
   render () {
     console.log('+++ +++ Badge render:', this.props, this.state)
-
     return (
-      <div>badge</div>
+      <div>badge {this.props.badge.title}</div>
     )
   }
 }
@@ -31,6 +32,7 @@ class Badge extends React.Component {
 const mapState = (state, ownProps) => {
   return {
     path: state.path,
+    badge: state.badge,
   }
 }
 

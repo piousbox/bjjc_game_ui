@@ -26,6 +26,7 @@ import Location from '../Locations/LocationShow'
 import Navigation from './Navigation'
 
 import Tgm2     from './Tgm2'
+import Tgm3     from './Tgm3'
 import Tgm2Home from './Tgm2Home'
 
 import VideosShow from '../Videos/VideosShow'
@@ -37,7 +38,7 @@ import { citiesIndex,
 } from '../../actions'
 
 const routes = [
-  { path: BjjcRouter.tgm2Path,
+  { path: '/tgm2',
     component: Tgm2,
     indexRoute: { component: Tgm2Home },
     childRoutes: [
@@ -48,6 +49,17 @@ const routes = [
       },
     ],
   },
+  { path: '/tgm3',
+    component: Tgm3,
+    indexRoute: { component: Tgm2Home },
+    childRoutes: [
+      { path: BjjcRouter.locationPath, component: Tgm3, 
+        childRoutes: [
+          { path: BjjcRouter.locationBadgePath, component: Tgm3 },
+        ],
+      },
+    ],
+  },    
   { path: '/',
     component: Navigation,
     indexRoute: { component: Home },
@@ -109,7 +121,7 @@ class App extends React.Component {
 
     return (
       <Provider store={store} >
-        <Router history={browserHistory} routes={routes} onUpdate={() => window.scrollTo(0, 0)} />
+        <Router history={browserHistory} routes={routes} onUpdate={(e) => { window.scrollTo(0, 0) }} />
       </Provider>
     );
   }

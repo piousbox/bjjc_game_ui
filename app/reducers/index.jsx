@@ -26,7 +26,13 @@ import config from 'config'
 
 // b
 function badgeReducer (state={}, action) {
-  return state
+  switch (action.type) {
+    case SET_BADGE:
+      console.log('+++ +++ badgeReducer:', action)
+      return action.badge
+    default:
+      return state
+  }
 }
 
 function breadcrumbsReducer(state={}, action) {

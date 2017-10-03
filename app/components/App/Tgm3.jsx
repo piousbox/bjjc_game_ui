@@ -20,7 +20,7 @@ import BjjcRouter from './BjjcRouter'
 import BjjcBreadcrumbs from './BjjcBreadcrumbs'
 import Badge from './Badge'
 
-class Tgm2 extends React.Component {
+class Tgm3 extends React.Component {
   constructor(props) {
     super(props)
     this.state = { collapseState: 'center',
@@ -90,7 +90,7 @@ class Tgm2 extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('+++ +++ Tgm2 will receive props:', this.props, nextProps)
+    console.log('+++ +++ Tgm3 will receive props:', this.props, nextProps)
 
     this.props.dispatch(setPath(nextProps.params))
     this.props.dispatch(setBadge(nextProps.params))
@@ -100,7 +100,7 @@ class Tgm2 extends React.Component {
   componentWillUnmount () { window.removeEventListener('resize', this.onWindowResize) }
 
   render () {
-    console.log('+++ +++ Tgm2 render:', this.props, this.state)
+    console.log('+++ +++ Tgm3 render:', this.props, this.state)
     
     let rightPane = (<div><Panel><h2>default rightPane</h2></Panel></div>)
     if (this.props.badge) {
@@ -178,7 +178,7 @@ class Tgm2 extends React.Component {
   }
 }
 
-Tgm2.propTypes = {
+Tgm3.propTypes = {
 }
 
 function mapStateToProps(state, ownProps) {
@@ -191,4 +191,4 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(mapStateToProps)(Tgm2)
+export default connect(mapStateToProps)(Tgm3)
