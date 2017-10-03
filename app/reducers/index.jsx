@@ -17,8 +17,6 @@ import { venuesShowReducer } from './venuesReducer'
 import { categoriesReducer, categoryReducer } from './categoriesReducer'
 import { videoReducer, } from './videosReducer'
 
-import TgmApi from '../components/App/TgmApi'
-
 import config from 'config'
 
 function locationReducer (state = {}, action) {

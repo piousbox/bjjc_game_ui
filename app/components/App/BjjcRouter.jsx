@@ -1,4 +1,6 @@
 
+import config from 'config'
+
 let BjjcRouter = {
 
   rootPath: '/',
@@ -16,6 +18,12 @@ let BjjcRouter = {
 
   videosShowPath: '/videos/view/:youtubeId',
   videosShowLink: (v) => { return `/videos/view/${v.youtube_id}` },
+
+  // formerly TgmApi
+  fbLogin:       `${config.apiUrl}/api/users/fb_sign_in`,
+  profile:       `${config.apiUrl}/api/users/profile`,
+  updateProfile: `${config.apiUrl}/api/users/profile/update`,
+  buyStars:      `${config.apiUrl}/api/buyStars`,
 
 }
 

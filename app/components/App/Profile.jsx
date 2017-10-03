@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 
 import { citiesIndex, profileAction } from '../../actions'
 
-import TgmApi from './TgmApi'
+import BjjcRouter from './BjjcRouter'
 
 import { Link } from 'react-router'
 
@@ -59,7 +59,7 @@ class Profile extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    fetch(TgmApi.updateProfile, {
+    fetch(BjjcRouter.updateProfile, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json',

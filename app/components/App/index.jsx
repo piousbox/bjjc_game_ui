@@ -10,8 +10,6 @@ import Meta        from './Meta'
 
 import Newsitems   from './Newsitems'
 
-import TgmApi      from './TgmApi'
-
 export default {
   BjjcRouter,
   BjjcBreadcrumbs,
@@ -22,7 +20,5 @@ export default {
 
   Meta,
 
-  Newsitems,
-
-  TgmApi,
+  Newsitems
 }

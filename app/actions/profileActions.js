@@ -1,5 +1,5 @@
 
-import TgmApi from '../components/App'
+import { BjjcRouter } from '../components/App'
 
 import {
   SET_PROFILE 
@@ -9,7 +9,7 @@ const profileAction = () => {
   return (dispatch, getState) => {
     if (localStorage.getItem('fbAccount')) {
       let fbAccount = JSON.parse(localStorage.getItem('fbAccount'))
-      fetch(TgmApi.profile, {
+      fetch(BjjcRouter.profile, {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json',
@@ -26,6 +26,9 @@ const profileAction = () => {
 
 const loginAction = (r2) => {
   return (dispatch, getState) => {
+
+    console.log('+++ +++ r2 is:', r2)
+
     localStorage.setItem('fbAccount', JSON.stringify(r2))
     dispatch(profileAction())
   }

@@ -7,10 +7,9 @@ import AppDispatcher from '../dispatcher/AppDispatcher'
 
 import {
   SET_API_URL,
-
   SET_INDEX_CATEGORY,
+  SET_LOCATION,
   SET_SHOW_CATEGORY,
-
   SET_VIDEO,
 } from '../constants';
 
@@ -182,10 +181,22 @@ const siteShow = () => {
   }
 }
 
-import { profileAction, } from './profileActions'
+const setLocation = (name) => {
+  return (dispatch, getState) => {
+    let state = getState()
+    let url = `${config.apiUrl}/api/locations/${name}.json`
+    fetch(url).then(r => r.json()).then(_data => {
+      dispatch({ type: SET_LOCATION, location: _data })
+    })
+  }
+}
+
+
+import { loginAction, logoutAction, profileAction, } from './profileActions'
 
 export default {
   setApiUrl,
+  setLocation,
   siteNewsitemsAction,
   siteShow,
 
@@ -194,5 +205,7 @@ export default {
 
   videosShowAction,
 
+  loginAction,
+  logoutAction,
   profileAction,
 }

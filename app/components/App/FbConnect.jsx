@@ -21,7 +21,7 @@ import config from 'config'
 
 import Center from '../Center'
 
-import TgmApi from './TgmApi'
+import BjjcRouter from './BjjcRouter'
 
 const MyFacebookButton = ({ onClick }) => (
   <button onClick={onClick}>F</button>
@@ -45,7 +45,7 @@ class _CheckoutForm extends React.Component {
                                              profile: this.props.profile })
       console.log("+++ payload:", payload)      
 
-      fetch(TgmApi.buyStars, {
+      fetch(BjjcRouter.buyStars, {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json',
