@@ -12,7 +12,12 @@ class Navigation extends React.Component {
 
   constructor(props) {
     super(props)
-    props.dispatch({ type: SET_PATH, path: props.params })
+
+    if (Object.keys(props.params).length > 0) {
+      props.dispatch({ type: SET_PATH, path: props.params })
+    } else {
+      props.dispatch({ type: SET_PATH, path: props.route.path })
+    }
   }
 
   render () {

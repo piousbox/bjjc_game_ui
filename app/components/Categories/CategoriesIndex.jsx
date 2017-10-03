@@ -28,7 +28,7 @@ class CategoriesIndex extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log('+++ +++ categoriesIndex will receive props:', this.props, nextProps)
+    console.log('+++ +++ categoriesIndex will receive props:', this.props, nextProps)
 
     let path = '/'
     if (nextProps.params.slug_0) {

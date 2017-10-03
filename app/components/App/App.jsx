@@ -18,7 +18,9 @@ import Home from './Home'
 import Profile from './Profile'
 import BjjcRouter from './BjjcRouter'
 
-import { CategoriesIndex } from '../Categories'
+import { CategoriesIndex,
+         CategoriesToplevel,
+} from '../Categories'
 import Location from '../Locations/LocationShow'
 
 import Navigation from './Navigation'
@@ -43,7 +45,7 @@ const routes = [
     ],
   },
   { path: '/',
-    component: Tgm2,
+    component: Navigation,
     indexRoute: { component: Home },
     childRoutes: [
       { path: BjjcRouter.videosShowPath, component: VideosShow },
@@ -51,7 +53,7 @@ const routes = [
   },
   { path: '/categories',
     component: Navigation,
-    indexRoute: { component: Home },
+    indexRoute: { component: CategoriesToplevel },
     childRoutes: [
       { path: '/categories/:slug_0', component: CategoriesIndex,
         childRoutes: [
