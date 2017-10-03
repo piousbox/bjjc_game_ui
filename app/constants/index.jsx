@@ -3,9 +3,6 @@ import pkg from '../../package'
 export const DEBUG = (process.env.NODE_ENV !== 'production')
 export const APP_TITLE = pkg.name
 
-export const SET_BADGE       = 'set badge'
-export const SET_BREADCRUMBS = 'set breadcrumbs'
-
 export const DO_LOGOUT = 'do logout'
 
 export const ITEMS_GET_SUCCESS = 'ITEMS_GET_SUCCESS'
@@ -13,6 +10,8 @@ export const ITEMS_GET_ERROR = 'ITEMS_GET_ERROR'
 export const ITEMS_UPDATED = 'ITEMS_UPDATED'
 
 export const SET_API_URL = 'set api url'
+
+export const SET_BADGE = 'set badge'
 
 export const SET_INDEX_CATEGORY = 'set index category' // add one more category to the tree of them
 export const SET_SHOW_CATEGORY  = 'set show category'  // add the display category, with videos
@@ -34,5 +33,4 @@ export const SET_SITE_NEWSITEMS = 'set site newsitems'
 export const SET_VIDEO = 'set video'
 
 export const SET_PROFILE = 'set profile'
-
-export const SET_PATH = 'set path'
+export const SET_PATH    = 'set path'

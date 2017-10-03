@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { Link } from 'react-router'
 import { Grid, Row, Col,
          Panel, 
 } from 'react-bootstrap'
@@ -12,10 +12,12 @@ import arrowDown  from './images/16x16/arrow-bottom.png'
 
 import Report2 from '../Reports/Reports2Show'
 
-import { setLocation, setBadge, setBreadcrumbs } from '../../actions'
+import { setLocation, setBadge, setPath } from '../../actions'
 import FbConnect from './FbConnect'
 
-import Headers from './Headers'
+// import Headers from './Headers'
+import BjjcRouter from './BjjcRouter'
+import BjjcBreadcrumbs from './BjjcBreadcrumbs'
 
 class Tgm2 extends React.Component {
   constructor(props) {
@@ -29,15 +31,17 @@ class Tgm2 extends React.Component {
     this.collapseUp    = this.collapseUp.bind(this)
     this.collapseDown  = this.collapseDown.bind(this)
 
+    this.componentWillReceiveProps = this.componentWillReceiveProps(this)
+
     this.rerender = this.rerender.bind(this)
   }
   
   rerender () {
     console.log('+++ +++ rerender?', this.props)
 
-    if (this.props.params.locationname) {
+    /* if (this.props.params.locationname) {
       this.props.dispatch(setLocation(this.props.params.locationname))
-    }
+    } */
   }
 
   collapseLeft () {
@@ -81,14 +85,14 @@ class Tgm2 extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('+++ +++ Tgm2 will receive props:', nextProps)
+    console.log('+++ +++ Tgm2 will receive props:', this.props, nextProps)
 
-    nextProps.dispatch(setBreadcrumbs(nextProps.params))
-    nextProps.dispatch(setBadge(nextProps.params))
+    this.props.dispatch(setPath(nextProps.params))
+    this.props.dispatch(setBadge(nextProps.params))
   }
 
   render () {
-    // console.log('+++ +++ render Tgm2:', this.props, this.state)
+    console.log('+++ +++ Tgm2 render:', this.props, this.state)
     
     let rightPane = (<div>
       <Panel>
@@ -115,7 +119,23 @@ class Tgm2 extends React.Component {
 
     return(
       <div className="container">
-        <Headers />
+
+        { /* <Headers /> */ }
+        <div >
+          <div className="header header-slim" style={{ zIndex: 2 }}>
+            <Link to={BjjcRouter.rootPath} >T.G.M</Link>
+          </div>
+          <ul className="header" style={{ zIndex: 2 }} >
+            <li><a href="#">Cities</a></li>
+            <li><a href="#">Tags</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Profile</a></li>
+          </ul>
+          <div className="header-2" style={{ zIndex: 2 }} >
+            <BjjcBreadcrumbs path={this.props.params} />
+          </div>
+        </div>
+
         
         <div className={ `folder folder-both folder-collapse-${this.state.collapseState} footer-${this.state.collapseFooter}` } >
           <div className="folder folder-left folder-half">
@@ -170,8 +190,10 @@ Tgm2.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    leftPane: state.leftPane,
-    rightPane: state.rightPane,
+    path: state.path,
+
+    // leftPane: state.leftPane,
+    // rightPane: state.rightPane,
   }
 }
 

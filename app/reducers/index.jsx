@@ -3,10 +3,15 @@ import { combineReducers } from 'redux'
 
 import {
   DO_LOGOUT,
+
+  SET_BADGE,
+
   SET_LOCATION,
-  SET_PROFILE,
-  SET_SITE_NEWSITEMS,
+
   SET_PATH,
+  SET_PROFILE,
+
+  SET_SITE_NEWSITEMS,
 } from '../constants'
 
 import { citiesIndexReducer, citiesShowReducer } from './citiesReducer'
@@ -18,6 +23,21 @@ import { categoriesReducer, categoryReducer } from './categoriesReducer'
 import { videoReducer, } from './videosReducer'
 
 import config from 'config'
+
+// b
+function badgeReducer (state={}, action) {
+  return state
+}
+
+function breadcrumbsReducer(state={}, action) {
+  switch (action.type) {
+    case SET_PATH:
+      console.log('+++ +++ breadcrumbsReducer:', action)
+      return Object.assign({}, action.params)
+    default: 
+      return state
+  }
+}
 
 function locationReducer (state = {}, action) {
   switch (action.type) {
@@ -32,29 +52,10 @@ function locationReducer (state = {}, action) {
   }
 }
 
-function myReportsReducer (state = {}, action) {
-  // @TODO
-  return state
-}
-
-function myGalleriesReducer (state = {}, action) {
-  // @TODO
-  return state
-}
-
 function newsitemsReducer(state = {}, action) {
   switch (action.type) {
     case SET_SITE_NEWSITEMS:
       return action.newsitems
-    default:
-      return state
-  }
-}
-
-function pathReducer (state={}, action) {
-  switch (action.type) {
-    case SET_PATH:
-      return action.path
     default:
       return state
   }
@@ -70,14 +71,17 @@ function profileReducer (state = {}, action) {
   }
 }
 
-
-
 export default combineReducers({
+
+  badge: badgeReducer,
 
   categories: categoriesReducer,
   category: categoryReducer,
+ 
+  location: locationReducer,
 
-  path: pathReducer,
+  path: breadcrumbsReducer,
+  profile: profileReducer,
 
   video: videoReducer,
 
@@ -85,11 +89,7 @@ export default combineReducers({
   cities: citiesIndexReducer,
   city: citiesShowReducer,
   gallery: galleriesShowReducer,
-  location: locationReducer,
-  myReports: myReportsReducer,
-  myGalleries: myGalleriesReducer,
   newsitems: newsitemsReducer,
-  profile: profileReducer,
   report: reportsShowReducer,
   reports: reportsReducer,
   site: sitesReducer,

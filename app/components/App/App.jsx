@@ -122,6 +122,7 @@ function mapStateToProps(state, ownProps) {
   return {
     cities: state.cities,
     profile: state.profile,
+    path: state.path,
   }
 }
 

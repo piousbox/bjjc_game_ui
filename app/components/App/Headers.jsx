@@ -1,6 +1,6 @@
 import React from 'react'
-
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
 
 import BjjcRouter      from './BjjcRouter'
 import BjjcBreadcrumbs from './BjjcBreadcrumbs'
@@ -9,9 +9,16 @@ class Headers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {}
+    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    console.log('+++ +++ Headers will receive props:', this.props, nextProps)
   }
 
   render () {
+    console.log('+++ +++ Headers render:', this.props, this.state)
+
     return(
       <div>
         <div className="header header-slim">
@@ -36,8 +43,8 @@ Headers.propTypes = {
 
 const mapStateToProps = (store, ownprops) => {
   return {
-    breadcrumbs: store.breadcrumbs,
+    path: store.path,
   }
 }
 
-export default Headers
+export default connect(mapStateToProps)(Headers)

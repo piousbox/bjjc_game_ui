@@ -5,29 +5,14 @@
 
 import {
   SET_BADGE,
-  SET_BREADCRUMBS,
   SET_INDEX_CATEGORY,
   SET_LOCATION,
+  SET_PATH,
   SET_SHOW_CATEGORY,
   SET_VIDEO,
 } from '../constants';
 
 import config from 'config'
-
-const setBadge = (params) => {
-  // console.log('+++ +++ setBadge:', params)
-  // params.locationname, params.badgename
-
-  return (dispatch, getState) => {
-    dispatch({ type: SET_BADGE, badge: null })
-  }
-}
-
-const setBreadcrumbs = (params) => {
-  return (dispatch, getState) => {
-    dispatch({ type: SET_BREADCRUMBS, params: null })
-  }
-}
 
 const categoriesIndex = (params) => {
   return (dispatch, getState) => {
@@ -86,6 +71,31 @@ const categoriesShow = (variables) => {
   }
 }
 
+const setBadge = (params) => {
+  // console.log('+++ +++ setBadge:', params)
+  // params.locationname, params.badgename
+
+  return (dispatch, getState) => {
+    dispatch({ type: SET_BADGE, badge: null })
+  }
+}
+
+const setBreadcrumbs = (params) => {
+  return (dispatch, getState) => {
+    dispatch({ type: SET_PATH, params: params })
+  }
+}
+
+const setLocation = (name) => {
+  return (dispatch, getState) => {
+    let state = getState()
+    let url = `${config.apiUrl}/api/locations/${name}.json`
+    fetch(url).then(r => r.json()).then(_data => {
+      dispatch({ type: SET_LOCATION, location: _data })
+    })
+  }
+}
+
 const siteNewsitemsAction = (args = {}) => {
   return (dispatch, getState) => {
     let state = getState()
@@ -117,24 +127,14 @@ const siteShow = () => {
   }
 }
 
-const setLocation = (name) => {
-  return (dispatch, getState) => {
-    let state = getState()
-    let url = `${config.apiUrl}/api/locations/${name}.json`
-    fetch(url).then(r => r.json()).then(_data => {
-      dispatch({ type: SET_LOCATION, location: _data })
-    })
-  }
-}
-
 
 import { loginAction, logoutAction, profileAction, } from './profileActions'
 
 export default {
   setBadge,
-  setBreadcrumbs,
   setLocation,
   siteNewsitemsAction,
+  setPath: setBreadcrumbs,
   siteShow,
 
   categoriesIndex,

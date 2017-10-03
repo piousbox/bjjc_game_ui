@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import BjjcRouter from './BjjcRouter'
 
-class BjjcBreadcrumbs extends React.Component {
+class Breadcrumbs extends React.Component {
 
   constructor(props) {
     super(props)
@@ -12,10 +12,11 @@ class BjjcBreadcrumbs extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('+++ +++ Breadcrumbs will receive props:', this.props, nextProps)
   }
 
   render () {
-    console.log('+++ +++ bjjcBreadcrumbs:', this.props, this.state)
+    console.log('+++ +++ Breadcrumbs render:', this.props, this.state)
 
     let links = []
     let key = 0
@@ -23,20 +24,21 @@ class BjjcBreadcrumbs extends React.Component {
     links.push(<span key={key++} >&nbsp;&gt;&nbsp;</span>)
 
     if (this.props.path.locationname) {
-      links.push(<Link key={key++} to={ BjjcRouter.locationLink(this.props.path.locationname) }><i className="fa fa-2x fa-home" /></Link>)
+      links.push(<span key={key++} >Locations</span>)
+      links.push(<span key={key++} >&nbsp;&gt;&nbsp;</span>)
+      
+      links.push(<Link key={key++} to={ BjjcRouter.locationLink(this.props.path.locationname) }>{ this.props.path.locationname }</Link>)
       links.push(<span key={key++} >&nbsp;&gt;&nbsp;</span>)
       if (this.props.path.badgename) {
         links.push(
           <Link key={key++} to={ BjjcRouter.locationBadgeLink(this.props.path.locationname, this.props.path.badgename) }>
-            <i className="fa fa-2x fa-home" />
+            { this.props.path.badgename }
           </Link>)
-        links.push(<span key={key++} >&nbsp;&gt;&nbsp;</span>)
       }
     }
 
     if (this.props.path === '/categories') {
       links.push(<Link key={key++} to={ BjjcRouter.categoryLink({path: ''})}>Categories</Link>)
-      return (<div>{ links }</div>)
     }
 
     if (this.props.path.slug_0) {
@@ -69,20 +71,18 @@ class BjjcBreadcrumbs extends React.Component {
           }
         }
       }
-      return (<div>{ links }</div>)
     }
-    
-    return (<div />)
+    return (<div>{ links }</div>)
   }
 }
 
-BjjcBreadcrumbs.propTypes = {
+Breadcrumbs.propTypes = {
 }
 
 const mapStateToProps = (store, ownprops) => {
   return {
-    path: store.path,
+    // path: store.path,
   }
 }
 
-export default connect(mapStateToProps)(BjjcBreadcrumbs)
+export default connect(mapStateToProps)(Breadcrumbs)

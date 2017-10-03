@@ -8,11 +8,14 @@ import { setLocation } from '../../actions'
 import { BjjcRouter } from '../App'
 
 class LocationShow extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {}
     this.props.dispatch(setLocation(props.params.locationname))
+  }
+
+  componentWillReceiveProps (nextProps) {
+    // console.log('+++ +++ LocationShow will receive props:', nextProps)
   }
 
   render () {
@@ -55,6 +58,8 @@ class LocationShow extends React.Component {
             { badges }
           </div>
         </Draggable>
+
+        <div style={{ display: 'none' }}>{this.props.children}</div>
       </div>
     )
   }
