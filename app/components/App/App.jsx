@@ -30,6 +30,8 @@ import Tgm2Home from './Tgm2Home'
 
 import VideosShow from '../Videos/VideosShow'
 
+import Badge from './Badge'
+
 import { citiesIndex, 
          // profileAction,
 } from '../../actions'
@@ -39,9 +41,11 @@ const routes = [
     component: Tgm2,
     indexRoute: { component: Tgm2Home },
     childRoutes: [
-      { path: BjjcRouter.locationPath, component: Location },
-      // { path: '/tgm2/cities/:cityname',               component: Cities2Show },
-      // { path: '/tgm2/cities/:cityname/tags/:tagname', component: TagsShow },
+      { path: BjjcRouter.locationPath, component: Location, 
+        childRoutes: [
+          { path: BjjcRouter.locationBadgePath, component: Badge },
+        ],
+      },
     ],
   },
   { path: '/',
@@ -50,7 +54,7 @@ const routes = [
     childRoutes: [
       { path: BjjcRouter.videosShowPath, component: VideosShow },
       { path: '/categories',             component: CategoriesToplevel },
-      { path: '/categories/:slug_0', component: CategoriesIndex,
+      { path: '/categories/:slug_0',     component: CategoriesIndex,
         childRoutes: [
           { path: '/categories/:slug_0/:slug_1', component: CategoriesIndex,
             childRoutes: [

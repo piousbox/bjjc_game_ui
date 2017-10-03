@@ -12,7 +12,7 @@ import arrowDown  from './images/16x16/arrow-bottom.png'
 
 import Report2 from '../Reports/Reports2Show'
 
-import { setLocation } from '../../actions'
+import { setLocation, setBadge, setBreadcrumbs } from '../../actions'
 import FbConnect from './FbConnect'
 
 import Headers from './Headers'
@@ -78,6 +78,13 @@ class Tgm2 extends React.Component {
       this.setState({ collapseFooter: 'down' })
     }
     this.rerender()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    console.log('+++ +++ Tgm2 will receive props:', nextProps)
+
+    nextProps.dispatch(setBreadcrumbs(nextProps.params))
+    nextProps.dispatch(setBadge(nextProps.params))
   }
 
   render () {

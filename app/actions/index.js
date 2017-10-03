@@ -1,12 +1,11 @@
 
 /*
- * bjjc_react appActions.js
+ * bjjc_react actions/index.js
  */
 
-import AppDispatcher from '../dispatcher/AppDispatcher'
-
 import {
-  SET_API_URL,
+  SET_BADGE,
+  SET_BREADCRUMBS,
   SET_INDEX_CATEGORY,
   SET_LOCATION,
   SET_SHOW_CATEGORY,
@@ -15,10 +14,18 @@ import {
 
 import config from 'config'
 
-const setApiUrl = () => {
-  return {
-    type: SET_API_URL,
-    apiUrl: config.apiUrl,
+const setBadge = (params) => {
+  // console.log('+++ +++ setBadge:', params)
+  // params.locationname, params.badgename
+
+  return (dispatch, getState) => {
+    dispatch({ type: SET_BADGE, badge: null })
+  }
+}
+
+const setBreadcrumbs = (params) => {
+  return (dispatch, getState) => {
+    dispatch({ type: SET_BREADCRUMBS, params: null })
   }
 }
 
@@ -79,77 +86,6 @@ const categoriesShow = (variables) => {
   }
 }
 
-
-/* const citiesIndex = () => {
-  return (dispatch, getState) => { 
-    let state = getState()
-    let url = config.apiUrl + "/api/cities.json"
-    
-    if (state.citiesIndex.length > 0) {
-      dispatch({
-        type: SET_CITIES_INDEX,
-        cities: state.citiesIndex
-      })
-    } else {
-      fetch(url).then(r => r.json()).then(_data => {
-
-        console.log('+++ +++ _data is:', _data)
-
-        dispatch({
-          type: SET_CITIES_INDEX,
-          cities: _data,
-        })
-      })
-    }
-  }
-}
-
-const citiesShow = (args) => {
-  return (dispatch, getState) => {
-    let state = getState()
-    let url = `${config.apiUrl}/api/cities/view/${args.cityname}.json`
-    fetch(url).then(r => r.json()).then(_data => {
-      console.log("+++ +++ citiesShow() data:", _data)
-      dispatch({
-        type: SET_CITY,
-        cityname: args.cityname,
-        city: _data.city,
-        galleries: _data.galleries,
-      })
-    })
-  }
-}
-
-const galleriesShow = (args) => {
-  console.log("+++ +++ start action galleriesShow:", args)
-
-  return (dispatch, getState) => {
-    let url = `${config.apiUrl}/api/galleries/view/${args.galleryname}.json`
-    fetch(url).then(r => r.json()).then(_data => {
-      console.log("+++ +++ galleriesShow() data:", _data)
-      dispatch({
-        type: SET_GALLERY,
-        galleryname: args.galleryname,
-        gallery: _data.gallery,
-      })
-    })
-  }
-}
-
-const reportsShow = (args) => {
-  return (dispatch, getState) => {
-    let url = `${config.apiUrl}/api/reports/view/${args.reportname}.json`
-    fetch(url).then(r => r.json()).then(_data => {
-      console.log("+++ +++ reportsShow data:", _data)
-      dispatch({
-        type: SET_REPORT,
-        report: _data.report,
-      })
-    })
-  }
-} */
-
-
 const siteNewsitemsAction = (args = {}) => {
   return (dispatch, getState) => {
     let state = getState()
@@ -195,7 +131,8 @@ const setLocation = (name) => {
 import { loginAction, logoutAction, profileAction, } from './profileActions'
 
 export default {
-  setApiUrl,
+  setBadge,
+  setBreadcrumbs,
   setLocation,
   siteNewsitemsAction,
   siteShow,

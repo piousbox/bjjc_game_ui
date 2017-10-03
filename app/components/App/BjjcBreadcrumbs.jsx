@@ -22,6 +22,18 @@ class BjjcBreadcrumbs extends React.Component {
     links.push(<Link key={key++} to={ BjjcRouter.rootPath }><i className="fa fa-2x fa-home" /></Link>)
     links.push(<span key={key++} >&nbsp;&gt;&nbsp;</span>)
 
+    if (this.props.path.locationname) {
+      links.push(<Link key={key++} to={ BjjcRouter.locationLink(this.props.path.locationname) }><i className="fa fa-2x fa-home" /></Link>)
+      links.push(<span key={key++} >&nbsp;&gt;&nbsp;</span>)
+      if (this.props.path.badgename) {
+        links.push(
+          <Link key={key++} to={ BjjcRouter.locationBadgeLink(this.props.path.locationname, this.props.path.badgename) }>
+            <i className="fa fa-2x fa-home" />
+          </Link>)
+        links.push(<span key={key++} >&nbsp;&gt;&nbsp;</span>)
+      }
+    }
+
     if (this.props.path === '/categories') {
       links.push(<Link key={key++} to={ BjjcRouter.categoryLink({path: ''})}>Categories</Link>)
       return (<div>{ links }</div>)

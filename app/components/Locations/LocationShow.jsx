@@ -5,6 +5,7 @@ import Draggable from 'react-draggable'
 
 import { setLocation } from '../../actions'
 
+import { BjjcRouter } from '../App'
 
 class LocationShow extends React.Component {
 
@@ -17,10 +18,10 @@ class LocationShow extends React.Component {
   render () {
     console.log("+++ +++ LocationShow render:", this.props, this.state)
 
-    let oWidth = 200
+    let oWidth  = 200
     let oHeight = 200
     if (document.getElementById('web-design-6')) {
-      oWidth = document.getElementById('web-design-6').offsetWidth
+      oWidth  = document.getElementById('web-design-6').offsetWidth
       oHeight = document.getElementById('web-design-6').offsetHeight
     }
 
@@ -29,7 +30,7 @@ class LocationShow extends React.Component {
     if (this.props.location.badges) {
       this.props.location.badges.map((badge) => {
         badges.push(
-          <Link to="#" key={badgesKey++} >
+          <Link to={BjjcRouter.locationBadgeLink(this.props.location, badge)} key={badgesKey++} >
             <div className="badge"
                  style={{ position: 'absolute', top: badge.bg_pos_y, left: badge.bg_pos_x,
                           width: '100px', height: '100px', display: 'block',

@@ -13,6 +13,27 @@ let BjjcRouter = {
 
   locationPath: '/tgm2/locations/:locationname',
   locationLink: (v) => { return `/tgm2/locations/${v}` },
+  locationBadgePath: '/tgm2/locations/:locationname/badges/:badgename',
+  locationBadgeLink: (location, badge) => {
+    // console.log('+++ +++ locationBaddgeLink:', location, badge)
+
+    let lname
+    let bname
+
+    if ('object' === typeof location) {
+      lname = location.location_name
+    } else if ('string' === typeof location) {
+      lname = location
+    }
+
+    if ('object' === typeof badge) {
+      bname = badge.location_name
+    } else if ('string' === typeof badge) {
+      bname = badge
+    }
+
+    return `/tgm2/locations/${lname}/badges/${bname}` 
+  },
 
   tgm2Path: '/tgm2',
 

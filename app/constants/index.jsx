@@ -3,6 +3,9 @@ import pkg from '../../package'
 export const DEBUG = (process.env.NODE_ENV !== 'production')
 export const APP_TITLE = pkg.name
 
+export const SET_BADGE       = 'set badge'
+export const SET_BREADCRUMBS = 'set breadcrumbs'
+
 export const DO_LOGOUT = 'do logout'
 
 export const ITEMS_GET_SUCCESS = 'ITEMS_GET_SUCCESS'
