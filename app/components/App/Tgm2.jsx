@@ -33,15 +33,19 @@ class Tgm2 extends React.Component {
 
     this.componentWillReceiveProps = this.componentWillReceiveProps(this)
 
-    this.rerender = this.rerender.bind(this)
+    this.onWindowResize = this.onWindowResize.bind(this)
+    this.rerender       = this.rerender.bind(this)
   }
   
-  rerender () {
-    console.log('+++ +++ rerender?', this.props)
-
-    /* if (this.props.params.locationname) {
+  onWindowResize () {
+    if (this.props.params.locationname) {
       this.props.dispatch(setLocation(this.props.params.locationname))
-    } */
+    }
+  }
+  rerender () {
+    if (this.props.params.locationname) {
+      this.props.dispatch(setLocation(this.props.params.locationname))
+    }
   }
 
   collapseLeft () {
@@ -90,6 +94,9 @@ class Tgm2 extends React.Component {
     this.props.dispatch(setPath(nextProps.params))
     this.props.dispatch(setBadge(nextProps.params))
   }
+
+  componentDidMount () { window.addEventListener('resize', this.onWindowResize) }
+  componentWillUnmount () { window.removeEventListener('resize', this.onWindowResize) }
 
   render () {
     console.log('+++ +++ Tgm2 render:', this.props, this.state)
