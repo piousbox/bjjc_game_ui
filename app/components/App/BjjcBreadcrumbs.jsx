@@ -28,12 +28,9 @@ class Breadcrumbs extends React.Component {
       links.push(<span key={key++} >&nbsp;&gt;&nbsp;</span>)
       
       links.push(<Link key={key++} to={ BjjcRouter.locationLink(this.props.path.locationname) }>{ this.props.path.locationname }</Link>)
-      links.push(<span key={key++} >&nbsp;&gt;&nbsp;</span>)
       if (this.props.path.badgename) {
-        links.push(
-          <Link key={key++} to={ BjjcRouter.locationBadgeLink(this.props.path.locationname, this.props.path.badgename) }>
-            { this.props.path.badgename }
-          </Link>)
+        links.push(<span key={key++} >&nbsp;&gt;&nbsp;</span>)
+        links.push(<Link key={key++} to={ BjjcRouter.locationBadgeLink(this.props.path.locationname, this.props.path.badgename) }>{ this.props.path.badgename }</Link>)
       }
     }
 

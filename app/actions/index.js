@@ -71,12 +71,12 @@ const categoriesShow = (variables) => {
   }
 }
 
-const setBadge = (params) => {
-  // console.log('+++ +++ setBadge:', params)
-  // params.locationname, params.badgename
-
+const setBadge = (badgename) => {
   return (dispatch, getState) => {
-    dispatch({ type: SET_BADGE, badge: null })
+    let url = `${config.apiUrl}/api/badges/${badgename}.json`
+    fetch(url).then(r => r.json()).then(_data => {
+      dispatch({ type: SET_BADGE, badge: _data })
+    })
   }
 }
 

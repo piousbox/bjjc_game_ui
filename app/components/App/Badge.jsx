@@ -1,13 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { SET_PATH, } from '../../constants'
+// import { SET_PATH, } from '../../constants'
+
+import { setBadge } from '../../actions'
 
 class Badge extends React.Component {
   constructor(props) {
     super(props)
     console.log('+++ +++ Badge constructor:', props)
     this.state = {}
+    this.props.dispatch(setBadge(props.params.badgename))
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
   }
 
