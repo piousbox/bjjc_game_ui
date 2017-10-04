@@ -9,6 +9,9 @@ const profileAction = () => {
   return (dispatch, getState) => {
     if (localStorage.getItem('fbAccount')) {
       let fbAccount = JSON.parse(localStorage.getItem('fbAccount'))
+
+      console.log('+++ +++ profileAction, fbAccount:', fbAccount)
+
       fetch(BjjcRouter.profile, {
         method: 'POST',
         headers: new Headers({

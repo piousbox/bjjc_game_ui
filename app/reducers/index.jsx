@@ -81,7 +81,6 @@ function profileReducer (state = {}, action) {
   switch (action.type) {
     case SET_PROFILE:
       return action.fbAccount
-
     default:
       return state
   }
