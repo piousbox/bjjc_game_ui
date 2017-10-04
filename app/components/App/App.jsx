@@ -50,12 +50,9 @@ const routes = [
       },
     ],
   },
-  { path: '/tgm3', component: Tgm3,
-    childRoutes: [
-      { path: '/tgm3/locations/:locationname', component: Tgm3Child },
-      { path: '/tgm3/locations/:locationname/badges/:badgename', component: Tgm3Child },
-    ]
-  },
+  { path: '/tgm3', component: Tgm3, },
+  { path: '/tgm3/locations/:locationname', component: Tgm3 },
+  { path: '/tgm3/locations/:locationname/badges/:badgename', component: Tgm3 },
   { path: '/',
     component: Navigation,
     indexRoute: { component: Home },

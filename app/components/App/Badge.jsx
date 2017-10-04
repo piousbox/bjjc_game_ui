@@ -9,8 +9,13 @@ class Badge extends React.Component {
   constructor(props) {
     super(props)
     console.log('+++ +++ Badge constructor:', props)
+
     this.state = {}
-    this.props.dispatch(setBadge(props.params.badgename))
+
+    if (props.params) {
+      this.props.dispatch(setBadge(props.params.badgename))
+    }
+
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
   }
 

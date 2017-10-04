@@ -30,12 +30,14 @@ class CategoriesIndex extends React.Component {
     this.state = { allCategories: {}, thisIndexCategory: {}, thisShowCategory: {} }
     props.dispatch(categoriesIndex( props.params ))
     props.dispatch({ type: SET_PATH, path: props.params })
+
+    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('+++ +++ categoriesIndex will receive props:', this.props, nextProps)
+    console.log('+++ +++ categoriesIndex will receive props:', this.props, nextProps, this.state)
 
-    let path = '/'
+    let path = ''
     if (nextProps.params.slug_0) {
       path = nextProps.params.slug_0
       if (nextProps.params.slug_1) {
@@ -57,11 +59,16 @@ class CategoriesIndex extends React.Component {
         }
       }
     }
+    console.log('+++ +++ path:', path)
 
     if (this.props.allCategories && this.props.allCategories[path]) {
-      this.setState(Object.assign({}, this.state, { thisIndexCategory: this.props.allCategories[path] }))
+      if (this.state.thisIndexCategory.path !== path) {
+        this.setState(Object.assign({}, this.state, { thisIndexCategory: this.props.allCategories[path] }))
+      }
     } else if (nextProps.allCategories && nextProps.allCategories[path]) {
-      this.setState(Object.assign({}, this.state, { thisIndexCategory: nextProps.allCategories[path] }))
+      if (this.state.thisIndexCategory.path !== path) {
+        this.setState(Object.assign({}, this.state, { thisIndexCategory: nextProps.allCategories[path] }))
+      }
     } else {
       this.props.dispatch(categoriesIndex( this.props.params ))
     }

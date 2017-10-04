@@ -104,7 +104,7 @@ class Tgm2 extends React.Component {
     
     let rightPane = (<div><Panel><h2>default rightPane</h2></Panel></div>)
     if (this.props.badge) {
-      let rightPane = (
+      rightPane = (
         <Row>
           <Col xs={12}>
             <Badge badge={this.props.badge} />

@@ -30,7 +30,7 @@ class Navigation extends React.Component {
     if (Object.keys(nextProps.params).length > 0) { 
       // I'm deep in categories
       this.props.dispatch({ type: SET_PATH, path: nextProps.params })
-    } else {
+    } else if (Object.keys(nextProps.route) > 0 ) {
       // I'm categoriesToplevel or other
       this.props.dispatch({ type: SET_PATH, path: nextProps.route.path })
     }

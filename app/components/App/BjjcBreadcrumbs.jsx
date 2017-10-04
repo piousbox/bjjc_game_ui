@@ -18,6 +18,8 @@ class Breadcrumbs extends React.Component {
   render () {
     console.log('+++ +++ Breadcrumbs render:', this.props, this.state)
 
+    if (!this.props.path) { return(<span />) }
+
     let links = []
     let key = 0
     links.push(<Link key={key++} to={ BjjcRouter.rootPath }><i className="fa fa-2x fa-home" /></Link>)

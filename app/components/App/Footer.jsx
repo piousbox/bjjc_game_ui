@@ -43,8 +43,7 @@ class Footer extends React.Component {
             <Col xs={4} >
               ^__^
             </Col>
-            <Col xs={4}>
-            </Col>
+            <Col xs={4} />
             <Col xs={4}>
               2017 &copy; wasya_co
             </Col>

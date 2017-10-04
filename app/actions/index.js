@@ -92,7 +92,11 @@ const setLocation = (name) => {
   return (dispatch, getState) => {
     let state = getState()
     let url = `${config.apiUrl}/api/locations/${name}.json`
-    fetch(url).then(r => r.json()).then(_data => {
+    fetch(url, {
+      headers: {
+        version: 'tgm3',
+      },
+    }).then(r => r.json()).then(_data => {
       dispatch({ type: SET_LOCATION, location: _data })
     })
   }

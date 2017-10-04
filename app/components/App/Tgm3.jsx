@@ -13,12 +13,12 @@ import arrowDown  from './images/16x16/arrow-bottom.png'
 import Report2 from '../Reports/Reports2Show'
 
 import { setLocation, setBadge, setPath } from '../../actions'
-import FbConnect from './FbConnect'
 
-// import Headers from './Headers'
-import BjjcRouter from './BjjcRouter'
-import BjjcBreadcrumbs from './BjjcBreadcrumbs'
-import Badge from './Badge'
+import FbConnect        from './FbConnect'
+import Headers          from './Headers'
+import BjjcRouter       from './BjjcRouter'
+import BjjcBreadcrumbs  from './BjjcBreadcrumbs'
+import Badge            from './Badge'
 import { LocationShow } from '../Locations'
 
 class Tgm3 extends React.Component {
@@ -28,15 +28,16 @@ class Tgm3 extends React.Component {
                    collapseFooter: 'up',
     };
 
-    this.collapseLeft  = this.collapseLeft.bind(this)
-    this.collapseRight = this.collapseRight.bind(this)
-    this.collapseUp    = this.collapseUp.bind(this)
-    this.collapseDown  = this.collapseDown.bind(this)
-
-    this.componentWillReceiveProps = this.componentWillReceiveProps(this)
-
+    this.collapseLeft   = this.collapseLeft.bind(this)
+    this.collapseRight  = this.collapseRight.bind(this)
+    this.collapseUp     = this.collapseUp.bind(this)
+    this.collapseDown   = this.collapseDown.bind(this)
+    this.showLeft       = this.showLeft.bind(this)
+    this.showRight      = this.showRight.bind(this)
     this.onWindowResize = this.onWindowResize.bind(this)
     this.rerender       = this.rerender.bind(this)
+    this.componentWillReceiveProps = this.componentWillReceiveProps(this)
+
   }
   
   onWindowResize () {
@@ -92,14 +93,14 @@ class Tgm3 extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     console.log('+++ +++ Tgm3 will receive props:', this.props, nextProps)
-
+    /*
     this.props.dispatch(setPath(nextProps.props.params))
     if (nextProps.props.params.locationname && this.props.params.locationname !== nextProps.props.params.locationname) {
       this.props.dispatch(setLocation(nextProps.params.locationname))
     }
     if (nextProps.props.params.badgename && this.props.params.badgename !== nextProps.props.params.badgename) {
       this.props.dispatch(setBadge(nextProps.params))
-    }
+    } */
   }
 
   componentWillUpdate (what) {
@@ -109,18 +110,24 @@ class Tgm3 extends React.Component {
   componentDidMount () { window.addEventListener('resize', this.onWindowResize) }
   componentWillUnmount () { window.removeEventListener('resize', this.onWindowResize) }
 
+  showLeft (what) {
+  }
+
+  showRight (what) {
+  }
+
   render () {
     console.log('+++ +++ Tgm3 render:', this.props, this.state)
     
     let leftPane = (<div><Panel>default leftPane</Panel></div>)
-    if (this.props.leftPane && this.props.leftPane.location) {
-      console.log('+++ rendering this location:', this.props.leftPane.location)
-      leftPane = (<LocationShow location={this.props.leftPane.location} />)
+    if (this.props.blocation && this.props.blocation) {
+      console.log('+++ rendering this blocation:', this.props.blocation)
+      leftPane = (<LocationShow location={this.props.blocation} />)
     }
 
     let rightPane = (<Panel>default rightPane</Panel>)
     if (this.props.badge) {
-      let rightPane = (
+      rightPane = (
         <Row>
           <Col xs={12}>
             <Badge badge={this.props.badge} />
@@ -131,8 +138,8 @@ class Tgm3 extends React.Component {
     return(
       <div className="container">
 
-        { /* <Headers /> */ }
-        <div >
+        <Headers />
+        { /* <div >
           <div className="header header-slim" style={{ zIndex: 2 }}>
             <Link to={BjjcRouter.rootPath} >T.G.M</Link>
           </div>
@@ -145,19 +152,18 @@ class Tgm3 extends React.Component {
           <div className="header-2" style={{ zIndex: 2 }} >
             <BjjcBreadcrumbs path={this.props.params} />
           </div>
-        </div>
-
+        </div> */ }
         
         <div className={ `folder folder-both folder-collapse-${this.state.collapseState} footer-${this.state.collapseFooter}` } >
           <div className="folder folder-left folder-half">
             <ul className="nav nav-tabs">
-              <li className="active"><a href="#web-design-6" data-toggle="tab" aria-expanded="false">Map</a></li>
-              <li className=""><a href="#graphic-design-6" data-toggle="tab" aria-expanded="false"><span className="title-head">News</span></a></li>
-              <li className=""><a href="#developement-6" data-toggle="tab" aria-expanded="false"><span className="title-head">People</span></a></li>
+              <li className="active"><a href="javascript:;" onClick={() => this.showLeft('map')} data-toggle="tab" aria-expanded="false">Map</a></li>
+              <li className=""><a href="javascript:;" onClick={() => this.showLeft('chat')} data-toggle="tab" aria-expanded="false"><span className="title-head">Chat</span></a></li>
+              { /* <li className=""><a href="javascript;" onClick={() => this.showLeft('people')} data-toggle="tab" aria-expanded="false"><span className="title-head">People</span></a></li> */ }
             </ul>
             <div className="tab-wrapper">
               <div className="tab-content">
-                <div className="tab-pane active" id="web-design-6">
+                <div className="tab-pane active">
                   { leftPane }
                 </div>
               </div>

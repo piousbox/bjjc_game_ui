@@ -42,7 +42,9 @@ class Home extends React.Component {
 
   constructor(props) {
     super(props)
-    props.dispatch(siteShow());
+
+    // props.dispatch(siteShow());
+
     if (props.site) {
       localStorage.setItem("lang", this.props.site.lang)
     }
