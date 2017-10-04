@@ -9,6 +9,7 @@ import {
   SET_LOCATION,
   SET_PATH,
   SET_SHOW_CATEGORY,
+  SET_STORY,
   SET_VIDEO,
 } from '../constants';
 
@@ -88,7 +89,7 @@ const setBreadcrumbs = (params) => {
 }
 
 const setLocation = (name) => {
-  console.log('+++ +++ setLocation:', name)
+  console.log('+++ setLocation:', name)
   return (dispatch, getState) => {
     let state = getState()
     let url = `${config.apiUrl}/api/locations/${name}.json`
@@ -97,7 +98,9 @@ const setLocation = (name) => {
         version: 'tgm3',
       },
     }).then(r => r.json()).then(_data => {
-      dispatch({ type: SET_LOCATION, location: _data })
+      // map
+      dispatch({ type: SET_LOCATION, location: _data.location })
+      dispatch({ tyle: SET_STORY, story: _data.story })
     })
   }
 }

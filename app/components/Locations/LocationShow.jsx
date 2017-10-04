@@ -27,9 +27,9 @@ class LocationShow extends React.Component {
 
     let oWidth  = 200
     let oHeight = 200
-    if (document.getElementById('web-design-6')) {
-      oWidth  = document.getElementById('web-design-6').offsetWidth
-      oHeight = document.getElementById('web-design-6').offsetHeight
+    if (document.getElementById('leftPane')) {
+      oWidth  = document.getElementById('leftPane').offsetWidth
+      oHeight = document.getElementById('leftPane').offsetHeight
     }
 
     let badges = []
@@ -40,7 +40,7 @@ class LocationShow extends React.Component {
           <Link to={BjjcRouter.locationBadgeLink(this.props.location, badge)} key={badgesKey++} >
             <div className="badge"
                  style={{ position: 'absolute', top: badge.bg_pos_y, left: badge.bg_pos_x,
-                          width: '100px', height: '100px', display: 'block',
+                          width: '100px',       height: '100px',     display: 'block',
                           background: `url(${badge.shaded_photo})`
                  }} />
           </Link>)

@@ -14,19 +14,29 @@ import Report2 from '../Reports/Reports2Show'
 
 import { setLocation, setBadge, setPath } from '../../actions'
 
-import FbConnect        from './FbConnect'
-import Headers          from './Headers'
+import Badge            from './Badge'
 import BjjcRouter       from './BjjcRouter'
 import BjjcBreadcrumbs  from './BjjcBreadcrumbs'
-import Badge            from './Badge'
+import FbConnect        from './FbConnect'
+import Headers          from './Headers'
+import Story            from './Story'
 import { LocationShow } from '../Locations'
 
 class Tgm3 extends React.Component {
   constructor(props) {
     super(props)
+
+    console.log('+++ ++ Tgm3 constructor:', props)
+
     this.state = { collapseState: 'center',
                    collapseFooter: 'up',
+                   showLeft: 'map',
+                   showRight: 'story',
     };
+    
+    if (props.params.locationname) {
+      props.dispatch(setLocation(props.params.locationname))
+    }
 
     this.collapseLeft   = this.collapseLeft.bind(this)
     this.collapseRight  = this.collapseRight.bind(this)
@@ -93,12 +103,12 @@ class Tgm3 extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     console.log('+++ +++ Tgm3 will receive props:', this.props, nextProps)
-    /*
+    
     this.props.dispatch(setPath(nextProps.props.params))
     if (nextProps.props.params.locationname && this.props.params.locationname !== nextProps.props.params.locationname) {
       this.props.dispatch(setLocation(nextProps.params.locationname))
     }
-    if (nextProps.props.params.badgename && this.props.params.badgename !== nextProps.props.params.badgename) {
+    /* if (nextProps.props.params.badgename && this.props.params.badgename !== nextProps.props.params.badgename) {
       this.props.dispatch(setBadge(nextProps.params))
     } */
   }
@@ -111,59 +121,67 @@ class Tgm3 extends React.Component {
   componentWillUnmount () { window.removeEventListener('resize', this.onWindowResize) }
 
   showLeft (what) {
+    this.setState({ showLeft: what })
   }
 
   showRight (what) {
+    this.setState({ showRight: what })
   }
 
   render () {
     console.log('+++ +++ Tgm3 render:', this.props, this.state)
     
     let leftPane = (<div><Panel>default leftPane</Panel></div>)
-    if (this.props.blocation && this.props.blocation) {
-      console.log('+++ rendering this blocation:', this.props.blocation)
-      leftPane = (<LocationShow location={this.props.blocation} />)
+    switch (this.state.showLeft) {
+      case 'map':
+        if (this.props.blocation && this.props.blocation) {
+          console.log('+++ rendering this blocation:', this.props.blocation)
+          leftPane = (<LocationShow location={this.props.blocation} />)
+        }
+        break
+      case 'chat':
+        leftPane = (<span>Show chat</span>)
+        break
+      default:
+        if (this.props.blocation && this.props.blocation) {
+          console.log('+++ rendering this blocation:', this.props.blocation)
+          leftPane = (<LocationShow location={this.props.blocation} />)
+        }
     }
 
     let rightPane = (<Panel>default rightPane</Panel>)
-    if (this.props.badge) {
-      rightPane = (
-        <Row>
-          <Col xs={12}>
-            <Badge badge={this.props.badge} />
-          </Col>
-        </Row>)
+    switch (this.state.showRight) {
+      case 'story':
+        rightPane = (<Story story={this.props.story} />)
+        break
+      case 'tasks':
+        if (this.props.badge) {
+          rightPane = (
+            <Row>
+              <Col xs={12}>
+                <Badge badge={this.props.badge} />
+              </Col>
+            </Row>)
+        }
+        break
+      default:
+        // nothing
     }
       
     return(
       <div className="container">
-
         <Headers />
-        { /* <div >
-          <div className="header header-slim" style={{ zIndex: 2 }}>
-            <Link to={BjjcRouter.rootPath} >T.G.M</Link>
-          </div>
-          <ul className="header" style={{ zIndex: 2 }} >
-            <li><a href="#">Cities</a></li>
-            <li><a href="#">Tags</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Profile</a></li>
-          </ul>
-          <div className="header-2" style={{ zIndex: 2 }} >
-            <BjjcBreadcrumbs path={this.props.params} />
-          </div>
-        </div> */ }
         
         <div className={ `folder folder-both folder-collapse-${this.state.collapseState} footer-${this.state.collapseFooter}` } >
           <div className="folder folder-left folder-half">
             <ul className="nav nav-tabs">
-              <li className="active"><a href="javascript:;" onClick={() => this.showLeft('map')} data-toggle="tab" aria-expanded="false">Map</a></li>
-              <li className=""><a href="javascript:;" onClick={() => this.showLeft('chat')} data-toggle="tab" aria-expanded="false"><span className="title-head">Chat</span></a></li>
+              <li className={this.state.showLeft === 'map' ? 'active' : ''}><a href="javascript:;" onClick={() => this.showLeft('map')} data-toggle="tab" aria-expanded="false">Map</a></li>
+              <li className={this.state.showLeft === 'chat' ? 'active' : ''}><a href="javascript:;" onClick={() => this.showLeft('chat')} data-toggle="tab" aria-expanded="false"><span className="title-head">Chat</span></a></li>
               { /* <li className=""><a href="javascript;" onClick={() => this.showLeft('people')} data-toggle="tab" aria-expanded="false"><span className="title-head">People</span></a></li> */ }
             </ul>
             <div className="tab-wrapper">
               <div className="tab-content">
-                <div className="tab-pane active">
+                <div className="tab-pane active" id="leftPane" style={{ overflow: 'hidden' }} >
                   { leftPane }
                 </div>
               </div>
@@ -175,13 +193,16 @@ class Tgm3 extends React.Component {
           </div>
           <div className="folder folder-right folder-half">
             <ul className="nav nav-tabs">
-              <li className="active"><a href="#">Tasks</a></li>
-              <li className=""><a href="#graphic-design-6" data-toggle="tab" aria-expanded="false"><span className="title-head">News</span></a></li>
-              <li className=""><a href="#developement-6" data-toggle="tab" aria-expanded="false"><span className="title-head">People</span></a></li>
+              <li className={this.state.showRight === 'story' ? 'active' : ''}><a href="javascript:;" onClick={() => this.showRight('story')} >Story</a></li>
+              <li className={this.state.showRight === 'tasks' ? 'active' : ''}><a href="javascript:;" onClick={() => this.showRight('tasks')} >Tasks</a></li>
+              { /* <li className=""><a href="#graphic-design-6" data-toggle="tab" aria-expanded="false"><span className="title-head">News</span></a></li>
+              <li className=""><a href="#developement-6" data-toggle="tab" aria-expanded="false"><span className="title-head">People</span></a></li> */ }
             </ul>
             <div className="tab-wrapper">
-              <div className="tab-content" style={{ overflowY: 'auto', overflowX: 'hidden' }} >
-                { rightPane }
+              <div className="tab-content" >
+                <div className="tab-pane active" style={{ overflowY: 'auto', overflowX: 'hidden' }} >
+                  { rightPane }
+                </div>
               </div>
             </div>
           </div>
@@ -208,10 +229,10 @@ function mapStateToProps(state, ownProps) {
   return {
     badge: state.badge,
     blocation: state.blocation, // b to not conflict
-    path: state.path,
-
     leftPane: state.leftPane,
+    path: state.path,
     rightPane: state.rightPane,
+    story: state.story,x
   }
 }
 

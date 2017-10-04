@@ -12,6 +12,8 @@ import {
   SET_PROFILE,
 
   SET_SITE_NEWSITEMS,
+  SET_STORY,
+
 } from '../constants'
 
 import { citiesIndexReducer, citiesShowReducer } from './citiesReducer'
@@ -89,6 +91,15 @@ function rightPaneReducer (state={}, action) {
   return state
 }
 
+function story (state={}, action) {
+  switch (action.type) {
+    case SET_STORY:
+      return action.story
+    default: 
+      return state
+  }
+}
+
 export default combineReducers({
 
   badge: badgeReducer,
@@ -114,6 +125,7 @@ export default combineReducers({
   report: reportsShowReducer,
   reports: reportsReducer,
   site: sitesReducer,
+  story,
   venue: venuesShowReducer,
 
 })

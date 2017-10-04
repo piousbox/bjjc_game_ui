@@ -21,16 +21,16 @@ class Headers extends React.Component {
 
     return(
       <div>
-        <div className="header header-slim">
+        <div className="header header-slim" style={{ zIndex: 2 }} >
           <Link to={BjjcRouter.rootPath} >T.G.M</Link>
         </div>
-        <ul className="header" >
+        <ul className="header" style={{ zIndex: 2 }} >
           <li><a href="#">Cities</a></li>
           <li><a href="#">Tags</a></li>
           <li><a href="#">News</a></li>
           <li><a href="#">Profile</a></li>
         </ul>
-        <div className="header-2"  >
+        <div className="header-2" style={{ zIndex: 2 }} >
           <BjjcBreadcrumbs />
         </div>
       </div>
