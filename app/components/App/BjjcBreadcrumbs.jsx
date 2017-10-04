@@ -80,7 +80,7 @@ Breadcrumbs.propTypes = {
 
 const mapStateToProps = (store, ownprops) => {
   return {
-    // path: store.path,
+    path: store.path,
   }
 }
 

@@ -20,7 +20,7 @@ class Story extends React.Component {
     console.log('+++ +++ Story render:', this.props, this.state)
     return (
       <div>
-        <h1>this.props.story.title</h1>
+        <h1>{ this.props.story.title }</h1>
         <div dangerouslySetInnerHTML={{ __html: this.props.story.subhead }} />
         <hr />
         <div dangerouslySetInnerHTML={{ __html: this.props.story.description }} />
@@ -30,6 +30,7 @@ class Story extends React.Component {
 
 const mapState = (state, ownProps) => {
   return {
+    story: state.story,
   }
 }
 

@@ -100,7 +100,7 @@ const setLocation = (name) => {
     }).then(r => r.json()).then(_data => {
       // map
       dispatch({ type: SET_LOCATION, location: _data.location })
-      dispatch({ tyle: SET_STORY, story: _data.story })
+      dispatch({ type: SET_STORY,    story:    _data.story    })
     })
   }
 }
