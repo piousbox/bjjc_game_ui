@@ -14,9 +14,6 @@ class Story extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     console.log('+++ +++ Story will receive props:', this.props, nextProps, this.state)
-    /* if (this.props.params.badgename !== nextProps.params.badgename) {
-      this.props.dispatch(setBadge(nextProps.params.badgename))
-    } */
   }
 
   render () {
@@ -36,4 +33,4 @@ const mapState = (state, ownProps) => {
   }
 }
 
-export default connect(mapState)(Badge)
+export default connect(mapState)(Story)

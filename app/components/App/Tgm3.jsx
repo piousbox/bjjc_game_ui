@@ -232,7 +232,7 @@ function mapStateToProps(state, ownProps) {
     leftPane: state.leftPane,
     path: state.path,
     rightPane: state.rightPane,
-    story: state.story,x
+    story: state.story,
   }
 }
 
