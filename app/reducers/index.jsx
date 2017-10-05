@@ -4,6 +4,8 @@ import { combineReducers } from 'redux'
 import {
   DO_LOGOUT,
 
+  SET_CHAPTERS,
+
   SET_BADGE,
 
   SET_LOCATION,
@@ -46,6 +48,7 @@ function breadcrumbsReducer(state={}, action) {
       return state
   }
 }
+
 
 function leftPaneReducer (state = {}, action) {
   switch (action.type) {
@@ -90,6 +93,15 @@ function rightPaneReducer (state={}, action) {
   return state
 }
 
+function chapters (state={}, action) {
+  switch (action.type) {
+    case SET_CHAPTERS:
+      return action.chapters
+    default:
+      return state
+  }
+}
+
 function story (state={}, action) {
   switch (action.type) {
     case SET_STORY:
@@ -102,19 +114,20 @@ function story (state={}, action) {
 export default combineReducers({
 
   badge: badgeReducer,
+  blocation: locationReducer,
 
   categories: categoriesReducer,
   category: categoryReducer,
- 
-  blocation: locationReducer,
+  chapters,
+  
+  leftPane: leftPaneReducer,
 
   path: breadcrumbsReducer,
   profile: profileReducer,
 
-  video: videoReducer,
-  
-  leftPane: leftPaneReducer,
   rightPane: rightPaneReducer,
+
+  video: videoReducer,
 
   // trash
   cities: citiesIndexReducer,

@@ -11,6 +11,8 @@ export const ITEMS_UPDATED = 'ITEMS_UPDATED'
 
 export const SET_API_URL = 'set api url'
 
+export const SET_CHAPTERS = 'set chapters'
+
 export const SET_BADGE = 'set badge'
 
 export const SET_INDEX_CATEGORY = 'set index category' // add one more category to the tree of them
@@ -35,3 +37,13 @@ export const SET_VIDEO = 'set video'
 
 export const SET_PROFILE = 'set profile'
 export const SET_PATH    = 'set path'
+
+/**
+ * used in tgm3 right now
+ * _vp_ 20171004
+ */
+export const CONST = {
+  chapters: 'chapters',
+  chat: 'chat',
+  news: 'news',
+}

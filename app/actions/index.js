@@ -4,6 +4,7 @@
  */
 
 import {
+  SET_CHAPTERS,
   SET_BADGE,
   SET_INDEX_CATEGORY,
   SET_LOCATION,
@@ -47,18 +48,6 @@ const categoriesIndex = (params) => {
   }
 }
 
-const videosShowAction = (youtubeId) => {
-  return (dispatch, getState) => {
-    let state = getState()
-    let url = `${config.apiUrl}/api/videos/view/${youtubeId}`
-    fetch(url).then(r => r.json()).then(_data => {
-      console.log("+++ +++ got video data:", _data)
-      let obj = Object.assign({}, _data, { type: SET_VIDEO })
-      dispatch(obj)
-    })
-  }
-}
-
 const categoriesShow = (variables) => {
   return (dispatch, getState) => {
     let state = getState()
@@ -68,6 +57,15 @@ const categoriesShow = (variables) => {
         type: SET_CATEGORIES_INDEX,
         categories: _data,
       })
+    })
+  }
+}
+
+const setChapters = () => {
+  return (dispatch, getState) => {
+    let url = `${config.apiUrl}/api/chapters.json`
+    fetch(url).then(r => r.json()).then(_data => {
+      dispatch({ type: SET_CHAPTERS, chapters: _data })
     })
   }
 }
@@ -136,22 +134,36 @@ const siteShow = () => {
   }
 }
 
+const videosShowAction = (youtubeId) => {
+  return (dispatch, getState) => {
+    let state = getState()
+    let url = `${config.apiUrl}/api/videos/view/${youtubeId}`
+    fetch(url).then(r => r.json()).then(_data => {
+      console.log("+++ +++ got video data:", _data)
+      let obj = Object.assign({}, _data, { type: SET_VIDEO })
+      dispatch(obj)
+    })
+  }
+}
 
 import { loginAction, logoutAction, profileAction, } from './profileActions'
 
 export default {
-  setBadge,
-  setLocation,
-  siteNewsitemsAction,
-  setPath: setBreadcrumbs,
-  siteShow,
-
   categoriesIndex,
   categoriesShow,
 
-  videosShowAction,
-
   loginAction,
   logoutAction,
+
+  setChapters,
+  setBadge,
+  setLocation,
+  setPath: setBreadcrumbs,
+
+  siteNewsitemsAction,
+  siteShow,
+
   profileAction,
+
+  videosShowAction,
 }

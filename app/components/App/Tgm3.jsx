@@ -10,9 +10,14 @@ import arrowRight from './images/16x16/arrow-right.png'
 import arrowUp    from './images/16x16/arrow-top.png'
 import arrowDown  from './images/16x16/arrow-bottom.png'
 
-import Report2 from '../Reports/Reports2Show'
+import {
+  setChapters,
+  setBadge,
+  setLocation,
+  setPath,
+} from '../../actions'
 
-import { setLocation, setBadge, setPath } from '../../actions'
+import { CONST } from '../../constants'
 
 import Badge            from './Badge'
 import BjjcRouter       from './BjjcRouter'
@@ -21,6 +26,7 @@ import FbConnect        from './FbConnect'
 import Headers          from './Headers'
 import Story            from './Story'
 import { LocationShow } from '../Locations'
+import Report2          from '../Reports/Reports2Show'
 
 class Tgm3 extends React.Component {
   constructor(props) {
@@ -32,22 +38,27 @@ class Tgm3 extends React.Component {
                    collapseFooter: 'up',
                    showLeft: 'map',
                    showRight: 'story',
+                   leftFolds: [ CONST.chapters, CONST.chat ],
+                   rightFolds: [ CONST.news ],
     };
     
-    if (props.params.locationname) {
+    if (props.params.badgename) {
+      props.dispatch(setBadge(props.params.badgename))
+    } else if (props.params.locationname) {
       props.dispatch(setLocation(props.params.locationname))
+    } else {
+      props.dispatch(setChapters())
     }
 
-    this.collapseLeft   = this.collapseLeft.bind(this)
-    this.collapseRight  = this.collapseRight.bind(this)
-    this.collapseUp     = this.collapseUp.bind(this)
-    this.collapseDown   = this.collapseDown.bind(this)
-    this.showLeft       = this.showLeft.bind(this)
-    this.showRight      = this.showRight.bind(this)
-    this.onWindowResize = this.onWindowResize.bind(this)
-    this.rerender       = this.rerender.bind(this)
+    this.collapseLeft              = this.collapseLeft.bind(this)
+    this.collapseRight             = this.collapseRight.bind(this)
+    this.collapseUp                = this.collapseUp.bind(this)
+    this.collapseDown              = this.collapseDown.bind(this)
+    this.showLeft                  = this.showLeft.bind(this)
+    this.showRight                 = this.showRight.bind(this)
+    this.onWindowResize            = this.onWindowResize.bind(this)
+    this.rerender                  = this.rerender.bind(this)
     this.componentWillReceiveProps = this.componentWillReceiveProps(this)
-
   }
   
   onWindowResize () {

@@ -71,7 +71,7 @@ class Home extends React.Component {
               <h1>Hello!</h1>
               <ul>
                 <li><Link to="/categories">Categories</Link></li> 
-                <li><Link to="/tgm2">Gameui</Link></li>
+                <li><Link to="/tgm3">Gameui</Link></li>
                 <li><Link to="/shop">Shop</Link></li>
               </ul>
             </Col>
