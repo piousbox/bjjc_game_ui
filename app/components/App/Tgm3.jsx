@@ -12,6 +12,7 @@ import arrowDown  from './images/16x16/arrow-bottom.png'
 
 import {
   setChapters,
+  setChapter,
   setBadge,
   setLocation,
   setPath,
@@ -22,6 +23,7 @@ import { CONST } from '../../constants'
 import Badge            from './Badge'
 import BjjcRouter       from './BjjcRouter'
 import BjjcBreadcrumbs  from './BjjcBreadcrumbs'
+import Chapter          from './Chapter'
 import Chapters         from './Chapters'
 import FbConnect        from './FbConnect'
 import Headers          from './Headers'
@@ -47,6 +49,10 @@ class Tgm3 extends React.Component {
       props.dispatch(setBadge(props.params.badgename))
     } else if (props.params.locationname) {
       props.dispatch(setLocation(props.params.locationname))
+    } else if (props.params.chaptername) {
+      props.dispatch(setChapter(props.params.chaptername))
+      this.state.leftFolds.push( CONST.chapter )
+      this.state.showLeft = CONST.chapter
     } else {
       props.dispatch(setChapters())
     }
@@ -154,6 +160,9 @@ class Tgm3 extends React.Component {
       case 'chat':
         leftPane = (<span>Show chat</span>)
         break
+      case 'chapter':
+        leftPane = (<Chapter chapter={this.props.chapter} />)
+        break
       case 'chapters':
         leftPane = (<Chapters chapters={this.props.chapters} />)
         break
@@ -250,6 +259,7 @@ function mapStateToProps(state, ownProps) {
     badge: state.badge,
     blocation: state.blocation, // b to not conflict
 
+    chapter: state.chapter,
     chapters: state.chapters,
 
     leftPane: state.leftPane,

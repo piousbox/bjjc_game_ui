@@ -11,6 +11,7 @@ export const ITEMS_UPDATED = 'ITEMS_UPDATED'
 
 export const SET_API_URL = 'set api url'
 
+export const SET_CHAPTER = 'set chapter'
 export const SET_CHAPTERS = 'set chapters'
 
 export const SET_BADGE = 'set badge'
@@ -43,6 +44,7 @@ export const SET_PATH    = 'set path'
  * _vp_ 20171004
  */
 export const CONST = {
+  chapter: 'chapter',
   chapters: 'chapters',
   chat: 'chat',
   news: 'news',

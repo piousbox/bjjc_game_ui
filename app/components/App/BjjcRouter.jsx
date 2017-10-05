@@ -11,6 +11,9 @@ let BjjcRouter = {
   categoryLink: (c) => { return `/categories/${c.path}` },
   categoryPath: '/categories/:categoryPath',
 
+  chapterLink: (c) => { return `/tgm3/chapters/${c}` },
+  chapterPath: '/tgm3/chapters/:chaptername',
+
   locationPath: '/tgm3/locations/:locationname',
   locationLink: (v) => { return `/tgm3/locations/${v}` },
   locationBadgePath: '/tgm3/locations/:locationname/badges/:badgename',

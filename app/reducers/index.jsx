@@ -4,6 +4,7 @@ import { combineReducers } from 'redux'
 import {
   DO_LOGOUT,
 
+  SET_CHAPTER,
   SET_CHAPTERS,
 
   SET_BADGE,
@@ -49,6 +50,24 @@ function breadcrumbsReducer(state={}, action) {
   }
 }
 
+// c
+function chapter (state={}, action) {
+  switch (action.type) {
+    case SET_CHAPTER:
+      return action.chapter
+    default:
+      return state
+  }
+}
+
+function chapters (state=[], action) {
+  switch (action.type) {
+    case SET_CHAPTERS:
+      return action.chapters
+    default:
+      return state
+  }
+}
 
 function leftPaneReducer (state = {}, action) {
   switch (action.type) {
@@ -93,15 +112,6 @@ function rightPaneReducer (state={}, action) {
   return state
 }
 
-function chapters (state={}, action) {
-  switch (action.type) {
-    case SET_CHAPTERS:
-      return action.chapters
-    default:
-      return state
-  }
-}
-
 function story (state={}, action) {
   switch (action.type) {
     case SET_STORY:
@@ -118,6 +128,7 @@ export default combineReducers({
 
   categories: categoriesReducer,
   category: categoryReducer,
+  chapter,
   chapters,
   
   leftPane: leftPaneReducer,

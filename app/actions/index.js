@@ -4,7 +4,9 @@
  */
 
 import {
+  SET_CHAPTER,
   SET_CHAPTERS,
+  
   SET_BADGE,
   SET_INDEX_CATEGORY,
   SET_LOCATION,
@@ -66,6 +68,15 @@ const setChapters = () => {
     let url = `${config.apiUrl}/api/chapters.json`
     fetch(url).then(r => r.json()).then(_data => {
       dispatch({ type: SET_CHAPTERS, chapters: _data })
+    })
+  }
+}
+
+const setChapter = (name) => {
+  return (dispatch, getState) => {
+    let url = `${config.apiUrl}/api/chapters/${name}.json`
+    fetch(url).then(r => r.json()).then(_data => {
+      dispatch({ type: SET_CHAPTER, chapter: _data })
     })
   }
 }
@@ -156,6 +167,7 @@ export default {
   logoutAction,
 
   setChapters,
+  setChapter,
   setBadge,
   setLocation,
   setPath: setBreadcrumbs,

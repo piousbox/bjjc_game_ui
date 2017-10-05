@@ -11,7 +11,7 @@ class Chapters extends React.Component {
       return (
         <Panel>
           <h3>{ i.title }</h3>
-          <Link to={BjjcRouter.locationLink(i.slug)}>{i.title}</Link>
+          <Link to={BjjcRouter.chapterLink(i.slug)}>{i.title}</Link>
         </Panel>)
     })
     return(
