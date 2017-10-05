@@ -22,6 +22,7 @@ import { CONST } from '../../constants'
 import Badge            from './Badge'
 import BjjcRouter       from './BjjcRouter'
 import BjjcBreadcrumbs  from './BjjcBreadcrumbs'
+import Chapters         from './Chapters'
 import FbConnect        from './FbConnect'
 import Headers          from './Headers'
 import Story            from './Story'
@@ -36,10 +37,10 @@ class Tgm3 extends React.Component {
 
     this.state = { collapseState: 'center',
                    collapseFooter: 'up',
-                   showLeft: 'map',
-                   showRight: 'story',
+                   showLeft: CONST.chapters, // map
+                   showRight: CONST.news,
                    leftFolds: [ CONST.chapters, CONST.chat ],
-                   rightFolds: [ CONST.news ],
+                   rightFolds: [ CONST.news, ], // story, tasks
     };
     
     if (props.params.badgename) {
@@ -153,6 +154,9 @@ class Tgm3 extends React.Component {
       case 'chat':
         leftPane = (<span>Show chat</span>)
         break
+      case 'chapters':
+        leftPane = (<Chapters chapters={this.props.chapters} />)
+        break
       default:
         if (this.props.blocation && this.props.blocation) {
           console.log('+++ rendering this blocation:', this.props.blocation)
@@ -178,7 +182,17 @@ class Tgm3 extends React.Component {
       default:
         // nothing
     }
+
+    let leftFolds = []
+    this.state.leftFolds.map(i => {
+      leftFolds.push(<li className={this.state.showLeft === i ? 'active' : ''}><a href="javascript:;" onClick={() => { this.showLeft(i) }}>{i}</a></li>)
+    })
       
+    let rightFolds = []
+    this.state.rightFolds.map(i => {
+      rightFolds.push(<li className={this.state.showRight === i ? 'active' : ''}><a href="javascript:;" onClick={() => { this.showRight(i) }}>{i}</a></li>)
+    })
+
     return(
       <div className="container">
         <Headers />
@@ -186,13 +200,11 @@ class Tgm3 extends React.Component {
         <div className={ `folder folder-both folder-collapse-${this.state.collapseState} footer-${this.state.collapseFooter}` } >
           <div className="folder folder-left folder-half">
             <ul className="nav nav-tabs">
-              <li className={this.state.showLeft === 'map' ? 'active' : ''}><a href="javascript:;" onClick={() => this.showLeft('map')} data-toggle="tab" aria-expanded="false">Map</a></li>
-              <li className={this.state.showLeft === 'chat' ? 'active' : ''}><a href="javascript:;" onClick={() => this.showLeft('chat')} data-toggle="tab" aria-expanded="false"><span className="title-head">Chat</span></a></li>
-              { /* <li className=""><a href="javascript;" onClick={() => this.showLeft('people')} data-toggle="tab" aria-expanded="false"><span className="title-head">People</span></a></li> */ }
+              { leftFolds }
             </ul>
             <div className="tab-wrapper">
               <div className="tab-content">
-                <div className="tab-pane active" id="leftPane" style={{ overflow: 'hidden' }} >
+                <div className="tab-pane active" id="leftPane" style={{ overflowX: 'hidden', paddingRight: '10px' }} >
                   { leftPane }
                 </div>
               </div>
@@ -204,10 +216,7 @@ class Tgm3 extends React.Component {
           </div>
           <div className="folder folder-right folder-half">
             <ul className="nav nav-tabs">
-              <li className={this.state.showRight === 'story' ? 'active' : ''}><a href="javascript:;" onClick={() => this.showRight('story')} >Story</a></li>
-              <li className={this.state.showRight === 'tasks' ? 'active' : ''}><a href="javascript:;" onClick={() => this.showRight('tasks')} >Tasks</a></li>
-              { /* <li className=""><a href="#graphic-design-6" data-toggle="tab" aria-expanded="false"><span className="title-head">News</span></a></li>
-              <li className=""><a href="#developement-6" data-toggle="tab" aria-expanded="false"><span className="title-head">People</span></a></li> */ }
+              { rightFolds }
             </ul>
             <div className="tab-wrapper">
               <div className="tab-content" >
@@ -240,6 +249,9 @@ function mapStateToProps(state, ownProps) {
   return {
     badge: state.badge,
     blocation: state.blocation, // b to not conflict
+
+    chapters: state.chapters,
+
     leftPane: state.leftPane,
     path: state.path,
     rightPane: state.rightPane,

@@ -11,9 +11,9 @@ let BjjcRouter = {
   categoryLink: (c) => { return `/categories/${c.path}` },
   categoryPath: '/categories/:categoryPath',
 
-  locationPath: '/tgm2/locations/:locationname',
-  locationLink: (v) => { return `/tgm2/locations/${v}` },
-  locationBadgePath: '/tgm2/locations/:locationname/badges/:badgename',
+  locationPath: '/tgm3/locations/:locationname',
+  locationLink: (v) => { return `/tgm3/locations/${v}` },
+  locationBadgePath: '/tgm3/locations/:locationname/badges/:badgename',
   locationBadgeLink: (location, badge) => {
     // console.log('+++ +++ locationBaddgeLink:', location, badge)
 
@@ -32,7 +32,7 @@ let BjjcRouter = {
       bname = badge
     }
 
-    return `/tgm2/locations/${lname}/badges/${bname}` 
+    return `/tgm3/locations/${lname}/badges/${bname}` 
   },
 
   videosShowPath: '/videos/view/:youtubeId',
