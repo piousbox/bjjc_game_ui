@@ -15,10 +15,16 @@ let BjjcRouter = {
   chapterPath: '/tgm3/chapters/:chaptername',
 
   locationPath: '/tgm3/locations/:locationname',
-  locationLink: (v) => { return `/tgm3/locations/${v}` },
+  locationLink: (v) => { 
+    if ('string' === typeof v) {
+      return `/tgm3/locations/${v}`
+    } else if ('object' === typeof v) {
+      return `/tgm3/locations/${v.location_name}`
+    }
+  },
   locationBadgePath: '/tgm3/locations/:locationname/badges/:badgename',
   locationBadgeLink: (location, badge) => {
-    // console.log('+++ +++ locationBaddgeLink:', location, badge)
+    console.log('+++ +++ locationBaddgeLink:', location, badge)
 
     let lname
     let bname

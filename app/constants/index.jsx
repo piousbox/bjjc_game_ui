@@ -47,5 +47,6 @@ export const CONST = {
   chapter: 'chapter',
   chapters: 'chapters',
   chat: 'chat',
+  location: 'location',
   news: 'news',
 }

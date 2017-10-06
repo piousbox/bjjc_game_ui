@@ -39,7 +39,7 @@ import { citiesIndex,
 } from '../../actions'
 
 const routes = [
-  { path: '/tgm2',
+  /* { path: '/tgm2',
     component: Tgm2,
     indexRoute: { component: Tgm2Home },
     childRoutes: [
@@ -49,11 +49,11 @@ const routes = [
         ],
       },
     ],
-  },
+  }, */
   { path: '/tgm3', component: Tgm3, },
   { path: '/tgm3/chapters/:chaptername', component: Tgm3 },
   { path: '/tgm3/locations/:locationname', component: Tgm3 },
-  // { path: '/tgm3/locations/:locationname/badges/:badgename', component: Tgm3 },
+  { path: '/tgm3/locations/:locationname/badges/:badgename', component: Tgm3 },
   { path: '/tgm3/badges/:badgename', component: Tgm3 },
   { path: '/',
     component: Navigation,

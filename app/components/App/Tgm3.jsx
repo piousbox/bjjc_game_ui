@@ -49,6 +49,8 @@ class Tgm3 extends React.Component {
       props.dispatch(setBadge(props.params.badgename))
     } else if (props.params.locationname) {
       props.dispatch(setLocation(props.params.locationname))
+      this.state.showLeft = CONST.location
+      this.state.leftFolds.push( CONST.location )
     } else if (props.params.chaptername) {
       props.dispatch(setChapter(props.params.chaptername))
       this.state.leftFolds.push( CONST.chapter )
@@ -134,9 +136,13 @@ class Tgm3 extends React.Component {
   componentWillUpdate (nextProps) {
     console.log('+++ +++ Tgm3 componentWillUpdate:', this.props, nextProps)
     
-    /* if (nextProps.params.chaptername) {    
+    if (nextProps.params.chaptername && nextProps.params.chaptername !== this.props.params.chaptername) {
       this.setState({ showLeft: CONST.chapter })
-    } */
+      props.dispatch(setChapter(nextProps.params.chaptername))
+      if (this.state.leftFolds.indexOf(nextProps.params.chaptername) === -1) {
+        this.state.leftFolds.push( CONST.chapter )
+      }
+    }
   }
 
   componentDidMount () { window.addEventListener('resize', this.onWindowResize) }
@@ -148,7 +154,8 @@ class Tgm3 extends React.Component {
     this.setState({ showLeft: what })
     switch (what) {
       case 'chapters':
-        this.props.dispatch(setChapters())
+        this.history.pushState(null, '/tgm3')
+        // this.props.dispatch(setChapters())
         break
       default:
         // nothing
@@ -206,13 +213,14 @@ class Tgm3 extends React.Component {
     }
 
     let leftFolds = []
-    this.state.leftFolds.map(i => {
-      leftFolds.push(<li className={this.state.showLeft === i ? 'active' : ''}><Link onClick={() => { this.showLeft(i) }}>{i}</Link></li>)
+    this.state.leftFolds.map((i, idx) => {
+      leftFolds.push(<li key={idx} className={this.state.showLeft === i ? 'active' : ''}>
+              <Link onClick={() => { this.showLeft(i) }}>{i}</Link></li>)
     })
       
     let rightFolds = []
-    this.state.rightFolds.map(i => {
-      rightFolds.push(<li className={this.state.showRight === i ? 'active' : ''}><a href="javascript:;" onClick={() => { this.showRight(i) }}>{i}</a></li>)
+    this.state.rightFolds.map((i, idx) => {
+      rightFolds.push(<li key={idx} className={this.state.showRight === i ? 'active' : ''}><a href="javascript:;" onClick={() => { this.showRight(i) }}>{i}</a></li>)
     })
 
     return(

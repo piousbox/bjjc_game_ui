@@ -40,6 +40,16 @@ function badgeReducer (state={}, action) {
   }
 }
 
+function blocation (state = {}, action) {
+  switch (action.type) {
+    case SET_LOCATION:
+      console.log('+++ blocationReducer:', action)
+      return action.location
+    default:
+      return state
+  }
+}
+
 function breadcrumbsReducer(state={}, action) {
   switch (action.type) {
     case SET_PATH:
@@ -79,17 +89,6 @@ function leftPaneReducer (state = {}, action) {
   }
 }
 
-
-function locationReducer (state = {}, action) {
-  switch (action.type) {
-    case SET_LOCATION:
-      console.log('+++ +++ locationReducer:', action)
-      return action.location
-    default:
-      return state
-  }
-}
-
 function newsitemsReducer (state = {}, action) {
   switch (action.type) {
     case SET_SITE_NEWSITEMS:
@@ -124,7 +123,7 @@ function story (state={}, action) {
 export default combineReducers({
 
   badge: badgeReducer,
-  blocation: locationReducer,
+  blocation,
 
   categories: categoriesReducer,
   category: categoryReducer,

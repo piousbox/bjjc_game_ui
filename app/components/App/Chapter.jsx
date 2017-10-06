@@ -10,11 +10,12 @@ class Chapter extends React.Component {
     console.log('+++ +++ Chapter render:', this.props, this.state)
 
     let questsets = []
-    if (this.props.chapter.questset) {
+    let idx = 0
+    if (this.props.chapter.questsets) {
       this.props.chapter.questsets.map(i => {
         questsets.push(
-          <Panel>
-            Questset {i.title}
+          <Panel key={idx++} >
+            Questset <Link to={BjjcRouter.locationLink(i)}>{i.title}</Link>
           </Panel>)
       })
     }

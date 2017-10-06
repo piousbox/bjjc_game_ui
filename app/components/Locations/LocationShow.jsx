@@ -10,12 +10,19 @@ import { BjjcRouter } from '../App'
 class LocationShow extends React.Component {
   constructor(props) {
     super(props)
+
+    console.log('+++ +++ LocationShow constructor:', props)
+
     this.state = {}
-    // this.props.dispatch(setLocation(props.params.locationname))
+    // this.props.dispatch(setLocation(props.params.blocation.location_name))
+  }
+
+  componentWillUpdate (nextProps) {
+    console.log('+++ +++ LocationShow componentWillUpdate:', nextProps)
   }
 
   componentWillReceiveProps (nextProps) {
-    // console.log('+++ +++ LocationShow will receive props:', nextProps)
+    console.log('+++ +++ LocationShow will receive props:', nextProps)
   }
 
   render () {
@@ -33,11 +40,10 @@ class LocationShow extends React.Component {
     }
 
     let badges = []
-    let badgesKey = 0
     if (this.props.location.badges) {
-      this.props.location.badges.map((badge) => {
+      this.props.location.badges.map((badge, idx) => {
         badges.push(
-          <Link to={BjjcRouter.locationBadgeLink(this.props.location, badge)} key={badgesKey++} >
+          <Link to={BjjcRouter.locationBadgeLink(this.props.location, badge)} key={idx} >
             <div className="badge"
                  style={{ position: 'absolute', top: badge.bg_pos_y, left: badge.bg_pos_x,
                           width: '100px',       height: '100px',     display: 'block',
@@ -74,7 +80,7 @@ LocationShow.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    // location: state.location,
+    blocation: state.blocation,
   }
 }
 
