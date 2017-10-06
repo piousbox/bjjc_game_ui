@@ -7,18 +7,17 @@ import BjjcRouter from './BjjcRouter'
 
 class Chapters extends React.Component {
   render () {
+    let idx = 0
     let chapters = this.props.chapters.map(i => {
       return (
-        <Panel>
+        <Panel key={idx++} >
           <h3>{ i.title }</h3>
           <Link to={BjjcRouter.chapterLink(i.slug)}>{i.title}</Link>
         </Panel>)
     })
     return(
       <div>
-        <ul>
-          { chapters }
-        </ul>
+        { chapters }
       </div>)
   }
 }

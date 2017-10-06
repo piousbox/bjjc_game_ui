@@ -131,15 +131,28 @@ class Tgm3 extends React.Component {
     } */
   }
 
-  componentWillUpdate (what) {
-    console.log('+++ +++ Tgm3 componentWillUpdate:', what)
+  componentWillUpdate (nextProps) {
+    console.log('+++ +++ Tgm3 componentWillUpdate:', this.props, nextProps)
+    
+    /* if (nextProps.params.chaptername) {    
+      this.setState({ showLeft: CONST.chapter })
+    } */
   }
 
   componentDidMount () { window.addEventListener('resize', this.onWindowResize) }
   componentWillUnmount () { window.removeEventListener('resize', this.onWindowResize) }
 
   showLeft (what) {
+    console.log('+++ +++ showLeft:', what)
+
     this.setState({ showLeft: what })
+    switch (what) {
+      case 'chapters':
+        this.props.dispatch(setChapters())
+        break
+      default:
+        // nothing
+    }
   }
 
   showRight (what) {
@@ -194,7 +207,7 @@ class Tgm3 extends React.Component {
 
     let leftFolds = []
     this.state.leftFolds.map(i => {
-      leftFolds.push(<li className={this.state.showLeft === i ? 'active' : ''}><a href="javascript:;" onClick={() => { this.showLeft(i) }}>{i}</a></li>)
+      leftFolds.push(<li className={this.state.showLeft === i ? 'active' : ''}><Link onClick={() => { this.showLeft(i) }}>{i}</Link></li>)
     })
       
     let rightFolds = []

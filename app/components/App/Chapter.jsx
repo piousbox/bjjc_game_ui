@@ -7,13 +7,17 @@ import BjjcRouter from './BjjcRouter'
 
 class Chapter extends React.Component {
   render () {
+    console.log('+++ +++ Chapter render:', this.props, this.state)
+
     let questsets = []
-    this.props.chapter.questsets.map(i => {
-      questsets.push(
-        <Panel>
-          Questset {i.title}
-        </Panel>)
-    })
+    if (this.props.chapter.questset) {
+      this.props.chapter.questsets.map(i => {
+        questsets.push(
+          <Panel>
+            Questset {i.title}
+          </Panel>)
+      })
+    }
 
     return(
       <div>

@@ -130,6 +130,7 @@
       "react"
     ],
     "rules": {
+      "no-script-url": 0,
       "semi": 0,
       "camelcase": 0,
       "key-spacing": 0,
