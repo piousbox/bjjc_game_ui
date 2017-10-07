@@ -16,8 +16,10 @@ class Chapters extends React.Component {
         </Panel>)
     })
     return(
-      <div>
-        { chapters }
+      <div style={{ overflow: 'auto', height: '100%', paddingRight: '10px' }}>
+        <div>
+          { chapters }
+        </div>
       </div>)
   }
 }

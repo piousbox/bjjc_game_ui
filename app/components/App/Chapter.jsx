@@ -21,9 +21,11 @@ class Chapter extends React.Component {
     }
 
     return(
-      <div>
-        <h5>{ this.props.chapter.title }</h5>
-        { questsets }
+      <div style={{ overflow: 'auto', height: '100%', paddingRight: '10px' }}>
+        <div>
+          <h5>{ this.props.chapter.title }</h5>
+          { questsets }
+        </div>
       </div>)
   }
 }

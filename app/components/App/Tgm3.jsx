@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import { Grid, Row, Col,
          Panel, 
 } from 'react-bootstrap'
+import { browserHistory } from 'react-router'
 
 import arrowLeft  from './images/16x16/arrow-left.png'
 import arrowRight from './images/16x16/arrow-right.png'
@@ -134,17 +135,32 @@ class Tgm3 extends React.Component {
   }
 
   componentWillUpdate (nextProps) {
-    console.log('+++ +++ Tgm3 componentWillUpdate:', this.props, nextProps)
-    
-    if (nextProps.params.chaptername && nextProps.params.chaptername !== this.props.params.chaptername) {
-      this.setState({ showLeft: CONST.chapter })
-      props.dispatch(setChapter(nextProps.params.chaptername))
-      if (this.state.leftFolds.indexOf(nextProps.params.chaptername) === -1) {
-        this.state.leftFolds.push( CONST.chapter )
-      }
-    }
-  }
+    console.log('+++ +++ Tgm3 componentWillUpdate:', this.props, nextProps, this.state)
 
+    // badge    
+    if (nextProps.params.badgename && nextProps.params.badgename !== this.props.params.badgename) {
+      this.props.dispatch(setBadge(nextProps.params.badgename))
+
+    // location
+    } else if (nextProps.params.locationname && nextProps.params.locationname !== this.props.params.locationname) {
+      this.props.dispatch(setLocation(nextProps.params.locationname))
+      this.state.showLeft = CONST.location
+      this.state.leftFolds.push( CONST.location )
+
+    // chapter
+    } else if (nextProps.params.chaptername && nextProps.params.chaptername !== this.props.params.chaptername) {
+      this.setState({ showLeft: CONST.chapter })
+      this.props.dispatch(setChapter(nextProps.params.chaptername))
+      if (this.state.leftFolds.indexOf(CONST.chapter) === -1) {
+        this.state.leftFolds.push(CONST.chapter)
+      }
+
+    // chapters
+    } else if (this.props.chapters.length === 0) {
+      this.props.dispatch(setChapters())
+    }  
+  }
+  
   componentDidMount () { window.addEventListener('resize', this.onWindowResize) }
   componentWillUnmount () { window.removeEventListener('resize', this.onWindowResize) }
 
@@ -154,7 +170,7 @@ class Tgm3 extends React.Component {
     this.setState({ showLeft: what })
     switch (what) {
       case 'chapters':
-        this.history.pushState(null, '/tgm3')
+        browserHistory.push('/tgm3')
         // this.props.dispatch(setChapters())
         break
       default:
@@ -214,8 +230,8 @@ class Tgm3 extends React.Component {
 
     let leftFolds = []
     this.state.leftFolds.map((i, idx) => {
-      leftFolds.push(<li key={idx} className={this.state.showLeft === i ? 'active' : ''}>
-              <Link onClick={() => { this.showLeft(i) }}>{i}</Link></li>)
+      leftFolds.push(<li style={{ cursor: 'pointer' }} key={idx} className={this.state.showLeft === i ? 'active' : ''}>
+              <a onClick={() => { this.showLeft(i) }}>{i}</a></li>)
     })
       
     let rightFolds = []
@@ -234,7 +250,7 @@ class Tgm3 extends React.Component {
             </ul>
             <div className="tab-wrapper">
               <div className="tab-content">
-                <div className="tab-pane active" id="leftPane" style={{ overflowX: 'hidden', paddingRight: '10px' }} >
+                <div className="tab-pane active" id="leftPane" style={{ overflow: 'hidden' }} >
                   { leftPane }
                 </div>
               </div>
