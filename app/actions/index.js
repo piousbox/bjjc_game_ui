@@ -4,6 +4,8 @@
  */
 
 import {
+  SET,
+
   SET_CHAPTER,
   SET_CHAPTERS,
   
@@ -84,9 +86,12 @@ const setChapter = (name) => {
 const setBadge = (badgename) => {
   return (dispatch, getState) => {
     let url = `${config.apiUrl}/api/badges/${badgename}.json`
-    // console.log('+++ +++ action setBadge', url)
     fetch(url).then(r => r.json()).then(_data => {
-      dispatch({ type: SET_BADGE, badge: _data })
+      console.log('+++ +++ action setBadge', _data)
+      dispatch({ type: SET.quest, quest: _data.quest })
+      dispatch({ type: SET.videos, videos: _data.videos })
+      dispatch({ type: SET.tasks, tasks: _data.tasks })
+      // dispatch({ type: SET_BADGE, badge: _data })
     })
   }
 }

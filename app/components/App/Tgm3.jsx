@@ -28,9 +28,12 @@ import Chapter          from './Chapter'
 import Chapters         from './Chapters'
 import FbConnect        from './FbConnect'
 import Headers          from './Headers'
-import Story            from './Story'
+import Quest            from './Quest'
+
 import { LocationShow } from '../Locations'
 import Report2          from '../Reports/Reports2Show'
+import { Tasks }        from '../Tasks'
+import { Videos }       from '../Videos'
 
 class Tgm3 extends React.Component {
   constructor(props) {
@@ -38,27 +41,47 @@ class Tgm3 extends React.Component {
 
     console.log('+++ ++ Tgm3 constructor:', props)
 
-    this.state = { collapseState: 'center',
-                   collapseFooter: 'up',
-                   showLeft: CONST.chapters, // map
-                   showRight: CONST.news,
-                   leftFolds: [ CONST.chapters, CONST.chat ],
-                   rightFolds: [ CONST.news, ], // story, tasks
+    let nextState = { collapseState: 'center',
+                      collapseFooter: 'up',
+                      showLeft: CONST.chapters, // map
+                      showRight: CONST.news,
+                      leftFolds: [ CONST.chapters, CONST.chat, ],
+                      rightFolds: [ CONST.news, ], // story, tasks
     };
-    
+
+    // badge
     if (props.params.badgename) {
+      [ CONST.quest, CONST.videos, CONST.tasks ].map((elem) => {
+        if (nextState.rightFolds.indexOf(elem) === -1) {
+          nextState.rightFolds.push(elem)
+        }
+        return null
+      })
+      if (nextState.leftFolds.indexOf(CONST.location) === -1) {
+        nextState.leftFolds.push(CONST.location)
+      }
+      nextState.showLeft  = CONST.location
+      nextState.showRight = CONST.quest
       props.dispatch(setBadge(props.params.badgename))
+      props.dispatch(setLocation(props.params.locationname))
+
+    // location
     } else if (props.params.locationname) {
       props.dispatch(setLocation(props.params.locationname))
       this.state.showLeft = CONST.location
       this.state.leftFolds.push( CONST.location )
+
+    // chapter
     } else if (props.params.chaptername) {
       props.dispatch(setChapter(props.params.chaptername))
       this.state.leftFolds.push( CONST.chapter )
       this.state.showLeft = CONST.chapter
+
     } else {
       props.dispatch(setChapters())
     }
+
+    this.state = nextState
 
     this.collapseLeft              = this.collapseLeft.bind(this)
     this.collapseRight             = this.collapseRight.bind(this)
@@ -72,14 +95,10 @@ class Tgm3 extends React.Component {
   }
   
   onWindowResize () {
-    if (this.props.params.locationname) {
-      this.props.dispatch(setLocation(this.props.params.locationname))
-    }
+    if (this.props.params.locationname) { this.props.dispatch(setLocation(this.props.params.locationname)) }
   }
   rerender () {
-    if (this.props.params.locationname) {
-      this.props.dispatch(setLocation(this.props.params.locationname))
-    }
+    if (this.props.params.locationname) { this.props.dispatch(setLocation(this.props.params.locationname)) }
   }
 
   collapseLeft () {
@@ -136,16 +155,31 @@ class Tgm3 extends React.Component {
 
   componentWillUpdate (nextProps) {
     console.log('+++ +++ Tgm3 componentWillUpdate:', this.props, nextProps, this.state)
+    let nextState = { leftFolds: this.state.leftFolds, rightFolds: this.state.rightFolds }
 
-    // badge    
+    // badge
     if (nextProps.params.badgename && nextProps.params.badgename !== this.props.params.badgename) {
+      [ CONST.quest, CONST.videos, CONST.tasks ].forEach((elem) => {
+        if (this.state.rightFolds.indexOf(elem) === -1) {
+          nextState.rightFolds.push( elem )
+        }
+      })
+      [ '1', CONST.location ].forEach(elem => {
+        if (this.state.leftFolds.indexOf(elem) === -1) {
+          nextState.leftFolds.push( elem )
+        }
+      })
+      this.setState(Object.assign({}, nextState, {showLeft: CONST.chapter, showRight: CONST.quest }))
+      this.props.dispatch(setLocation(nextProps.params.locationname))
       this.props.dispatch(setBadge(nextProps.params.badgename))
 
     // location
     } else if (nextProps.params.locationname && nextProps.params.locationname !== this.props.params.locationname) {
       this.props.dispatch(setLocation(nextProps.params.locationname))
       this.state.showLeft = CONST.location
-      this.state.leftFolds.push( CONST.location )
+      if (this.state.leftFolds.indexOf(CONST.location) === -1) {
+        this.state.leftFolds.push( CONST.location )
+      }
 
     // chapter
     } else if (nextProps.params.chaptername && nextProps.params.chaptername !== this.props.params.chaptername) {
@@ -211,18 +245,14 @@ class Tgm3 extends React.Component {
 
     let rightPane = (<Panel>default rightPane</Panel>)
     switch (this.state.showRight) {
-      case 'story':
-        rightPane = (<Story story={this.props.story} />)
+      case CONST.quest:
+        rightPane = (<Quest quest={this.props.quest} />)
         break
-      case 'tasks':
-        if (this.props.badge) {
-          rightPane = (
-            <Row>
-              <Col xs={12}>
-                <Badge badge={this.props.badge} />
-              </Col>
-            </Row>)
-        }
+      case CONST.videos:
+        rightPane = (<div style={{ paddingRight: '10px' }}><Videos videos={this.props.videos} /></div>)
+        break
+      case CONST.tasks:
+        rightPane = (<Tasks tasks={this.props.tasks} />)
         break
       default:
         // nothing
@@ -302,7 +332,8 @@ function mapStateToProps(state, ownProps) {
     leftPane: state.leftPane,
     path: state.path,
     rightPane: state.rightPane,
-    story: state.story,
+
+    videos: state.videos,
   }
 }
 

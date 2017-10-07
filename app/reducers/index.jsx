@@ -4,6 +4,7 @@ import { combineReducers } from 'redux'
 import {
   DO_LOGOUT,
 
+  SET,
   SET_CHAPTER,
   SET_CHAPTERS,
 
@@ -79,6 +80,7 @@ function chapters (state=[], action) {
   }
 }
 
+// l
 function leftPaneReducer (state = {}, action) {
   switch (action.type) {
     case SET_LOCATION:
@@ -89,6 +91,7 @@ function leftPaneReducer (state = {}, action) {
   }
 }
 
+// n
 function newsitemsReducer (state = {}, action) {
   switch (action.type) {
     case SET_SITE_NEWSITEMS:
@@ -98,6 +101,7 @@ function newsitemsReducer (state = {}, action) {
   }
 }
 
+// p
 function profileReducer (state = {}, action) {
   switch (action.type) {
     case SET_PROFILE:
@@ -107,15 +111,50 @@ function profileReducer (state = {}, action) {
   }
 }
 
+// q
+function quest (state={}, action) {
+  switch (action.type) {
+    case SET.quest:
+      console.log('+++ quest reducer:', action)
+      return action.quest
+    default:
+      return state
+  }
+}
+
+// r
 function rightPaneReducer (state={}, action) {
   return state
 }
 
+// s
 function story (state={}, action) {
   switch (action.type) {
     case SET_STORY:
       return action.story
     default: 
+      return state
+  }
+}
+
+// t
+function tasks (state=[], action) {
+  switch (action.type) {
+    case SET.tasks:
+      console.log('+++ tasks reducer:', action)
+      return action.tasks
+    default:
+      return state
+  }
+}
+
+// v
+function videos (state=[], action) {
+  switch (action.type) {
+    case SET.videos:
+      console.log('+++ videos reducer:', action)
+      return action.videos
+    default:
       return state
   }
 }
@@ -135,9 +174,13 @@ export default combineReducers({
   path: breadcrumbsReducer,
   profile: profileReducer,
 
+  quest,
   rightPane: rightPaneReducer,
 
+  tasks,
+
   video: videoReducer,
+  videos,
 
   // trash
   cities: citiesIndexReducer,

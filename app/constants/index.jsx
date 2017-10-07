@@ -44,9 +44,23 @@ export const SET_PATH    = 'set path'
  * _vp_ 20171004
  */
 export const CONST = {
-  chapter: 'chapter',
+  chapter:  'chapter',
   chapters: 'chapters',
-  chat: 'chat',
+  chat:     'chat',
   location: 'location',
-  news: 'news',
+  news:     'news',
+  quest:    'quest',
+  tasks:    'tasks',
+  videos:   'videos',
+}
+
+/**
+ * used in reducers right now
+ * _vp_ 20171007
+ */
+export const SET = {
+  quest:    'quest',
+  location: 'location',
+  tasks:    'tasks',
+  videos:   'videos',
 }
