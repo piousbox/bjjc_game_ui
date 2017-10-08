@@ -2,7 +2,7 @@ import React from 'react'
 
 class Task extends React.Component {
   render () {
-   return (<div>Task</div>)
+    return (<div>Task</div>)
   }
 }
 

@@ -55,7 +55,6 @@ class Tgm3 extends React.Component {
         if (nextState.rightFolds.indexOf(elem) === -1) {
           nextState.rightFolds.push(elem)
         }
-        return null
       })
       if (nextState.leftFolds.indexOf(CONST.location) === -1) {
         nextState.leftFolds.push(CONST.location)
@@ -68,14 +67,14 @@ class Tgm3 extends React.Component {
     // location
     } else if (props.params.locationname) {
       props.dispatch(setLocation(props.params.locationname))
-      this.state.showLeft = CONST.location
-      this.state.leftFolds.push( CONST.location )
+      nextState.showLeft = CONST.location
+      nextState.leftFolds.push( CONST.location )
 
     // chapter
     } else if (props.params.chaptername) {
       props.dispatch(setChapter(props.params.chaptername))
-      this.state.leftFolds.push( CONST.chapter )
-      this.state.showLeft = CONST.chapter
+      nextState.leftFolds.push( CONST.chapter )
+      nextState.showLeft = CONST.chapter
 
     } else {
       props.dispatch(setChapters())
@@ -159,16 +158,14 @@ class Tgm3 extends React.Component {
 
     // badge
     if (nextProps.params.badgename && nextProps.params.badgename !== this.props.params.badgename) {
-      [ CONST.quest, CONST.videos, CONST.tasks ].forEach((elem) => {
+      [ CONST.quest, CONST.videos, CONST.tasks ].map((elem) => {
         if (this.state.rightFolds.indexOf(elem) === -1) {
           nextState.rightFolds.push( elem )
         }
       })
-      [ '1', CONST.location ].forEach(elem => {
-        if (this.state.leftFolds.indexOf(elem) === -1) {
-          nextState.leftFolds.push( elem )
-        }
-      })
+      if (this.state.leftFolds.indexOf(CONST.location) === -1) {
+        nextState.leftFolds.push(CONST.location)
+      }
       this.setState(Object.assign({}, nextState, {showLeft: CONST.chapter, showRight: CONST.quest }))
       this.props.dispatch(setLocation(nextProps.params.locationname))
       this.props.dispatch(setBadge(nextProps.params.badgename))
@@ -249,7 +246,7 @@ class Tgm3 extends React.Component {
         rightPane = (<Quest quest={this.props.quest} />)
         break
       case CONST.videos:
-        rightPane = (<div style={{ paddingRight: '10px' }}><Videos videos={this.props.videos} /></div>)
+        rightPane = (<Videos videos={this.props.videos} />)
         break
       case CONST.tasks:
         rightPane = (<Tasks tasks={this.props.tasks} />)
@@ -312,7 +309,7 @@ class Tgm3 extends React.Component {
             </div>
           </div>
         </div>
-        <div style={{ display: 'none' }}>{ this.props.children }</div>
+        { /* <div style={{ display: 'none' }}>{ this.props.children }</div> */ }
       </div>
     )
   }
@@ -330,7 +327,10 @@ function mapStateToProps(state, ownProps) {
     chapters: state.chapters,
 
     leftPane: state.leftPane,
+
     path: state.path,
+    profile: state.profile,
+
     rightPane: state.rightPane,
 
     videos: state.videos,

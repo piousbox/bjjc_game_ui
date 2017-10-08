@@ -41,4 +41,7 @@
          major changes to fb auth
 0.1.5 - let's merge fg (the categorization tree) into the game ui
 0.1.6 - 20171004, router and multiple panes
+        can display tasks of a badge
+0.1.7 - let's make it s.t. I can pay for a quest.
+
 

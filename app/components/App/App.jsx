@@ -9,47 +9,29 @@ import 'whatwg-fetch'
 import config     from 'config'
 import PropTypes from 'prop-types'
 
-import styles     from './_App.scss'
-import bg         from './images/noisy_grid.png'
 import store      from '../../stores'
 
-import Home from './Home'
-
-import Profile from './Profile'
+import styles     from './_App.scss'
+import bg         from './images/noisy_grid.png'
+import Home       from './Home'
+import Profile    from './Profile'
 import BjjcRouter from './BjjcRouter'
 
 import { CategoriesIndex,
          CategoriesToplevel,
 } from '../Categories'
-import Location from '../Locations/LocationShow'
 
+import Location   from '../Locations/LocationShow'
 import Navigation from './Navigation'
-
-import Tgm2      from './Tgm2'
-import Tgm2Home  from './Tgm2Home'
-import Tgm3      from './Tgm3'
-import Tgm3Child from './Tgm3Child'
-
+import Tgm3       from './Tgm3'
 import VideosShow from '../Videos/VideosShow'
-
-import Badge from './Badge'
+import Badge      from './Badge'
 
 import { citiesIndex, 
          // profileAction,
 } from '../../actions'
 
 const routes = [
-  /* { path: '/tgm2',
-    component: Tgm2,
-    indexRoute: { component: Tgm2Home },
-    childRoutes: [
-      { path: BjjcRouter.locationPath, component: Location, 
-        childRoutes: [
-          { path: BjjcRouter.locationBadgePath, component: Badge },
-        ],
-      },
-    ],
-  }, */
   { path: '/tgm3', component: Tgm3, },
   { path: '/tgm3/chapters/:chaptername', component: Tgm3 },
   { path: '/tgm3/locations/:locationname', component: Tgm3 },

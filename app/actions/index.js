@@ -103,15 +103,16 @@ const setBreadcrumbs = (params) => {
 }
 
 const setLocation = (name) => {
-  console.log('+++ setLocation:', name)
   return (dispatch, getState) => {
-    let state = getState()
-    let url = `${config.apiUrl}/api/locations/${name}.json`
-    fetch(url, {
-      headers: {
-        version: 'tgm3',
-      },
-    }).then(r => r.json()).then(_data => {
+    let state     = getState()
+    let url       = `${config.apiUrl}/api/locations/${name}.json`
+    let fbAccount = JSON.parse(localStorage.getItem('fbAccount'))
+    let headers   = { version: 'tgm3' }
+    if (fbAccount) {
+      headers.accessToken = fbAccount.accessToken
+    }
+    console.log('+++ setLocation:', name, state, headers)
+    fetch(url, { headers, }).then(r => r.json()).then(_data => {
       // map
       dispatch({ type: SET_LOCATION, location: _data.location })
       dispatch({ type: SET_STORY,    story:    _data.story    })

@@ -28,14 +28,12 @@ const MyFacebookButton = ({ onClick }) => (
 )
 
 class _CheckoutForm extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  
   handleSubmit (e) {
     e.preventDefault()
     console.log("+++ handlesubmit:", e)
@@ -59,10 +57,8 @@ class _CheckoutForm extends React.Component {
 
     })
   }
-
   render () {
-    console.log("+++ +++ _CheckoutForm:", this.props, this.state)
-
+    console.log("+++ +++ _CheckoutForm in FbConnect:", this.props, this.state)
     return (
       <form onSubmit={this.handleSubmit}>
         <CardElement />
@@ -76,7 +72,6 @@ class _CheckoutForm extends React.Component {
           <Col sm={4}>
             <h1>$15</h1>
           </Col>
-
         </Row>
         <Center><button>Buy Stars</button></Center>
       </form>
@@ -90,6 +85,9 @@ class FbConnect extends React.Component {
 
   constructor(props) {
     super(props)
+
+    console.log('+++ +++ FbConnect constructor:', props)
+
     props.dispatch(profileAction())
     this.state = { 
       profile: {},
@@ -109,6 +107,10 @@ class FbConnect extends React.Component {
     let fbLogin = (<FacebookAuth appId={config.fbAppId} fields="name,email,picture" 
                                  callback={(response) => {this.props.dispatch(loginAction(response))}} 
                                  component={MyFacebookButton} />)
+
+    if (this.props.profile && this.props.profile.picture) {
+      avatar = this.props.profile.picture.data.url
+    }
 
     if (loggedIn) {
       return (

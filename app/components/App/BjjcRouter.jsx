@@ -24,8 +24,6 @@ let BjjcRouter = {
   },
   locationBadgePath: '/tgm3/locations/:locationname/badges/:badgename',
   locationBadgeLink: (location, badge) => {
-    console.log('+++ +++ locationBaddgeLink:', location, badge)
-
     let lname
     let bname
 
