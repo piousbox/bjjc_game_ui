@@ -10,7 +10,7 @@ import { Grid, Row, Col,
          Nav, NavItem, Navbar,
 } from 'react-bootstrap'
 
-import { Link } from 'react-router'
+import { Link, browserHistory as history } from 'react-router'
 import { connect } from 'react-redux'
 
 import config from 'config'
@@ -32,18 +32,14 @@ const saveFbUser = (r) => {
   console.log('+++ +++ more todo!')
 }
 
-/* const MyFacebookButton = ({ onClick }) => (
-  <button onClick={onClick}>
-    Login with facebook
-  </button>
-); */
-
 class Home extends React.Component {
 
   constructor(props) {
     super(props)
 
     // props.dispatch(siteShow());
+
+    history.push('/tgm3')
 
     if (props.site) {
       localStorage.setItem("lang", this.props.site.lang)
@@ -68,7 +64,6 @@ class Home extends React.Component {
         <Grid>
           <Row>
             <Col xs={12}>
-              <h1>Hello!</h1>
               <ul>
                 <li><Link to="/categories">Categories</Link></li> 
                 <li><Link to="/tgm3">Gameui</Link></li>
@@ -76,17 +71,6 @@ class Home extends React.Component {
               </ul>
             </Col>
           </Row>
-
-          { /* <Features features={this.props.site.features} /> */ }
-
-          { /* <Row>
-            <Col xs={12} xsOffset={0} 
-                 md={8} mdOffset={2}
-                 lg={6} lgOffset={3} >
-              <Newsitems newsitems={ this.props.site.newsitems } nAds={3} site={this.props.site} />
-            </Col>
-          </Row> */ }
-
         </Grid>
       </div>
     )

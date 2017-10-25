@@ -38,8 +38,7 @@ import { Videos }       from '../Videos'
 class Tgm3 extends React.Component {
   constructor(props) {
     super(props)
-
-    console.log('+++ ++ Tgm3 constructor:', props)
+    // console.log('+++ ++ Tgm3 constructor:', props)
 
     let nextState = { collapseState: 'center',
                       collapseFooter: 'up',

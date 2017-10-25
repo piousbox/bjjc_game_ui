@@ -68,8 +68,7 @@ const CheckoutForm = injectStripe(_CheckoutForm)
 class LocationShow extends React.Component {
   constructor(props) {
     super(props)
-
-    console.log('+++ +++ LocationShow constructor:', props)
+    // console.log('+++ +++ LocationShow constructor:', props)
 
     this.state = {
       showBuyPremium: false
@@ -81,15 +80,15 @@ class LocationShow extends React.Component {
   }
 
   componentWillUpdate (nextProps) {
-    console.log('+++ +++ LocationShow componentWillUpdate:', nextProps)
+    // console.log('+++ +++ LocationShow componentWillUpdate:', nextProps)
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('+++ +++ LocationShow will receive props:', nextProps)
+    // console.log('+++ +++ LocationShow will receive props:', nextProps)
   }
 
   buyBadge = (badge) => {
-    console.log('+++ +++ buyBadge:', badge)
+    // console.log('+++ +++ buyBadge:', badge)
     this.setState({ showBuyPremium: true })
   }
   closeBuyBadge = () => {
@@ -104,7 +103,7 @@ class LocationShow extends React.Component {
   }
 
   render () {
-    console.log("+++ +++ LocationShow render:", this.props, this.state)
+    // console.log("+++ +++ LocationShow render:", this.props, this.state)
 
     if (!this.props.location) {
       return (<span></span>)
@@ -122,7 +121,7 @@ class LocationShow extends React.Component {
       this.props.location.badges.map((badge, idx) => {
         if (badge.is_premium) {
           badges.push(
-            <div className="badge badge-premium premium"
+            <div key={idx++} className="badge badge-premium premium"
                  style={{ position: 'absolute', top: badge.bg_pos_y, left: badge.bg_pos_x,
                           width: '100px',       height: '100px',     display: 'block',
                           background: `url(${badge.shaded_photo})`
@@ -130,7 +129,7 @@ class LocationShow extends React.Component {
           )
         } else {
           badges.push(
-            <Link to={BjjcRouter.locationBadgeLink(this.props.location, badge)} key={idx} >
+            <Link key={idx++} to={BjjcRouter.locationBadgeLink(this.props.location, badge)} >
               <div className="badge"
                    style={{ position: 'absolute', top: badge.bg_pos_y, left: badge.bg_pos_x,
                             width: '100px',       height: '100px',     display: 'block',

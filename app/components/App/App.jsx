@@ -39,7 +39,7 @@ const routes = [
   { path: '/tgm3/badges/:badgename', component: Tgm3 },
   { path: '/',
     component: Navigation,
-    indexRoute: { component: Home },
+    indexRoute: { component: Home }, // redirects to /tgm3
     childRoutes: [
       { path: BjjcRouter.videosShowPath, component: VideosShow },
       { path: '/categories',             component: CategoriesToplevel },

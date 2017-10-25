@@ -25,10 +25,10 @@ class Headers extends React.Component {
           <Link to={BjjcRouter.rootPath} >T.G.M</Link>
         </div>
         <ul className="header" style={{ zIndex: 2 }} >
-          <li><a href="#">Cities</a></li>
-          <li><a href="#">Tags</a></li>
-          <li><a href="#">News</a></li>
-          <li><a href="#">Profile</a></li>
+          <li><Link to="/tgm3">Quests</Link></li>
+          <li><Link to="/categories">Technique</Link></li>
+          <li><Link to="/shop">Shop</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
         </ul>
         <div className="header-2" style={{ zIndex: 2 }} >
           <BjjcBreadcrumbs />
