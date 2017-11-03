@@ -18,11 +18,13 @@ class Quest extends React.Component {
 
   render () {
     console.log('+++ +++ Quest render:', this.props, this.state)
+    let badge = this.props.quest || this.props.badge
+
     return (
       <div className="main-quest" >
         <h1>{ this.props.quest.title }</h1>
-        <div dangerouslySetInnerHTML={{ __html: this.props.quest.subhead }} />
-        <div dangerouslySetInnerHTML={{ __html: this.props.quest.description }} />
+        <div dangerouslySetInnerHTML={{ __html: badge.subhead }} />
+        <div dangerouslySetInnerHTML={{ __html: badge.description }} />
       </div>)
   }
 }

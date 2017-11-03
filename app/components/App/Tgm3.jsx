@@ -28,7 +28,7 @@ import Chapter          from './Chapter'
 import Chapters         from './Chapters'
 import FbConnect        from './FbConnect'
 import Headers          from './Headers'
-import Quest            from './Quest'
+import Quest            from './Quest' // Story
 
 import { LocationShow } from '../Locations'
 import Report2          from '../Reports/Reports2Show'
@@ -67,6 +67,7 @@ class Tgm3 extends React.Component {
     } else if (props.params.locationname) {
       props.dispatch(setLocation(props.params.locationname))
       nextState.showLeft = CONST.location
+      nextState.showRight = CONST.location
       nextState.leftFolds.push( CONST.location )
 
     // chapter
@@ -217,19 +218,19 @@ class Tgm3 extends React.Component {
     
     let leftPane = (<div><Panel>default leftPane</Panel></div>)
     switch (this.state.showLeft) {
-      case 'map':
+      case CONST.map:
         if (this.props.blocation && this.props.blocation) {
           console.log('+++ rendering this blocation:', this.props.blocation)
           leftPane = (<LocationShow location={this.props.blocation} />)
         }
         break
-      case 'chat':
+      case CONST.chat:
         leftPane = (<span>Show chat</span>)
         break
-      case 'chapter':
+      case CONST.chapter:
         leftPane = (<Chapter chapter={this.props.chapter} />)
         break
-      case 'chapters':
+      case CONST.chapters:
         leftPane = (<Chapters chapters={this.props.chapters} />)
         break
       default:
@@ -249,6 +250,9 @@ class Tgm3 extends React.Component {
         break
       case CONST.tasks:
         rightPane = (<Tasks tasks={this.props.tasks} />)
+        break
+      case CONST.location:
+        rightPane = (<Quest badge={this.props.blocation} />)
         break
       default:
         // nothing
@@ -320,7 +324,7 @@ Tgm3.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     badge: state.badge,
-    blocation: state.blocation, // b to not conflict
+    blocation: state.blocation, // b to not conflict, but this is actually a location... badge is a location.
 
     chapter: state.chapter,
     chapters: state.chapters,

@@ -48,6 +48,7 @@ export const CONST = {
   chapters: 'chapters',
   chat:     'chat',
   location: 'location',
+  map:      'map',
   news:     'news',
   quest:    'quest',
   tasks:    'tasks',
