@@ -19,7 +19,7 @@ class Quest extends React.Component {
   render () {
     console.log('+++ +++ Quest render:', this.props, this.state)
     return (
-      <div>
+      <div className="main-quest" >
         <h1>{ this.props.quest.title }</h1>
         <div dangerouslySetInnerHTML={{ __html: this.props.quest.subhead }} />
         <div dangerouslySetInnerHTML={{ __html: this.props.quest.description }} />

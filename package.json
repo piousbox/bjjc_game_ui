@@ -1,28 +1,9 @@
 {
-  "name": "travel-guide-mobi",
+  "name": "BJJC Gameui",
   "version": "0.0.0",
   "description": "Seed project for React apps using ES6 & webpack.",
-  "repository": "https://github.com/badsyntax/react-seed",
+  "repository": "https://github.com/piousbox/bjjc_gameui_react",
   "license": "MIT",
-  "config": {
-    "buildDir": {
-      "production": "./build",
-      "development": "./build",
-      "test": "./build_test"
-    },
-    "buildDirTests": "./build_tests",
-    "devHost": "localhost",
-    "devPort": {
-      "tgm": 8004,
-      "development": 8006,
-      "test": 8088
-    },
-    "static_domain": { 
-      "_default": "static.piousbox.com",
-      "development": "static.local",
-      "production": "static.piousbox.com"
-    }
-  },
   "dependencies": {
     "classnames": "^2.1.3",
     "flux": "^2.0.3",
@@ -169,11 +150,27 @@
       "react/wrap-multilines": 1
     }
   },
+  "config": {
+    "buildDir": {
+      "production": "./build",
+      "development": "./build",
+      "test": "./build_test"
+    },
+    "buildDirTests": "./build_tests",
+    "devHost": "localhost",
+    "devPort": {
+      "development": 8006,
+      "test": 8088
+    },
+    "static_domain": { 
+      "_default": "static.piousbox.com",
+      "development": "static.local",
+      "production": "static.piousbox.com"
+    }
+  },
   "scripts": {
     "build": "NODE_ENV=production npm run webpack && cp -v htaccess build/.htaccess && cp sitemap* build/ -v && echo ok",
-    "build_tgm": "NODE_ENV=tgm npm run webpack && cp -v htaccess build/.htaccess && cp sitemap* build/ -v && echo ok",
-    "build_piousbox": "NODE_ENV=piousbox npm run webpack && cp -v htaccess build/.htaccess && cp sitemap* build/ -v && echo ok",
-    "build_bjjc": "NODE_ENV=production_bjjc npm run webpack && cp -v htaccess build/.htaccess && rm -rf ../static.local/public/tgm2 && cp -r build_bjjc/ ../static.local/public/tgm2 && echo ok",
+    "build_bjjc_trash": "NODE_ENV=production_bjjc npm run webpack && cp -v htaccess build/.htaccess && rm -rf ../static.local/public/tgm2 && cp -r build_bjjc/ ../static.local/public/tgm2 && echo ok",
     "clean": "NODE_ENV=production rimraf $npm_package_config_buildDir_production && mkdir $npm_package_config_buildDir_production",
     "env": "env",
     "lint": "eslint --ext .js --ext .jsx ./app ./webpack && echo No linting errors.",

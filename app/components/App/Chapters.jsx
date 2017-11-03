@@ -7,19 +7,18 @@ import BjjcRouter from './BjjcRouter'
 
 class Chapters extends React.Component {
   render () {
-    let idx = 0
-    let chapters = this.props.chapters.map(i => {
+    let chapters = this.props.chapters.map((i, idx) => {
       return (
-        <Panel key={idx++} >
-          <h3>{ i.title }</h3>
-          <Link to={BjjcRouter.chapterLink(i.slug)}>{i.title}</Link>
-        </Panel>)
+        <div key={idx} >
+          <h3 className="one-chapter" ><div style={{ float: 'right' }}>{idx+1}</div> <Link to={BjjcRouter.chapterLink(i.slug)}>{ i.title }</Link></h3>
+        </div>)
     })
     return(
-      <div style={{ overflow: 'auto', height: '100%', paddingRight: '10px' }}>
-        <div>
-          { chapters }
-        </div>
+      <div className="chapters">
+        <h1>Table of Contents</h1>
+        <h2>Chapters</h2>
+
+        { chapters }
       </div>)
   }
 }

@@ -10,20 +10,21 @@ class Chapter extends React.Component {
     console.log('+++ +++ Chapter render:', this.props, this.state)
 
     let questsets = []
-    let idx = 0
     if (this.props.chapter.questsets) {
-      this.props.chapter.questsets.map(i => {
+      this.props.chapter.questsets.map((i, idx) => {
         questsets.push(
-          <Panel key={idx++} >
-            Questset <Link to={BjjcRouter.locationLink(i)}>{i.title}</Link>
-          </Panel>)
+          <h4 key={idx} className="one-questset" >
+            <div style={{ float: 'right' }}>{idx+1}</div><Link to={BjjcRouter.locationLink(i)}>{i.title}</Link>
+          </h4>)
       })
     }
 
     return(
-      <div style={{ overflow: 'auto', height: '100%', paddingRight: '10px' }}>
+      <div className="main-chapter">
         <div>
-          <h5>{ this.props.chapter.title }</h5>
+          <h1>Table of Contents</h1>
+          <h2>Chapters</h2>
+          <h3>{ this.props.chapter.title }</h3>
           { questsets }
         </div>
       </div>)
