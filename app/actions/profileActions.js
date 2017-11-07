@@ -2,24 +2,23 @@
 import { BjjcRouter } from '../components/App'
 
 import {
-  SET_PROFILE 
+  SET_PROFILE,
+  FBACCOUNT,
 } from '../constants'
 
 const profileAction = () => {
   return (dispatch, getState) => {
-    if (localStorage.getItem('fbAccount')) {
-      let fbAccount = JSON.parse(localStorage.getItem('fbAccount'))
-
-      console.log('+++ +++ profileAction, fbAccount:', fbAccount)
-
+    let fbAccount = localStorage.getItem(FBACCOUNT)
+    if (fbAccount) {
       fetch(BjjcRouter.profile, {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json',
         }),
-        body: localStorage.getItem('fbAccount'),
+        body: fbAccount,
       }).then(r => r.json()).then(_data => {
-        fbAccount = Object.assign({}, fbAccount, _data)
+        fbAccount = Object.assign({}, JSON.parse(fbAccount), _data)
+        // console.log('+++ setting in-app existing profile:', fbAccount)
         dispatch({ type: SET_PROFILE, fbAccount: fbAccount })
       })
     }
@@ -27,18 +26,29 @@ const profileAction = () => {
   }
 }
 
-const loginAction = (r2) => {
+/**
+ * this gets called from facebook directly, I need to call the api as well to get the long token.
+ */
+const loginAction = (fbAccount) => {
   return (dispatch, getState) => {
-
-    console.log('+++ +++ r2 is:', r2)
-
-    localStorage.setItem('fbAccount', JSON.stringify(r2))
-    dispatch(profileAction())
+    fetch(BjjcRouter.fbLogin, {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(fbAccount),
+    }).then(r => r.json()).then(_data => {
+      fbAccount = Object.assign({}, fbAccount, _data)
+      // console.log('+++ +++ I will localStorage this fbAccount:', fbAccount)
+      localStorage.setItem(FBACCOUNT, JSON.stringify(fbAccount))
+      dispatch(profileAction())
+      dispatch({ type: SET_PROFILE, fbAccount: fbAccount })
+    })
   }
 }
 
 const logoutAction = () => {
-  localStorage.removeItem('fbAccount')
+  localStorage.removeItem(FBACCOUNT)
   return({ type: SET_PROFILE, fbAccount: null }) 
 }
 
