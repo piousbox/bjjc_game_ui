@@ -113,6 +113,7 @@ const setLocation = (name) => {
     }
     console.log('+++ setLocation:', name, state, headers)
     fetch(url, { headers, }).then(r => r.json()).then(_data => {
+      console.log('+++ _data 35:', _data)
       // map
       dispatch({ type: SET_LOCATION, location: _data.location })
       dispatch({ type: SET_STORY,    story:    _data.story    })
