@@ -1,10 +1,10 @@
 
 let Config = {
   envName: "production",
-  apiUrl: "http://manager.piousbox.com",
-  fbAppId: "155288885040689",
-  domain: "travel-guide.mobi",
-  siteTitle: "T.G.M",
+  apiUrl: "https://fighters-guild.piousbox.com",
+  fbAppId: "333229727087961",
+  domain: "gameui.piousbox.com",
+  siteTitle: "BJJC GAMEUI",
 }
 
 export default Config
