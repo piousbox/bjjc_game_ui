@@ -50,6 +50,8 @@ let BjjcRouter = {
   profile:       `${config.apiUrl}/api/users/profile`,
   updateProfile: `${config.apiUrl}/api/users/profile/update`,
   buyStars:      `${config.apiUrl}/api/buyStars`,
+  buyBadge: (badge) => {
+    return `${config.apiUrl}/api/badges/${badge.location_name}/buy` },
 
 }
 

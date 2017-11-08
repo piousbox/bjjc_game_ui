@@ -109,7 +109,7 @@ const setLocation = (name) => {
     let fbAccount = JSON.parse(localStorage.getItem('fbAccount'))
     let headers   = { version: 'tgm3' }
     if (fbAccount) {
-      headers.accessToken = fbAccount.accessToken
+      headers.accessToken = fbAccount.fb_long_access_token
     }
     console.log('+++ setLocation:', name, state, headers)
     fetch(url, { headers, }).then(r => r.json()).then(_data => {

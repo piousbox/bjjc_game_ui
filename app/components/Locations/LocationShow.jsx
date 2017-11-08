@@ -29,15 +29,17 @@ class _CheckoutForm extends React.Component {
     console.log("+++ handlesubmit:", e)
     this.props.stripe.createToken().then((payload) => {
 
-      payload = Object.assign({}, payload, { amount: 500, 
-                                             profile: this.props.profile })
-      console.log("+++ payload:", payload)      
+      payload = Object.assign({}, payload, { profile: this.props.profile, badge: this.props.badgeToBuy })
+      console.log("+++ payload:", payload)
 
-      fetch(BjjcRouter.buyStars, {
+      let fbAccount = JSON.parse(localStorage.getItem('fbAccount'))
+
+      fetch(BjjcRouter.buyBadge( this.props.badgeToBuy ), {
         method: 'POST',
-        headers: new Headers({
-          'Content-Type': 'application/json',
-        }),
+        headers: { version: 'tgm3', 
+                   'Content-Type': 'application/json',
+                   accessToken: fbAccount.fb_long_access_token
+        },
         body: JSON.stringify(payload)
       }).then(r => r.json()).then(_data => {
         console.log("+++ success!", _data)
@@ -54,7 +56,7 @@ class _CheckoutForm extends React.Component {
         <CardElement />
         <Row>
           <Col sm={12}>
-            <h1>$4.99</h1>
+            <h1>${this.props.badgeToBuy.cost}</h1>
           </Col>
         </Row>
         <Center><button>Buy it</button></Center>
@@ -71,7 +73,8 @@ class LocationShow extends React.Component {
     // console.log('+++ +++ LocationShow constructor:', props)
 
     this.state = {
-      showBuyPremium: false
+      showBuyPremium: false,
+      badgeToBuy: {},
     }
 
     // this.props.dispatch(setLocation(props.params.blocation.location_name))
@@ -88,8 +91,9 @@ class LocationShow extends React.Component {
   }
 
   buyBadge = (badge) => {
-    // console.log('+++ +++ buyBadge:', badge)
-    this.setState({ showBuyPremium: true })
+    console.log('+++ +++ buyBadge:', badge)
+    this.setState({ showBuyPremium: true, 
+                    badgeToBuy: badge, })
   }
   closeBuyBadge = () => {
     this.setState({ showBuyPremium: false })
@@ -121,10 +125,11 @@ class LocationShow extends React.Component {
       this.props.location.badges.map((badge, idx) => {
         if (badge.is_premium) {
           badges.push(
-            <div key={idx++} className="badge badge-premium premium"
+            <div key={idx++} className={`badge badge-premium premium ${badge.is_bought ? 'bought' : ''}`}
                  style={{ position: 'absolute', top: badge.bg_pos_y, left: badge.bg_pos_x,
                           width: '100px',       height: '100px',     display: 'block',
-                          background: `url(${badge.shaded_photo})`
+                          background: `url(${badge.shaded_photo})`,
+                          border: '1px solid gold',
                  }} onClick={() => this.buyBadge(badge)} />
           )
         } else {
@@ -160,13 +165,13 @@ class LocationShow extends React.Component {
 
         <Modal show={this.state.showBuyPremium} onHide={this.closeBuyBadge}>
           <Modal.Header closeButton>
-            <Modal.Title>Let's buy this badge</Modal.Title>
+            <Modal.Title>Let's buy this badge "{this.state.badgeToBuy.title}"</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Would you like to guy access to this quest? It's $4.99</p>
+            <p>Would you like to guy access to this quest? It's {this.state.badgeToBuy.cost}</p>
             <StripeProvider apiKey={config.stripePublicKey}>
               <Elements>
-                <CheckoutForm profile={this.props.profile} dispatch={this.props.dispatch} handleSuccess={this.handleSuccess} />
+                <CheckoutForm badgeToBuy={this.state.badgeToBuy} profile={this.props.profile} dispatch={this.props.dispatch} handleSuccess={this.handleSuccess} />
               </Elements>
             </StripeProvider>
           </Modal.Body>
