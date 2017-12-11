@@ -34,7 +34,7 @@ import config from 'config'
 function badgeReducer (state={}, action) {
   switch (action.type) {
     case SET_BADGE:
-      console.log('+++ +++ badgeReducer:', action)
+      // console.log('+++ +++ badgeReducer:', action)
       return action.badge
     default:
       return state
@@ -44,7 +44,7 @@ function badgeReducer (state={}, action) {
 function blocation (state = {}, action) {
   switch (action.type) {
     case SET_LOCATION:
-      console.log('+++ blocationReducer:', action)
+      // console.log('+++ blocationReducer:', action)
       return action.location
     default:
       return state
@@ -54,7 +54,7 @@ function blocation (state = {}, action) {
 function breadcrumbsReducer(state={}, action) {
   switch (action.type) {
     case SET_PATH:
-      console.log('+++ +++ breadcrumbsReducer:', action)
+      // console.log('+++ +++ breadcrumbsReducer:', action)
       return Object.assign({}, action.params)
     default: 
       return state
@@ -84,7 +84,7 @@ function chapters (state=[], action) {
 function leftPaneReducer (state = {}, action) {
   switch (action.type) {
     case SET_LOCATION:
-      console.log('+++ +++ leftPaneReducer:', action)
+      // console.log('+++ +++ leftPaneReducer:', action)
       return { location: action.location }
     default:
       return state
@@ -115,7 +115,7 @@ function profileReducer (state = {}, action) {
 function quest (state={}, action) {
   switch (action.type) {
     case SET.quest:
-      console.log('+++ quest reducer:', action)
+      // console.log('+++ quest reducer:', action)
       return action.quest
     default:
       return state
@@ -141,7 +141,7 @@ function story (state={}, action) {
 function tasks (state=[], action) {
   switch (action.type) {
     case SET.tasks:
-      console.log('+++ tasks reducer:', action)
+      // console.log('+++ tasks reducer:', action)
       return action.tasks
     default:
       return state
@@ -152,7 +152,7 @@ function tasks (state=[], action) {
 function videos (state=[], action) {
   switch (action.type) {
     case SET.videos:
-      console.log('+++ videos reducer:', action)
+      // console.log('+++ videos reducer:', action)
       return action.videos
     default:
       return state

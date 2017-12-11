@@ -36,12 +36,12 @@ class _CheckoutForm extends React.Component {
   }
   handleSubmit (e) {
     e.preventDefault()
-    console.log("+++ handlesubmit:", e)
+    // console.log("+++ handlesubmit:", e)
     this.props.stripe.createToken().then((payload) => {
 
       payload = Object.assign({}, payload, { amount: 500, 
                                              profile: this.props.profile })
-      console.log("+++ payload:", payload)      
+      // console.log("+++ payload:", payload)      
 
       fetch(BjjcRouter.buyStars, {
         method: 'POST',
@@ -99,7 +99,7 @@ class FbConnect extends React.Component {
   }
 
   render () {
-    console.log("+++ +++ rendering FbConnect:", this.props, this.state)
+    // console.log("+++ +++ rendering FbConnect:", this.props, this.state)
 
     let loggedIn = !!(this.props.profile && this.props.profile.name)
 

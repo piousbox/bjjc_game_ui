@@ -4,6 +4,7 @@
  */
 
 import {
+  SET,
   SET_SHOW_CATEGORY,
   SET_INDEX_CATEGORY,
 } from '../constants'
@@ -22,10 +23,11 @@ function categoryReducer (state = {}, action) {
 
 function categoriesReducer (state = {}, action) {
   switch (action.type) {
-    case SET_INDEX_CATEGORY:
+    case SET.categories:
       console.log('+++ +++ set index category reducer:', action)
       let newState = Object.assign({}, state)
       newState[action.path] = action
+      newState.categories = action.categories
       return newState
     default:
       return state

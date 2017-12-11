@@ -144,6 +144,7 @@ CategoriesIndex.propTypes = {
 
 const mapStateToProps = (store, ownprops) => {
   return {
+    categories: store.categories,
     allCategories: store.categories,
     thisCategory: store.category,
   }

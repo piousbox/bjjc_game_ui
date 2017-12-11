@@ -27,6 +27,7 @@ import { CONST } from '../../constants'
 import Badge            from './Badge'
 import BjjcRouter       from './BjjcRouter'
 import BjjcBreadcrumbs  from './BjjcBreadcrumbs'
+import { CategoriesIndex } from '../Categories'
 import Chapter          from './Chapter'
 import Chapters         from './Chapters'
 import FbConnect        from './FbConnect'
@@ -41,13 +42,14 @@ import { Videos }       from '../Videos'
 class Tgm3 extends React.Component {
   constructor(props) {
     super(props)
-    console.log('+++ ++ Tgm3 constructor:', props)
+    // console.log('+++ ++ Tgm3 constructor:', props)
 
     let nextState = { collapseState: 'center',
                       collapseFooter: 'up',
                       showLeft: CONST.chapters, // map
                       showRight: CONST.news,
-                      leftFolds: [ CONST.chapters, CONST.chat, ],
+                      leftFolds: [ {key: CONST.chapters, readable: 'Chapters'},
+                                   {key: CONST.chat,     readable: 'Chat'}, ],
                       rightFolds: [ CONST.news, ], // story, tasks
     };
 
@@ -82,8 +84,10 @@ class Tgm3 extends React.Component {
     // categories
     } else if (props.router.location.pathname === BjjcRouter.categoriesLink()) {
       props.dispatch(setCategories([config.defaultCategory]))
-      nextState.leftFolds.push( CONST.categories )
+      nextState.leftFolds.push({ key: CONST.categories, readable: 'Categories' })
       nextState.showLeft = CONST.categories
+      nextState.rightFolds.push( CONST.videos )
+      nextState.showRight = CONST.videos
 
     } else {
       props.dispatch(setChapters())
@@ -151,7 +155,7 @@ class Tgm3 extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('+++ +++ Tgm3 will receive props:', this.props, nextProps)
+    // console.log('+++ +++ Tgm3 will receive props:', this.props, nextProps)
     
     this.props.dispatch(setPath(nextProps.props.params))
     if (nextProps.props.params.locationname && this.props.params.locationname !== nextProps.props.params.locationname) {
@@ -163,7 +167,7 @@ class Tgm3 extends React.Component {
   }
 
   componentWillUpdate (nextProps) {
-    console.log('+++ +++ Tgm3 componentWillUpdate:', this.props, nextProps, this.state)
+    // console.log('+++ +++ Tgm3 componentWillUpdate:', this.props, nextProps, this.state)
     let nextState = { leftFolds: this.state.leftFolds, rightFolds: this.state.rightFolds }
 
     // badge
@@ -206,7 +210,7 @@ class Tgm3 extends React.Component {
   componentWillUnmount () { window.removeEventListener('resize', this.onWindowResize) }
 
   showLeft (what) {
-    console.log('+++ +++ showLeft:', what)
+    // console.log('+++ +++ showLeft:', what)
 
     this.setState({ showLeft: what })
     switch (what) {
@@ -230,7 +234,7 @@ class Tgm3 extends React.Component {
     switch (this.state.showLeft) {
       case CONST.map:
         if (this.props.blocation && this.props.blocation) {
-          console.log('+++ rendering this blocation:', this.props.blocation)
+          // console.log('+++ rendering this blocation:', this.props.blocation)
           leftPane = (<LocationShow location={this.props.blocation} />)
         }
         break
@@ -243,9 +247,12 @@ class Tgm3 extends React.Component {
       case CONST.chapters:
         leftPane = (<Chapters chapters={this.props.chapters} />)
         break
+      case CONST.chategories:
+        leftPane = (<CategoriesIndex categories={this.props.categories} />)
+        break
       default:
         if (this.props.blocation && this.props.blocation) {
-          console.log('+++ rendering this blocation:', this.props.blocation)
+          // console.log('+++ rendering this blocation:', this.props.blocation)
           leftPane = (<LocationShow location={this.props.blocation} />)
         }
     }
@@ -270,8 +277,8 @@ class Tgm3 extends React.Component {
 
     let leftFolds = []
     this.state.leftFolds.map((i, idx) => {
-      leftFolds.push(<li style={{ cursor: 'pointer' }} key={idx} className={this.state.showLeft === i ? 'active' : ''}>
-              <a onClick={() => { this.showLeft(i) }}>{i}</a></li>)
+      leftFolds.push(<li style={{ cursor: 'pointer' }} key={idx} className={this.state.showLeft === i.key ? 'active' : ''}>
+              <a onClick={() => { this.showLeft(i.key) }}>{i.readable}</a></li>)
     })
       
     let rightFolds = []

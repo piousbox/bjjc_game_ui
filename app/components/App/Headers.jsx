@@ -13,11 +13,11 @@ class Headers extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('+++ +++ Headers will receive props:', this.props, nextProps)
+    // console.log('+++ +++ Headers will receive props:', this.props, nextProps)
   }
 
   render () {
-    console.log('+++ +++ Headers render:', this.props, this.state)
+    // console.log('+++ +++ Headers render:', this.props, this.state)
 
     return(
       <div>

@@ -89,7 +89,7 @@ const setCategories = (cats) => {
   let url = `${config.apiUrl}/api/categories/${cats.join('/')}.json`
   return (dispatch, getState) => {
     fetch(url).then(r => r.json()).then(_data => {
-      console.log('+++ fetched categories:', _data)
+      // console.log('+++ fetched categories:', _data)
       dispatch({ type: SET.categories, categories: _data.categories })
     })
   }
