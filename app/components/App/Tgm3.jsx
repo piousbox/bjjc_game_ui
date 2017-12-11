@@ -247,8 +247,8 @@ class Tgm3 extends React.Component {
       case CONST.chapters:
         leftPane = (<Chapters chapters={this.props.chapters} />)
         break
-      case CONST.chategories:
-        leftPane = (<CategoriesIndex categories={this.props.categories} />)
+      case CONST.categories:
+        leftPane = (<CategoriesIndex categiesSlugs={ this.props.location.query.categoriesSlugs.split('/') } />)
         break
       default:
         if (this.props.blocation && this.props.blocation) {
@@ -343,6 +343,7 @@ function mapStateToProps(state, ownProps) {
     badge: state.badge,
     blocation: state.blocation, // b to not conflict, but this is actually a location... badge is a location.
 
+    categories: state.categories,
     chapter: state.chapter,
     chapters: state.chapters,
 

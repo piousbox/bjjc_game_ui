@@ -21,7 +21,15 @@ import {
 
 import config from 'config'
 
-const categoriesIndex = (params) => {
+const categoriesIndex = (cats) => {
+  return (dispatch, getState) => {
+    let url = `${config.apiUrl}/api/categories`
+    fetch(url).then(r => r.json()).then(_data => {
+      dispatch({ type: SET.categories, categories: _data.categories })
+    })
+  }
+}
+/* const categoriesIndex = (params) => {
   return (dispatch, getState) => {
     let state = getState()
     let url = `${config.apiUrl}/api/categories`
@@ -51,7 +59,7 @@ const categoriesIndex = (params) => {
       dispatch(obj)
     })
   }
-}
+} */
 
 const categoriesShow = (variables) => {
   return (dispatch, getState) => {

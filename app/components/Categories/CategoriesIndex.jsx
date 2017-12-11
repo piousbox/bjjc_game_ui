@@ -27,10 +27,11 @@ class CategoriesIndex extends React.Component {
 
     console.log('+++ +++ categoriesIndex constructor:', props)
 
-    this.state = { allCategories: {}, thisIndexCategory: {}, thisShowCategory: {} }
-    props.dispatch(categoriesIndex( props.params ))
-    props.dispatch({ type: SET_PATH, path: props.params })
+    this.state = { categories: [] }
+    props.dispatch(categoriesIndex( props.categoriesSlugs ))
+    // props.dispatch({ type: SET_PATH, path: props.params }) // breadcrumb?
 
+    console.log('here?')
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
   }
 
@@ -145,8 +146,6 @@ CategoriesIndex.propTypes = {
 const mapStateToProps = (store, ownprops) => {
   return {
     categories: store.categories,
-    allCategories: store.categories,
-    thisCategory: store.category,
   }
 }
 

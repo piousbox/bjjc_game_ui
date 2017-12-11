@@ -21,14 +21,10 @@ function categoryReducer (state = {}, action) {
   }
 }
 
-function categoriesReducer (state = {}, action) {
+function categoriesReducer (state = [], action) {
   switch (action.type) {
     case SET.categories:
-      console.log('+++ +++ set index category reducer:', action)
-      let newState = Object.assign({}, state)
-      newState[action.path] = action
-      newState.categories = action.categories
-      return newState
+      return action.categories
     default:
       return state
   }
