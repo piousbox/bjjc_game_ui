@@ -6,12 +6,15 @@ import { Grid, Row, Col,
 } from 'react-bootstrap'
 import { browserHistory } from 'react-router'
 
+import config from 'config'
+
 import arrowLeft  from './images/16x16/arrow-left.png'
 import arrowRight from './images/16x16/arrow-right.png'
 import arrowUp    from './images/16x16/arrow-top.png'
 import arrowDown  from './images/16x16/arrow-bottom.png'
 
 import {
+  setCategories,
   setChapters,
   setChapter,
   setBadge,
@@ -38,7 +41,7 @@ import { Videos }       from '../Videos'
 class Tgm3 extends React.Component {
   constructor(props) {
     super(props)
-    // console.log('+++ ++ Tgm3 constructor:', props)
+    console.log('+++ ++ Tgm3 constructor:', props)
 
     let nextState = { collapseState: 'center',
                       collapseFooter: 'up',
@@ -76,6 +79,12 @@ class Tgm3 extends React.Component {
       nextState.leftFolds.push( CONST.chapter )
       nextState.showLeft = CONST.chapter
 
+    // categories
+    } else if (props.router.location.pathname === BjjcRouter.categoriesLink()) {
+      props.dispatch(setCategories([config.defaultCategory]))
+      nextState.leftFolds.push( CONST.categories )
+      nextState.showLeft = CONST.categories
+
     } else {
       props.dispatch(setChapters())
     }
@@ -96,6 +105,7 @@ class Tgm3 extends React.Component {
   onWindowResize () {
     if (this.props.params.locationname) { this.props.dispatch(setLocation(this.props.params.locationname)) }
   }
+
   rerender () {
     if (this.props.params.locationname) { this.props.dispatch(setLocation(this.props.params.locationname)) }
   }

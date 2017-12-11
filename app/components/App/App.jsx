@@ -32,15 +32,18 @@ import { citiesIndex,
 } from '../../actions'
 
 const routes = [
-  { path: '/tgm3', component: Tgm3, },
-  { path: '/tgm3/chapters/:chaptername', component: Tgm3 },
-  { path: '/tgm3/locations/:locationname', component: Tgm3 },
-  { path: '/tgm3/locations/:locationname/badges/:badgename', component: Tgm3 },
-  { path: '/tgm3/badges/:badgename', component: Tgm3 },
-  { path: '/',
-    component: Navigation,
-    indexRoute: { component: Home }, // redirects to /tgm3
-    childRoutes: [
+  { component: Tgm3, path: '/tgm3', },
+  { component: Tgm3, path: '/tgm3/chapters/:chaptername', },
+  { component: Tgm3, path: '/tgm3/locations/:locationname', },
+  { component: Tgm3, path: '/tgm3/locations/:locationname/badges/:badgename', },
+  { component: Tgm3, path: '/tgm3/badges/:badgename', },
+  { component: Tgm3, path: BjjcRouter.categoriesPath, },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/videos/page/:videos_page', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/videos/page/:videos_page', },
+
+  /*  childRoutes: [
       { path: BjjcRouter.videosShowPath, component: VideosShow },
       { path: '/categories',             component: CategoriesToplevel },
       { path: '/categories/:slug_0',     component: CategoriesIndex,
@@ -73,7 +76,8 @@ const routes = [
         ],
       },
     ],
-  },
+   }, */
+
 ]
 
 class App extends React.Component {

@@ -46,6 +46,7 @@ export const SET_PATH    = 'set path'
  * _vp_ 20171004
  */
 export const CONST = {
+  categories: 'categories',
   chapter:  'chapter',
   chapters: 'chapters',
   chat:     'chat',
@@ -62,6 +63,7 @@ export const CONST = {
  * _vp_ 20171007
  */
 export const SET = {
+  categories: 'sdga3fx',
   quest:    'quest',
   location: 'location',
   tasks:    'tasks',

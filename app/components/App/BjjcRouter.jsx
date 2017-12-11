@@ -5,8 +5,8 @@ let BjjcRouter = {
 
   rootPath: '/',
 
-  categoriesPath: '/categories',
-  categoriesLink: () => { return `/categoriees` },
+  categoriesPath: '/tgm3/categories',
+  categoriesLink: () => { return `/tgm3/categories` },
 
   categoryLink: (c) => { return `/categories/${c.path}` },
   categoryPath: '/categories/:categoryPath',
@@ -51,7 +51,8 @@ let BjjcRouter = {
   updateProfile: `${config.apiUrl}/api/users/profile/update`,
   buyStars:      `${config.apiUrl}/api/buyStars`,
   buyBadge: (badge) => {
-    return `${config.apiUrl}/api/badges/${badge.location_name}/buy` },
+    return `${config.apiUrl}/api/badges/${badge.location_name}/buy`
+  },
 
 }
 

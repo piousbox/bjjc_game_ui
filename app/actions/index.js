@@ -4,6 +4,7 @@
  */
 
 import {
+  CONST,
   SET,
 
   SET_CHAPTER,
@@ -65,24 +66,6 @@ const categoriesShow = (variables) => {
   }
 }
 
-const setChapters = () => {
-  return (dispatch, getState) => {
-    let url = `${config.apiUrl}/api/chapters.json`
-    fetch(url).then(r => r.json()).then(_data => {
-      dispatch({ type: SET_CHAPTERS, chapters: _data })
-    })
-  }
-}
-
-const setChapter = (name) => {
-  return (dispatch, getState) => {
-    let url = `${config.apiUrl}/api/chapters/${name}.json`
-    fetch(url).then(r => r.json()).then(_data => {
-      dispatch({ type: SET_CHAPTER, chapter: _data })
-    })
-  }
-}
-
 const setBadge = (badgename) => {
   return (dispatch, getState) => {
     let url = `${config.apiUrl}/api/badges/${badgename}.json`
@@ -99,6 +82,34 @@ const setBadge = (badgename) => {
 const setBreadcrumbs = (params) => {
   return (dispatch, getState) => {
     dispatch({ type: SET_PATH, params: params })
+  }
+}
+
+const setCategories = (cats) => {
+  let url = `${config.apiUrl}/api/categories/${cats.join('/')}.json`
+  return (dispatch, getState) => {
+    fetch(url).then(r => r.json()).then(_data => {
+      console.log('+++ fetched categories:', _data)
+      dispatch({ type: SET.categories, categories: _data.categories })
+    })
+  }
+}
+
+const setChapters = () => {
+  return (dispatch, getState) => {
+    let url = `${config.apiUrl}/api/chapters.json`
+    fetch(url).then(r => r.json()).then(_data => {
+      dispatch({ type: SET_CHAPTERS, chapters: _data })
+    })
+  }
+}
+
+const setChapter = (name) => {
+  return (dispatch, getState) => {
+    let url = `${config.apiUrl}/api/chapters/${name}.json`
+    fetch(url).then(r => r.json()).then(_data => {
+      dispatch({ type: SET_CHAPTER, chapter: _data })
+    })
   }
 }
 
@@ -173,6 +184,7 @@ export default {
   loginAction,
   logoutAction,
 
+  setCategories,
   setChapters,
   setChapter,
   setBadge,

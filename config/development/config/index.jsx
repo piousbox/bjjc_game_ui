@@ -8,6 +8,8 @@ let Config = {
 
   domain: "localhost", // used to fetch which site, from the API
   siteTitle: "BJJC GAMEUI local",
+
+  defaultCategory: 'technique',
 }
 
 export default Config
