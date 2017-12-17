@@ -154,6 +154,7 @@ export default {
   categoriesIndex,
   categoriesShow,
 
+  locationAction,
   loginAction,
   logoutAction,
 
@@ -161,7 +162,6 @@ export default {
   setChapters,
   setChapter,
   setBadge,
-  setLocation,
   setPath: setBreadcrumbs,
 
   siteNewsitemsAction,

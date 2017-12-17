@@ -10,12 +10,9 @@ import {
   injectStripe,
 } from 'react-stripe-elements'
 
-import config from 'config'
-
 import { locationAction } from '../../actions'
 
 import { BjjcRouter } from '../App'
-import Center from '../Center'
 
 /**
  * see LocationShow for example of checkout
@@ -32,7 +29,8 @@ class LocationMap extends React.Component {
       badgeToBuy: {},
     }
 
-    props.disaptch(locationAction(props.params.locationname))
+    props.dispatch(locationAction(props.params.locationname))
+    console.log('+++ +++ im gonna dispatch this', props.dispatch)
 
     this.buyBadge = this.buyBadge.bind(this)
   }
@@ -64,7 +62,7 @@ class LocationMap extends React.Component {
   render () {
     console.log("+++ +++ LocationMap render:", this.props, this.state)
 
-    if (Object.keys(this.props.location).length === 0) {
+    if (!this.props.location || Object.keys(this.props.location).length === 0) {
       return (null)
     }
 
@@ -101,9 +99,9 @@ class LocationMap extends React.Component {
     }
 
     return (
-      <div style={{ width: this.props.location.background_image_width*2 - oWidth,
+      <div style={{ position: 'relative', 
+                    width: this.props.location.background_image_width*2 - oWidth,
                     height: this.props.location.background_image_height*2 - oHeight, 
-                    position: 'relative', 
                     top: -this.props.location.background_image_height + oHeight, 
                     left: -this.props.location.background_image_width + oWidth, 
       }}>
@@ -117,29 +115,6 @@ class LocationMap extends React.Component {
         </Draggable>
 
         <div style={{ display: 'none' }}>{this.props.children}</div>
-
-        <Modal show={this.state.showBuyPremium} onHide={this.closeBuyBadge}>
-          <Modal.Header closeButton>
-            <Modal.Title>Let's buy this badge "{this.state.badgeToBuy.title}"</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>Would you like to guy access to this quest? It's {this.state.badgeToBuy.cost}</p>
-            <StripeProvider apiKey={config.stripePublicKey}>
-              <Elements>
-                <CheckoutForm badgeToBuy={this.state.badgeToBuy} profile={this.props.profile} dispatch={this.props.dispatch} handleSuccess={this.handleSuccess} />
-              </Elements>
-            </StripeProvider>
-          </Modal.Body>
-        </Modal>
-
-        <Modal show={this.state.showBuySuccess} onHide={this.closeBuySuccess}>
-          <Modal.Header closeButton>
-            <Modal.Title>Thank you!</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            Thanks, you got this.
-          </Modal.Body>
-        </Modal>
 
       </div>
     )

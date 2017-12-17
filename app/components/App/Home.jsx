@@ -50,7 +50,7 @@ class Home extends React.Component {
   }
 
   render () {
-    console.log('+++ +++ rendering Home:', this.props, this.state)
+    // console.log('+++ +++ rendering Home:', this.props, this.state)
 
     let newsitems = []
     if (this.props.siteNewsitems) {

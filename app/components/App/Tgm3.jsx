@@ -14,11 +14,12 @@ import arrowUp    from './images/16x16/arrow-top.png'
 import arrowDown  from './images/16x16/arrow-bottom.png'
 
 import {
+  locationAction,
+
   setCategories,
   setChapters,
   setChapter,
   setBadge,
-  setLocation,
   setPath,
 } from '../../actions'
 
@@ -27,7 +28,6 @@ import { CONST } from '../../constants'
 import Badge            from './Badge'
 import BjjcRouter       from './BjjcRouter'
 import BjjcBreadcrumbs  from './BjjcBreadcrumbs'
-import { CategoriesIndex } from '../Categories'
 import Chapter          from './Chapter'
 import Chapters         from './Chapters'
 import FbConnect        from './FbConnect'
@@ -35,7 +35,6 @@ import Headers          from './Headers'
 import Quest            from './Quest' // Story
 
 import { LocationShow } from '../Locations'
-import Report2          from '../Reports/Reports2Show'
 import { Tasks }        from '../Tasks'
 import { Videos }       from '../Videos'
 
@@ -59,14 +58,14 @@ class Tgm3 extends React.Component {
 
     // badge
     if (props.params.badgename) {
-      [ CONST.quest, CONST.videos, CONST.tasks ].map((elem) => {
+      /* [ CONST.quest, CONST.videos, CONST.tasks ].map((elem) => {
         if (nextState.rightFolds.indexOf(elem) === -1) {
           nextState.rightFolds.push(elem)
         }
       })
       if (nextState.leftFolds.indexOf(CONST.location) === -1) {
         nextState.leftFolds.push(CONST.location)
-      }
+      } */
       nextState.showLeft  = CONST.location
       nextState.showRight = CONST.quest
       props.dispatch(setBadge(props.params.badgename))
@@ -289,7 +288,7 @@ class Tgm3 extends React.Component {
       
     let rightFolds = []
     this.state.rightFolds.map((i, idx) => {
-      rightFolds.push(<li key={idx} className={this.state.showRight === i ? 'active' : ''}><a href="javascript:;" onClick={() => { this.showRight(i) }}>{i}</a></li>)
+      rightFolds.push(<li key={idx} className={this.state.showRight === i.key ? 'active' : ''}><a href="javascript:;" onClick={() => { this.showRight(i.key) }}>{i.readable}</a></li>)
     })
 
     return(
