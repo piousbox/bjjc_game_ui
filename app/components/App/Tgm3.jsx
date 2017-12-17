@@ -42,15 +42,19 @@ import { Videos }       from '../Videos'
 class Tgm3 extends React.Component {
   constructor(props) {
     super(props)
-    // console.log('+++ ++ Tgm3 constructor:', props)
+    console.log('+++ ++ Tgm3 constructor:', props)
 
     let nextState = { collapseState: 'center',
                       collapseFooter: 'up',
                       showLeft: CONST.chapters, // map
                       showRight: CONST.news,
-                      leftFolds: [ {key: CONST.chapters, readable: 'Chapters'},
-                                   {key: CONST.chat,     readable: 'Chat'}, ],
-                      rightFolds: [ CONST.news, ], // story, tasks
+                      leftFolds: [ {key: CONST.chapters,    readable: 'Chapters'},
+                                   {key: CONST.chat,        readable: 'Chat'},
+                                   {key: CONST.locationMap, readable: 'Location Map' },
+                      ],
+                      rightFolds: [ {key: CONST.news,         readable: 'News' },
+                                    {key: CONST.locationShow, readable: 'This Location' },
+                      ],
     };
 
     // badge
@@ -67,31 +71,34 @@ class Tgm3 extends React.Component {
       nextState.showRight = CONST.quest
       props.dispatch(setBadge(props.params.badgename))
       props.dispatch(setLocation(props.params.locationname))
+    }
 
     // location
-    } else if (props.params.locationname) {
-      props.dispatch(setLocation(props.params.locationname))
-      nextState.showLeft = CONST.location
-      nextState.showRight = CONST.location
-      nextState.leftFolds.push( CONST.location )
+    if (props.params.locationname) {
+      // props.dispatch(setLocation(props.params.locationname)) // this should be in Location
+      nextState.showLeft = CONST.locationMap
+      nextState.showRight = CONST.locationShow
+    }
 
     // chapter
-    } else if (props.params.chaptername) {
+    if (props.params.chaptername) {
       props.dispatch(setChapter(props.params.chaptername))
       nextState.leftFolds.push( CONST.chapter )
       nextState.showLeft = CONST.chapter
+    }
 
     // categories
-    } else if (props.router.location.pathname === BjjcRouter.categoriesLink()) {
+    if (props.router.location.pathname === BjjcRouter.categoriesLink()) {
       props.dispatch(setCategories([config.defaultCategory]))
       nextState.leftFolds.push({ key: CONST.categories, readable: 'Categories' })
       nextState.showLeft = CONST.categories
       nextState.rightFolds.push( CONST.videos )
       nextState.showRight = CONST.videos
 
-    } else {
-      props.dispatch(setChapters())
     }
+     
+    // chapters
+    props.dispatch(setChapters())
 
     this.state = nextState
 
@@ -232,11 +239,10 @@ class Tgm3 extends React.Component {
     
     let leftPane = (<div><Panel>default leftPane</Panel></div>)
     switch (this.state.showLeft) {
-      case CONST.map:
-        if (this.props.blocation && this.props.blocation) {
-          // console.log('+++ rendering this blocation:', this.props.blocation)
-          leftPane = (<LocationShow location={this.props.blocation} />)
-        }
+      case CONST.map: // @TODO: is this deprecated?
+      case CONST.location: // @deprecated, @TODO: remove
+      case CONST.locationMap:
+        leftPane = (<LocationMap locationname={this.props.params.locationname} />)
         break
       case CONST.chat:
         leftPane = (<span>Show chat</span>)
@@ -251,9 +257,8 @@ class Tgm3 extends React.Component {
         leftPane = (<CategoriesIndex categiesSlugs={ this.props.location.query.categoriesSlugs.split('/') } />)
         break
       default:
-        if (this.props.blocation && this.props.blocation) {
-          // console.log('+++ rendering this blocation:', this.props.blocation)
-          leftPane = (<LocationShow location={this.props.blocation} />)
+        if (this.props.location) {
+          leftPane = (<LocationShow location={this.props.location} />)
         }
     }
 
@@ -268,8 +273,9 @@ class Tgm3 extends React.Component {
       case CONST.tasks:
         rightPane = (<Tasks tasks={this.props.tasks} />)
         break
-      case CONST.location:
-        rightPane = (<Quest badge={this.props.blocation} />)
+      case CONST.locationShow:
+        // rightPane = (<Quest badge={this.props.location} />)
+        rightPane = (<Quest locationname={this.props.params.locationname} />)
         break
       default:
         // nothing
@@ -341,13 +347,13 @@ Tgm3.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     badge: state.badge,
-    blocation: state.blocation, // b to not conflict, but this is actually a location... badge is a location.
 
     categories: state.categories,
     chapter: state.chapter,
     chapters: state.chapters,
 
     leftPane: state.leftPane,
+    // location: state.location,
 
     path: state.path,
     profile: state.profile,

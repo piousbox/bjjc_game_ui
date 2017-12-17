@@ -81,8 +81,8 @@ class CategoriesIndex extends React.Component {
     let categories = []
     let parentIdx  = 0
     let tempKey    = 0
-    if (this.state.thisIndexCategory.categories && this.state.thisIndexCategory.categories.length > 0) {
-      this.state.thisIndexCategory.categories.forEach((item, idx) => {
+    if (this.state.categories && this.state.categories.length > 0) {
+      this.state.categories.forEach((item, idx) => {
         let childrenCategories = []
         item.categories.forEach((child, idx_2) => {
           childrenCategories.push(

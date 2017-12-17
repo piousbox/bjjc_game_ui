@@ -12,7 +12,6 @@ import {
   
   SET_BADGE,
   SET_INDEX_CATEGORY,
-  SET_LOCATION,
   SET_PATH,
   SET_SHOW_CATEGORY,
   SET_STORY,
@@ -29,37 +28,6 @@ const categoriesIndex = (cats) => {
     })
   }
 }
-/* const categoriesIndex = (params) => {
-  return (dispatch, getState) => {
-    let state = getState()
-    let url = `${config.apiUrl}/api/categories`
-    if (params.slug_0) {
-      url = `${url}/${params.slug_0}`
-      if (params.slug_1) {
-        url = `${url}/${params.slug_1}`
-        if (params.slug_2) {
-          url = `${url}/${params.slug_2}`
-          if (params.slug_3) {
-            url = `${url}/${params.slug_3}`
-            if (params.slug_4) {
-              url = `${url}/${params.slug_4}`
-              if (params.slug_5) {
-                url = `${url}/${params.slug_5}`
-                if (params.slug_6) {
-                  url = `${url}/${params.slug_6}`
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    fetch(url).then(r => r.json()).then(_data => {
-      let obj = Object.assign({}, _data, { type: SET_INDEX_CATEGORY })
-      dispatch(obj)
-    })
-  }
-} */
 
 const categoriesShow = (variables) => {
   return (dispatch, getState) => {
@@ -121,21 +89,18 @@ const setChapter = (name) => {
   }
 }
 
-const setLocation = (name) => {
+const locationAction = (name) => {
   return (dispatch, getState) => {
-    let state     = getState()
     let url       = `${config.apiUrl}/api/locations/${name}.json`
-    let fbAccount = JSON.parse(localStorage.getItem('fbAccount'))
     let headers   = { version: 'tgm3' }
+    let fbAccount = JSON.parse(localStorage.getItem('fbAccount'))
     if (fbAccount) {
       headers.accessToken = fbAccount.fb_long_access_token
     }
-    console.log('+++ setLocation:', name, state, headers)
     fetch(url, { headers, }).then(r => r.json()).then(_data => {
-      console.log('+++ _data 35:', _data)
-      // map
-      dispatch({ type: SET_LOCATION, location: _data.location })
-      dispatch({ type: SET_STORY,    story:    _data.story    })
+      console.log('+++ _data 35 is:', _data)
+      dispatch({ type: SET.location, location: _data.location })
+      // dispatch({ type: SET_STORY,    story:    _data.story    })
     })
   }
 }

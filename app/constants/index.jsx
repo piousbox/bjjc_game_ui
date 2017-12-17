@@ -51,6 +51,8 @@ export const CONST = {
   chapters: 'chapters',
   chat:     'chat',
   location: 'location',
+  locationShow: 'location-show-const',
+  locationMap: 'location-map-const',
   map:      'map',
   news:     'news',
   quest:    'quest',
@@ -63,9 +65,9 @@ export const CONST = {
  * _vp_ 20171007
  */
 export const SET = {
-  categories: 'categories-set-sdga3fx',
-  quest:    'quest',
-  location: 'location',
-  tasks:    'tasks',
-  videos:   'videos',
+  categories: 'set-categories-set-sdga3fx',
+  quest:    'set-quest-99',
+  location: 'set-location-99',
+  tasks:    'set-tasks-99',
+  videos:   'set-videos-99',
 }

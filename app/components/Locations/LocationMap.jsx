@@ -12,84 +12,37 @@ import {
 
 import config from 'config'
 
-import { setLocation } from '../../actions'
+import { locationAction } from '../../actions'
 
 import { BjjcRouter } from '../App'
 import Center from '../Center'
 
-class _CheckoutForm extends React.Component {
+/**
+ * see LocationShow for example of checkout
+ *
+ * this isn't wired to the router
+ */
+class LocationMap extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-    }
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  handleSubmit (e) {
-    e.preventDefault()
-    console.log("+++ handlesubmit:", e)
-    this.props.stripe.createToken().then((payload) => {
-
-      payload = Object.assign({}, payload, { profile: this.props.profile, badge: this.props.badgeToBuy })
-      console.log("+++ payload:", payload)
-
-      let fbAccount = JSON.parse(localStorage.getItem('fbAccount'))
-
-      fetch(BjjcRouter.buyBadge( this.props.badgeToBuy ), {
-        method: 'POST',
-        headers: { version: 'tgm3', 
-                   'Content-Type': 'application/json',
-                   accessToken: fbAccount.fb_long_access_token
-        },
-        body: JSON.stringify(payload)
-      }).then(r => r.json()).then(_data => {
-        console.log("+++ success!", _data)
-        this.props.dispatch(profileAction())
-        this.props.handleSuccess()
-      })
-
-    })
-  }
-
-  render () {
-    console.log("+++ +++ _CheckoutForm in LocationShow:", this.props, this.state)
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <CardElement />
-        <Row>
-          <Col sm={12}>
-            <h1>${this.props.badgeToBuy.cost}</h1>
-          </Col>
-        </Row>
-        <Center><button>Buy it</button></Center>
-      </form>
-    )
-  }
-}
-
-const CheckoutForm = injectStripe(_CheckoutForm)
-
-class LocationShow extends React.Component {
-  constructor(props) {
-    super(props)
-    console.log('+++ +++ LocationShow constructor:', props)
-
-    // this isn't wired to the router, so I expect location as a prop, no dispatch in constructor
+    console.log('+++ +++ LocationMap constructor:', props)
 
     this.state = {
       showBuyPremium: false,
       badgeToBuy: {},
     }
 
+    props.disaptch(locationAction(props.params.locationname))
+
     this.buyBadge = this.buyBadge.bind(this)
   }
 
   componentWillUpdate (nextProps) {
-    // console.log('+++ +++ LocationShow componentWillUpdate:', nextProps)
+    // console.log('+++ +++ LocationMap componentWillUpdate:', nextProps)
   }
 
   componentWillReceiveProps (nextProps) {
-    // console.log('+++ +++ LocationShow will receive props:', nextProps)
+    // console.log('+++ +++ LocationMap will receive props:', nextProps)
   }
 
   buyBadge = (badge) => {
@@ -109,7 +62,7 @@ class LocationShow extends React.Component {
   }
 
   render () {
-    console.log("+++ +++ LocationShow render:", this.props, this.state)
+    console.log("+++ +++ LocationMap render:", this.props, this.state)
 
     if (Object.keys(this.props.location).length === 0) {
       return (null)
@@ -193,7 +146,7 @@ class LocationShow extends React.Component {
   }
 }
 
-LocationShow.propTypes = {
+LocationMap.propTypes = {
 }
 
 function mapStateToProps(state, ownProps) {
@@ -202,4 +155,4 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(mapStateToProps)(LocationShow)
+export default connect(mapStateToProps)(LocationMap)
