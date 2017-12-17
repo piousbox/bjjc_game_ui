@@ -12,7 +12,7 @@ import {
 
 import config from 'config'
 
-import { setLocation } from '../../actions'
+import { locationAction } from '../../actions'
 
 import { BjjcRouter } from '../App'
 import Center from '../Center'

@@ -39,7 +39,7 @@ const loginAction = (fbAccount) => {
       body: JSON.stringify(fbAccount),
     }).then(r => r.json()).then(_data => {
       fbAccount = Object.assign({}, fbAccount, _data)
-      // console.log('+++ +++ I will localStorage this fbAccount:', fbAccount)
+      console.log('+++ +++ loginAction, I will localStorage this fbAccount:', fbAccount)
       localStorage.setItem(FBACCOUNT, JSON.stringify(fbAccount))
       dispatch(profileAction())
       dispatch({ type: SET_PROFILE, fbAccount: fbAccount })

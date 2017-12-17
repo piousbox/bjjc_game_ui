@@ -31,7 +31,6 @@ class LocationMap extends React.Component {
 
     props.dispatch(locationAction(props.params.locationname))
 
-    this.buyBadge = this.buyBadge.bind(this)
   }
 
   componentWillUpdate (nextProps) {
@@ -42,24 +41,8 @@ class LocationMap extends React.Component {
     // console.log('+++ +++ LocationMap will receive props:', nextProps)
   }
 
-  buyBadge = (badge) => {
-    console.log('+++ +++ buyBadge:', badge)
-    this.setState({ showBuyPremium: true, 
-                    badgeToBuy: badge, })
-  }
-  closeBuyBadge = () => {
-    this.setState({ showBuyPremium: false })
-  }
-
-  handleSuccess (e) {
-    this.setState({ showBuySuccess: true, showBuyPremiumm: false })
-  }
-  closeBuySuccess = () => {
-    this.setState({ showBuySuccess: false })
-  }
-
   render () {
-    // console.log("+++ +++ LocationMap render:", this.props, this.state)
+    console.log("+++ +++ LocationMap render:", this.props, this.state)
 
     if (!this.props.location || Object.keys(this.props.location).length === 0) {
       return (null)
@@ -125,7 +108,7 @@ LocationMap.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    blocation: state.blocation,
+    location: state.location,
   }
 }
 

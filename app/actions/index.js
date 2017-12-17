@@ -100,7 +100,6 @@ const locationAction = (name) => {
     fetch(url, { headers, }).then(r => r.json()).then(_data => {
       console.log('+++ _data 35 is:', _data)
       dispatch({ type: SET.location, location: _data.location })
-      // dispatch({ type: SET_STORY,    story:    _data.story    })
     })
   }
 }

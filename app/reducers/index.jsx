@@ -74,7 +74,6 @@ function chapters (state=[], action) {
 function leftPaneReducer (state = {}, action) {
   switch (action.type) {
     case SET_LOCATION:
-      // console.log('+++ +++ leftPaneReducer:', action)
       return { location: action.location }
     default:
       return state
@@ -83,8 +82,8 @@ function leftPaneReducer (state = {}, action) {
 
 function location (state = {}, action) {
   switch (action.type) {
-    case SET_LOCATION:
-      // console.log('+++ locationReducer:', action)
+    case SET.location:
+      console.log('+++ locationReducer:', action)
       return action.location
     default:
       return state

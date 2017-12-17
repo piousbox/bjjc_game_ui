@@ -34,7 +34,7 @@ import FbConnect        from './FbConnect'
 import Headers          from './Headers'
 import Quest            from './Quest' // Story
 
-import { LocationShow } from '../Locations'
+import { LocationShow, LocationMap } from '../Locations'
 import { Tasks }        from '../Tasks'
 import { Videos }       from '../Videos'
 
@@ -241,7 +241,7 @@ class Tgm3 extends React.Component {
       case CONST.map: // @TODO: is this deprecated?
       case CONST.location: // @deprecated, @TODO: remove
       case CONST.locationMap:
-        leftPane = (<LocationMap locationname={this.props.params.locationname} />)
+        leftPane = (<LocationMap params={{ locationname: this.props.params.locationname }} />)
         break
       case CONST.chat:
         leftPane = (<span>Show chat</span>)

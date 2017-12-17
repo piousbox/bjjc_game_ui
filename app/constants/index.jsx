@@ -5,7 +5,7 @@ export const APP_TITLE = pkg.name
 
 export const DO_LOGOUT = 'do logout'
 
-export const FBACCOUNT = 'fbAccount' // for localStorage
+export const FBACCOUNT = 'fbAccount-for-localstorage'
 
 export const ITEMS_GET_SUCCESS = 'ITEMS_GET_SUCCESS'
 export const ITEMS_GET_ERROR = 'ITEMS_GET_ERROR'
