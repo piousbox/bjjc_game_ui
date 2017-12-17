@@ -16,16 +16,12 @@ describe('LocationMap', () => {
     let home = ReactTestUtils.renderIntoDocument(<LocationMap store={store} params={{ locationname: _locationname }} />)
     let elem = ReactDOM.findDOMNode(home)
     expect(elem).to.equal(null)
-    // expect(elem.tagName.toLowerCase()).to.equal('div');
   })
 
   it('dispatches locationAction', () => {
     fetch = (url) => {
-
       expect(url).to.equal(`${config.apiUrl}/api/locations/${_locationname}.json`)
-      return new Promise((resolve, reject) => {
-        resolve()
-      })
+      return new Promise((resolve, reject) => {resolve()})
     }
 
     let locationMap = ReactTestUtils.renderIntoDocument(<LocationMap store={store} params={{ locationname: _locationname }} />)
