@@ -22,7 +22,7 @@ import { BjjcRouter } from '../App'
 class LocationMap extends React.Component {
   constructor(props) {
     super(props)
-    console.log('+++ +++ LocationMap constructor:', props)
+    // console.log('+++ +++ LocationMap constructor:', props)
 
     this.state = {
       showBuyPremium: false,
@@ -30,7 +30,6 @@ class LocationMap extends React.Component {
     }
 
     props.dispatch(locationAction(props.params.locationname))
-    console.log('+++ +++ im gonna dispatch this', props.dispatch)
 
     this.buyBadge = this.buyBadge.bind(this)
   }
@@ -60,7 +59,7 @@ class LocationMap extends React.Component {
   }
 
   render () {
-    console.log("+++ +++ LocationMap render:", this.props, this.state)
+    // console.log("+++ +++ LocationMap render:", this.props, this.state)
 
     if (!this.props.location || Object.keys(this.props.location).length === 0) {
       return (null)
