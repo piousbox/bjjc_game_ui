@@ -5,6 +5,7 @@
 
 import {
   CONST,
+  FBACCOUNT,
   SET,
 
   SET_CHAPTER,
@@ -94,7 +95,7 @@ const locationAction = (name) => {
   return (dispatch, getState) => {
     let url       = `${config.apiUrl}/api/locations/${name}.json`
     let headers   = { version: 'tgm3' }
-    let fbAccount = JSON.parse(localStorage.getItem('fbAccount'))
+    let fbAccount = JSON.parse(localStorage.getItem(FBACCOUNT))
     if (fbAccount) {
       headers.accessToken = fbAccount.fb_long_access_token
     }

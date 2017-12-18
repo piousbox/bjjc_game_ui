@@ -158,15 +158,18 @@ class Tgm3 extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    // console.log('+++ +++ Tgm3 will receive props:', this.props, nextProps)
+    console.log('+++ +++ Tgm3 will receive props:', this.props, nextProps)
     
-    this.props.dispatch(setPath(nextProps.props.params))
-    if (nextProps.props.params.locationname && this.props.params.locationname !== nextProps.props.params.locationname) {
-      this.props.dispatch(locationAction(nextProps.params.locationname))
+    let nextState = {}
+    if (nextProps.params.locationname && this.props.params.locationname !== nextProps.params.locationname) {
+      nextState.showLeft = CONST.locationMap
+      nextState.showRight = CONST.locationShow
     }
-    /* if (nextProps.props.params.badgename && this.props.params.badgename !== nextProps.props.params.badgename) {
-      this.props.dispatch(setBadge(nextProps.params))
-    } */
+    if (nextProps.params.badgename && this.props.params.badgename !== nextProps.params.badgename) {
+      nextState.showRight = CONST.badgeShow // overrides the above
+    }
+    this.setState(Object.assign({}, this.state, nextState))
+
   }
 
   componentWillUpdate (nextProps) {
