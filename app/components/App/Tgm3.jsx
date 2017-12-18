@@ -34,7 +34,9 @@ import FbConnect        from './FbConnect'
 import Headers          from './Headers'
 import Quest            from './Quest' // Story
 
-import { LocationShow, LocationMap } from '../Locations'
+import {
+  LocationShow, LocationMap, LocationStory,
+} from '../Locations'
 import { Tasks }        from '../Tasks'
 import { Videos }       from '../Videos'
 
@@ -69,12 +71,12 @@ class Tgm3 extends React.Component {
       nextState.showLeft  = CONST.location
       nextState.showRight = CONST.quest
       props.dispatch(setBadge(props.params.badgename))
-      props.dispatch(setLocation(props.params.locationname))
+      props.dispatch(locationAction(props.params.locationname))
     }
 
     // location
     if (props.params.locationname) {
-      // props.dispatch(setLocation(props.params.locationname)) // this should be in Location
+      // props.dispatch(locationAction(props.params.locationname)) // this should be in Location
       nextState.showLeft = CONST.locationMap
       nextState.showRight = CONST.locationShow
     }
@@ -113,11 +115,11 @@ class Tgm3 extends React.Component {
   }
   
   onWindowResize () {
-    if (this.props.params.locationname) { this.props.dispatch(setLocation(this.props.params.locationname)) }
+    // if (this.props.params.locationname) { this.props.dispatch(locationAction(this.props.params.locationname)) }
   }
 
   rerender () {
-    if (this.props.params.locationname) { this.props.dispatch(setLocation(this.props.params.locationname)) }
+    // if (this.props.params.locationname) { this.props.dispatch(locationAction(this.props.params.locationname)) }
   }
 
   collapseLeft () {
@@ -165,7 +167,7 @@ class Tgm3 extends React.Component {
     
     this.props.dispatch(setPath(nextProps.props.params))
     if (nextProps.props.params.locationname && this.props.params.locationname !== nextProps.props.params.locationname) {
-      this.props.dispatch(setLocation(nextProps.params.locationname))
+      this.props.dispatch(locationAction(nextProps.params.locationname))
     }
     /* if (nextProps.props.params.badgename && this.props.params.badgename !== nextProps.props.params.badgename) {
       this.props.dispatch(setBadge(nextProps.params))
@@ -187,12 +189,12 @@ class Tgm3 extends React.Component {
         nextState.leftFolds.push(CONST.location)
       }
       this.setState(Object.assign({}, nextState, {showLeft: CONST.chapter, showRight: CONST.quest }))
-      this.props.dispatch(setLocation(nextProps.params.locationname))
+      this.props.dispatch(locationAction(nextProps.params.locationname))
       this.props.dispatch(setBadge(nextProps.params.badgename))
 
     // location
     } else if (nextProps.params.locationname && nextProps.params.locationname !== this.props.params.locationname) {
-      this.props.dispatch(setLocation(nextProps.params.locationname))
+      this.props.dispatch(locationAction(nextProps.params.locationname))
       this.state.showLeft = CONST.location
       if (this.state.leftFolds.indexOf(CONST.location) === -1) {
         this.state.leftFolds.push( CONST.location )
@@ -274,7 +276,9 @@ class Tgm3 extends React.Component {
         break
       case CONST.locationShow:
         // rightPane = (<Quest badge={this.props.location} />)
-        rightPane = (<Quest locationname={this.props.params.locationname} />)
+        // rightPane = (<Quest locationname={this.props.params.locationname} />)
+        console.log('+++ here?')
+        rightPane = (<LocationStory locationname={this.props.params.locationname} />)
         break
       default:
         // nothing

@@ -17,14 +17,6 @@ import { locationAction } from '../../actions'
 import { BjjcRouter } from '../App'
 import Center from '../Center'
 
-/**
- * this is example with stripe!
- *
- *
- *
- *
- */
-
 class _CheckoutForm extends React.Component {
   constructor(props) {
     super(props)
@@ -60,7 +52,7 @@ class _CheckoutForm extends React.Component {
   }
 
   render () {
-    console.log("+++ +++ _CheckoutForm in LocationShow:", this.props, this.state)
+    console.log("+++ +++ _CheckoutForm in LocationStory:", this.props, this.state)
     return (
       <form onSubmit={this.handleSubmit}>
         <CardElement />
@@ -77,10 +69,10 @@ class _CheckoutForm extends React.Component {
 
 const CheckoutForm = injectStripe(_CheckoutForm)
 
-class LocationShow extends React.Component {
+class LocationStory extends React.Component {
   constructor(props) {
     super(props)
-    console.log('+++ +++ LocationShow constructor:', props)
+    console.log('+++ +++ LocationStory constructor:', props)
 
     // this isn't wired to the router, so I expect location as a prop, no dispatch in constructor
 
@@ -93,11 +85,11 @@ class LocationShow extends React.Component {
   }
 
   componentWillUpdate (nextProps) {
-    // console.log('+++ +++ LocationShow componentWillUpdate:', nextProps)
+    // console.log('+++ +++ LocationStory componentWillUpdate:', nextProps)
   }
 
   componentWillReceiveProps (nextProps) {
-    // console.log('+++ +++ LocationShow will receive props:', nextProps)
+    // console.log('+++ +++ LocationStory will receive props:', nextProps)
   }
 
   buyBadge = (badge) => {
@@ -117,17 +109,10 @@ class LocationShow extends React.Component {
   }
 
   render () {
-    console.log("+++ +++ LocationShow render:", this.props, this.state)
+    console.log("+++ +++ LocationStory render:", this.props, this.state)
 
     if (Object.keys(this.props.location).length === 0) {
       return (null)
-    }
-
-    let oWidth  = 200
-    let oHeight = 200
-    if (document.getElementById('leftPane')) {
-      oWidth  = document.getElementById('leftPane').offsetWidth
-      oHeight = document.getElementById('leftPane').offsetHeight
     }
 
     let badges = []
@@ -156,58 +141,20 @@ class LocationShow extends React.Component {
     }
 
     return (
-      <div style={{ width: this.props.location.background_image_width*2 - oWidth,
-                    height: this.props.location.background_image_height*2 - oHeight, 
-                    position: 'relative', 
-                    top: -this.props.location.background_image_height + oHeight, 
-                    left: -this.props.location.background_image_width + oWidth, 
-      }}>
-        <Draggable bounds="parent" >
-          <div id="locationMap" style={{ height: this.props.location.background_image_height,
-                                         width: this.props.location.background_image_width,
-                                         background: `no-repeat url(${this.props.location.background_image_path})`,
-                                         position: 'relative' }}>
-            { badges }
-          </div>
-        </Draggable>
-
-        <div style={{ display: 'none' }}>{this.props.children}</div>
-
-        <Modal show={this.state.showBuyPremium} onHide={this.closeBuyBadge}>
-          <Modal.Header closeButton>
-            <Modal.Title>Let's buy this badge "{this.state.badgeToBuy.title}"</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>Would you like to guy access to this quest? It's {this.state.badgeToBuy.cost}</p>
-            <StripeProvider apiKey={config.stripePublicKey}>
-              <Elements>
-                <CheckoutForm badgeToBuy={this.state.badgeToBuy} profile={this.props.profile} dispatch={this.props.dispatch} handleSuccess={this.handleSuccess} />
-              </Elements>
-            </StripeProvider>
-          </Modal.Body>
-        </Modal>
-
-        <Modal show={this.state.showBuySuccess} onHide={this.closeBuySuccess}>
-          <Modal.Header closeButton>
-            <Modal.Title>Thank you!</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            Thanks, you got this.
-          </Modal.Body>
-        </Modal>
-
+      <div>
+        <h1>{ this.props.location.title }</h1>
       </div>
     )
   }
 }
 
-LocationShow.propTypes = {
+LocationStory.propTypes = {
 }
 
 function mapStateToProps(state, ownProps) {
   return {
-    blocation: state.blocation,
+    location: state.location,
   }
 }
 
-export default connect(mapStateToProps)(LocationShow)
+export default connect(mapStateToProps)(LocationStory)
