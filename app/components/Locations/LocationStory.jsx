@@ -69,6 +69,9 @@ class _CheckoutForm extends React.Component {
 
 const CheckoutForm = injectStripe(_CheckoutForm)
 
+/**
+ * this is trash I think
+ */
 class LocationStory extends React.Component {
   constructor(props) {
     super(props)

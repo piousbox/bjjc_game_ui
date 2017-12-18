@@ -89,6 +89,7 @@ const setChapter = (name) => {
   }
 }
 
+// _vp_ 20171218
 const locationAction = (name) => {
   return (dispatch, getState) => {
     let url       = `${config.apiUrl}/api/locations/${name}.json`
@@ -104,6 +105,17 @@ const locationAction = (name) => {
   }
 }
 
+// _vp_ 20171218
+const questAction = (badgename) => {
+  return (dispatch, getState) => {
+    let url = `${config.apiUrl}/api/badges/view/${badgename}.json`
+    fetch(url).then(r => r.json()).then(_data => {
+      dispatch({ type: SET.quest, quest: _data.badge })
+    })
+  }
+}
+
+// @TODO: trash, remove
 const siteNewsitemsAction = (args = {}) => {
   return (dispatch, getState) => {
     let state = getState()
@@ -117,6 +129,7 @@ const siteNewsitemsAction = (args = {}) => {
   }
 }
 
+// @TODO: trash, remove
 const siteShow = () => {
   return (dispatch, getState) => {
     let state = getState()
@@ -162,11 +175,12 @@ export default {
   setChapter,
   setBadge,
   setPath: setBreadcrumbs,
-
   siteNewsitemsAction,
   siteShow,
 
   profileAction,
+
+  questAction,
 
   videosShowAction,
 }

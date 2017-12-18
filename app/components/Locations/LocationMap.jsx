@@ -42,7 +42,7 @@ class LocationMap extends React.Component {
   }
 
   render () {
-    console.log("+++ +++ LocationMap render:", this.props, this.state)
+    // console.log("+++ +++ LocationMap render:", this.props, this.state)
 
     if (!this.props.location || Object.keys(this.props.location).length === 0) {
       return (null)
@@ -87,7 +87,8 @@ class LocationMap extends React.Component {
                     top: -this.props.location.background_image_height + oHeight, 
                     left: -this.props.location.background_image_width + oWidth, 
       }}>
-        <Draggable bounds="parent" >
+        <Draggable bounds="parent" 
+                   defaultPosition={{ x: 500, y: 500 }} >
           <div id="locationMap" style={{ height: this.props.location.background_image_height,
                                          width: this.props.location.background_image_width,
                                          background: `no-repeat url(${this.props.location.background_image_path})`,

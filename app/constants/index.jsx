@@ -55,7 +55,7 @@ export const CONST = {
   locationMap: 'location-map-const',
   map:      'map',
   news:     'news',
-  quest:    'quest',
+  quest:    'quest--or-badge-const',
   tasks:    'tasks',
   videos:   'videos',
 }

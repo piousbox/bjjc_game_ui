@@ -15,7 +15,6 @@ import config from 'config'
 import { locationAction } from '../../actions'
 
 import { BjjcRouter } from '../App'
-import Center from '../Center'
 
 /**
  * this is example with stripe!
@@ -69,7 +68,7 @@ class _CheckoutForm extends React.Component {
             <h1>${this.props.badgeToBuy.cost}</h1>
           </Col>
         </Row>
-        <Center><button>Buy it</button></Center>
+        <button>Buy it</button>
       </form>
     )
   }
@@ -77,12 +76,13 @@ class _CheckoutForm extends React.Component {
 
 const CheckoutForm = injectStripe(_CheckoutForm)
 
+/**
+ * not wired to the router
+ */
 class LocationShow extends React.Component {
   constructor(props) {
     super(props)
     console.log('+++ +++ LocationShow constructor:', props)
-
-    // this isn't wired to the router, so I expect location as a prop, no dispatch in constructor
 
     this.state = {
       showBuyPremium: false,
@@ -123,57 +123,33 @@ class LocationShow extends React.Component {
       return (null)
     }
 
-    let oWidth  = 200
-    let oHeight = 200
-    if (document.getElementById('leftPane')) {
-      oWidth  = document.getElementById('leftPane').offsetWidth
-      oHeight = document.getElementById('leftPane').offsetHeight
-    }
-
     let badges = []
     if (this.props.location.badges) {
       this.props.location.badges.map((badge, idx) => {
         if (badge.is_premium) {
           badges.push(
-            <div key={idx++} className={`badge badge-premium premium ${badge.is_bought ? 'bought' : ''}`}
-                 style={{ position: 'absolute', top: badge.bg_pos_y, left: badge.bg_pos_x,
-                          width: '100px',       height: '100px',     display: 'block',
-                          background: `url(${badge.shaded_photo})`,
-                          border: '1px solid gold',
-                 }} onClick={() => this.buyBadge(badge)} />
-          )
+            <li>
+              <div key={idx++} className={`badge badge-premium premium ${badge.is_bought ? 'bought' : ''}`}
+                   onClick={() => this.buyBadge(badge)} >{ badge.title }</div>
+            </li>)
         } else {
           badges.push(
-            <Link key={idx++} to={BjjcRouter.locationBadgeLink(this.props.location, badge)} >
-              <div className="badge"
-                   style={{ position: 'absolute', top: badge.bg_pos_y, left: badge.bg_pos_x,
-                            width: '100px',       height: '100px',     display: 'block',
-                            background: `url(${badge.shaded_photo})`
-                   }} />
-            </Link>)
+            <li>
+              <Link key={idx++} to={BjjcRouter.locationBadgeLink(this.props.location, badge)} >{ badge.title }</Link>
+            </li>)
         }
       })
     }
 
     return (
-      <div style={{ width: this.props.location.background_image_width*2 - oWidth,
-                    height: this.props.location.background_image_height*2 - oHeight, 
-                    position: 'relative', 
-                    top: -this.props.location.background_image_height + oHeight, 
-                    left: -this.props.location.background_image_width + oWidth, 
-      }}>
-        <Draggable bounds="parent" >
-          <div id="locationMap" style={{ height: this.props.location.background_image_height,
-                                         width: this.props.location.background_image_width,
-                                         background: `no-repeat url(${this.props.location.background_image_path})`,
-                                         position: 'relative' }}>
-            { badges }
-          </div>
-        </Draggable>
+      <div >
+        <h5>{this.props.location.title}</h5>
+        <div dangerouslySetInnerHTML={{ __html: this.props.location.description }} />
 
-        <div style={{ display: 'none' }}>{this.props.children}</div>
+        <h5>Badges:</h5>
+        <ul>{ badges }</ul>
 
-        <Modal show={this.state.showBuyPremium} onHide={this.closeBuyBadge}>
+        { /* <Modal show={this.state.showBuyPremium} onHide={this.closeBuyBadge}>
           <Modal.Header closeButton>
             <Modal.Title>Let's buy this badge "{this.state.badgeToBuy.title}"</Modal.Title>
           </Modal.Header>
@@ -194,8 +170,8 @@ class LocationShow extends React.Component {
           <Modal.Body>
             Thanks, you got this.
           </Modal.Body>
-        </Modal>
-
+        </Modal> */ }
+        
       </div>
     )
   }
@@ -206,7 +182,7 @@ LocationShow.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    blocation: state.blocation,
+    location: state.location,
   }
 }
 

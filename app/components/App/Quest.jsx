@@ -1,13 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { questAction } from '../../actions'
+
 class Quest extends React.Component {
   constructor(props) {
     super(props)
-
     console.log('+++ +++ Quest constructor:', props)
 
     this.state = {}
+
+    props.dispatch(questAction(props.badgename))
 
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
   }
@@ -18,13 +21,13 @@ class Quest extends React.Component {
 
   render () {
     console.log('+++ +++ Quest render:', this.props, this.state)
-    let badge = this.props.quest || this.props.badge
+    if (!this.props.quest || Object.keys(this.props.quest).length === 0) { return (null) }
 
     return (
       <div className="main-quest" >
         <h1>{ this.props.quest.title }</h1>
-        <div dangerouslySetInnerHTML={{ __html: badge.subhead }} />
-        <div dangerouslySetInnerHTML={{ __html: badge.description }} />
+        <div dangerouslySetInnerHTML={{ __html: this.props.quest.subhead }} />
+        <div dangerouslySetInnerHTML={{ __html: this.props.quest.description }} />
       </div>)
   }
 }
