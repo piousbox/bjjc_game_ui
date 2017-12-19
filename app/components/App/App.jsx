@@ -31,7 +31,18 @@ import { citiesIndex,
          // profileAction,
 } from '../../actions'
 
+class RootRedirect extends React.Component {
+  constructor(props) {
+    super(props)
+    browserHistory.push(BjjcRouter.rootPath)
+  }
+  render () {
+    return (null)
+  }
+}
+
 const routes = [
+  { component: RootRedirect, path: '/' },
   { component: Tgm3, path: '/tgm3', },
   { component: Tgm3, path: '/tgm3/chapters/:chaptername', },
   { component: Tgm3, path: '/tgm3/locations/:locationname', },

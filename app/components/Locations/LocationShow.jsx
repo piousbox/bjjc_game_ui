@@ -128,14 +128,14 @@ class LocationShow extends React.Component {
       this.props.location.badges.map((badge, idx) => {
         if (badge.is_premium) {
           badges.push(
-            <li>
-              <div key={idx++} className={`badge badge-premium premium ${badge.is_bought ? 'bought' : ''}`}
+            <li key={idx++} >
+              <div className={`badge badge-premium premium ${badge.is_bought ? 'bought' : ''}`}
                    onClick={() => this.buyBadge(badge)} >{ badge.title }</div>
             </li>)
         } else {
           badges.push(
-            <li>
-              <Link key={idx++} to={BjjcRouter.locationBadgeLink(this.props.location, badge)} >{ badge.title }</Link>
+            <li key={idx++} >
+              <Link to={BjjcRouter.locationBadgeLink(this.props.location, badge)} >{ badge.title }</Link>
             </li>)
         }
       })

@@ -1,9 +1,7 @@
-
 import config from 'config'
 
 let BjjcRouter = {
-
-  rootPath: '/',
+  rootPath: '/tgm3',
 
   categoriesPath: '/tgm3/categories',
   categoriesLink: () => { return `/tgm3/categories` },
