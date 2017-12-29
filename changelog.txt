@@ -43,6 +43,8 @@
 0.1.6 - 20171004, router and multiple panes
         can display tasks of a badge
 0.1.7 - let's make it s.t. I can pay for a quest.
-0.1.8 - major changes, lets cleanup everything, trying to make it work (although co tailors is an easier task)
+0.1.8 - major changes, lets cleanup everything, trying to make it work 
+        (although co tailors is an easier task)
+        20171228 continue wiring in categories show
 
 
