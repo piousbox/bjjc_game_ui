@@ -49,45 +49,22 @@ const routes = [
   { component: Tgm3, path: '/tgm3/locations/:locationname/badges/:badgename', },
   { component: Tgm3, path: '/tgm3/badges/:badgename', },
   { component: Tgm3, path: BjjcRouter.categoriesPath, },
-  { component: Tgm3, path: '/tgm3/categories/:slug_0', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0', }, // @obsolete?
   { component: Tgm3, path: '/tgm3/categories/:slug_0/videos/page/:videos_page', },
   { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1', },
   { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/videos/page/:videos_page', },
-
-  /*  childRoutes: [
-      { path: BjjcRouter.videosShowPath, component: VideosShow },
-      { path: '/categories',             component: CategoriesToplevel },
-      { path: '/categories/:slug_0',     component: CategoriesIndex,
-        childRoutes: [
-          { path: '/categories/:slug_0/:slug_1', component: CategoriesIndex,
-            childRoutes: [
-              { path: '/categories/:slug_0/:slug_1/:slug_2', component: CategoriesIndex,
-                childRoutes: [
-                  { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3', component: CategoriesIndex,
-                    childRoutes: [
-                      { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4', component: CategoriesIndex,
-                        childRoutes: [
-                          { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5', component: CategoriesIndex,
-                            childRoutes: [
-                              { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5/:slug_6', component: CategoriesIndex,
-                                childRoutes: [
-                                  { path: '/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5/:slug_6/:slug_7', component: CategoriesIndex, },
-                                ],
-                              },
-                            ],
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-   }, */
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/:slug_2', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/:slug_2/videos/page/:videos_page', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/:slug_2/:slug_3', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/:slug_2/:slug_3/videos/page/:videos_page', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/videos/page/:videos_page', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5/videos/page/:videos_page', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5/:slug_6', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5/:slug_6/videos/page/:videos_page', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5/:slug_6/:slug_7', },
+  { component: Tgm3, path: '/tgm3/categories/:slug_0/:slug_1/:slug_2/:slug_3/:slug_4/:slug_5/:slug_6/:slug_7/videos/page/:videos_page', },
 
 ]
 

@@ -21,57 +21,34 @@ import CategoriesShowView from './CategoriesShowView'
 import VideosIndex from '../Videos/VideosIndex'
 
 class CategoriesIndex extends React.Component {
-
   constructor(props) {
     super(props)
-
     console.log('+++ +++ categoriesIndex constructor:', props)
 
     this.state = { categories: [] }
-    props.dispatch(categoriesIndex( props.categoriesSlugs ))
+    props.dispatch(categoriesIndex( props.categoriesSlug || props.params ))
     // props.dispatch({ type: SET_PATH, path: props.params }) // breadcrumb?
 
-    console.log('here?')
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
+  }
+
+  compileCategoriesSlugs (params) {
+    let path = []
+    for (let i=0; i<8; i++) {
+      if (params[`slug_${i}`]) { path.push(params[`slug_${i}`]) }
+    }
+    return path.join('/')
   }
 
   componentWillReceiveProps(nextProps) {
     console.log('+++ +++ categoriesIndex will receive props:', this.props, nextProps, this.state)
 
-    let path = ''
-    if (nextProps.params.slug_0) {
-      path = nextProps.params.slug_0
-      if (nextProps.params.slug_1) {
-        path = `${path}/${nextProps.params.slug_1}`
-        if (nextProps.params.slug_2) {
-          path = `${path}/${nextProps.params.slug_2}`
-          if (nextProps.params.slug_3) {
-            path = `${path}/${nextProps.params.slug_3}`
-            if (nextProps.params.slug_4) {
-              path = `${path}/${nextProps.params.slug_4}`
-              if (nextProps.params.slug_5) {
-                path = `${path}/${nextProps.params.slug_5}`
-                if (nextProps.params.slug_6) {
-                  path = `${path}/${nextProps.params.slug_6}`
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    console.log('+++ +++ path:', path)
+    let nextPath = this.compileCategoriesSlugs( nextProps.params )
+    let path = this.compileCategoriesSlugs( this.props.params )
+    console.log('next, this paths:', nextPath, path)
 
-    if (this.props.allCategories && this.props.allCategories[path]) {
-      if (this.state.thisIndexCategory.path !== path) {
-        this.setState(Object.assign({}, this.state, { thisIndexCategory: this.props.allCategories[path] }))
-      }
-    } else if (nextProps.allCategories && nextProps.allCategories[path]) {
-      if (this.state.thisIndexCategory.path !== path) {
-        this.setState(Object.assign({}, this.state, { thisIndexCategory: nextProps.allCategories[path] }))
-      }
-    } else {
-      this.props.dispatch(categoriesIndex( this.props.params ))
+    if (path !== nextPath) {
+      this.props.dispatch(categoriesIndex( nextProps.params ))
     }
   }
 
@@ -81,8 +58,8 @@ class CategoriesIndex extends React.Component {
     let categories = []
     let parentIdx  = 0
     let tempKey    = 0
-    if (this.state.categories && this.state.categories.length > 0) {
-      this.state.categories.forEach((item, idx) => {
+    if (this.props.categories && this.props.categories.length > 0) {
+      this.props.categories.forEach((item, idx) => {
         let childrenCategories = []
         item.categories.forEach((child, idx_2) => {
           childrenCategories.push(
@@ -120,21 +97,19 @@ class CategoriesIndex extends React.Component {
     }
 
     return (
-      <Grid>
+      <Grid fluid>
         <Row>
           <Col sm={12}>
-            <Center><h3>{ this.state.thisIndexCategory.title } ({this.state.thisIndexCategory.n_videos})</h3></Center>
+            <Center><h3>{ this.props.category.title } ({this.props.category.n_videos})</h3></Center>
           </Col>
         </Row>
         <Row>
-          <Col sm={4}>
-            <h3>Subcategories</h3>
+          <Col sm={12}>
             { categories }
           </Col>
-          <Col sm={8}>
-            <VideosIndex videos={ this.state.thisIndexCategory.videos } nVideos={ this.state.thisIndexCategory.n_videos }/>
-          </Col>
         </Row>
+
+        { /* <Col sm={8}><VideosIndex videos={ this.props.videos } nVideos={ this.props.category.n_videos }/></Col> */ }
       </Grid>
     ) 
   }
@@ -146,6 +121,9 @@ CategoriesIndex.propTypes = {
 const mapStateToProps = (store, ownprops) => {
   return {
     categories: store.categories,
+    category: store.category,
+    videos: store.videos,
+    video: store.video,
   }
 }
 

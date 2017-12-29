@@ -6,6 +6,6 @@ import VideosIndex  from './VideosIndex'
 export default {
   VideoEmbed,
   VideoPreview,
-  Videos: VideosIndex,
+  VideosIndex,
 }
 

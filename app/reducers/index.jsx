@@ -26,7 +26,6 @@ import { reportsShowReducer, reportsReducer } from './reportsReducer'
 import { sitesReducer } from './sitesReducer'
 import { venuesShowReducer } from './venuesReducer'
 import { categoriesReducer, categoryReducer } from './categoriesReducer'
-import { videoReducer, } from './videosReducer'
 
 import config from 'config'
 
@@ -149,10 +148,18 @@ function tasks (state=[], action) {
 }
 
 // v
+function video (state={}, action) {
+  switch (action.type) {
+    case SET.video:
+      return action
+    default:
+      return state
+  }
+}
 function videos (state=[], action) {
   switch (action.type) {
     case SET.videos:
-      // console.log('+++ videos reducer:', action)
+      console.log('+++ videos reducer:', action)
       return action.videos
     default:
       return state
@@ -175,22 +182,12 @@ export default combineReducers({
   profile: profileReducer,
 
   quest,
+
   rightPane: rightPaneReducer,
 
   tasks,
 
-  video: videoReducer,
+  video,
   videos,
-
-  // trash
-  cities: citiesIndexReducer,
-  city: citiesShowReducer,
-  gallery: galleriesShowReducer,
-  newsitems: newsitemsReducer,
-  report: reportsShowReducer,
-  reports: reportsReducer,
-  site: sitesReducer,
-  story,
-  venue: venuesShowReducer,
 
 })

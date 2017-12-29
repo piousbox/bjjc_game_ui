@@ -25,6 +25,8 @@ class CategoriesShowView extends React.Component {
   }
 
   render () {
+    // console.log('+++ +++ CategoriesShowView render:', this.props, this.state)
+
     return (
       <div>
         <img style={{ width: '100%' }} src={ this.state.category.photo_url } alt='' />

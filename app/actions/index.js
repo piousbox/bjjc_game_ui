@@ -12,20 +12,32 @@ import {
   SET_CHAPTERS,
   
   SET_BADGE,
-  SET_INDEX_CATEGORY,
   SET_PATH,
-  SET_SHOW_CATEGORY,
   SET_STORY,
   SET_VIDEO,
 } from '../constants';
 
 import config from 'config'
 
-const categoriesIndex = (cats) => {
+// c
+const categoriesAction = (params={}) => {
+  console.log('+++ +++ categoriesAction params:', params)
+
+  let cats = []
+  for (let i=0; i<8; i++) { 
+    if (params[`slug_${i}`]) { cats.push( params[`slug_${i}`] ) } 
+  }
+
   return (dispatch, getState) => {
-    let url = `${config.apiUrl}/api/categories`
+    let url = `${config.apiUrl}/api/categories/${cats.join('/')}`
     fetch(url).then(r => r.json()).then(_data => {
-      dispatch({ type: SET.categories, categories: _data.categories })
+      // console.log('+++ +++ action categoriesIndex:', _data)
+      dispatch({ type: SET.category, 
+                 category: _data })
+      dispatch({ type: SET.categories, 
+                 categories: _data.categories })
+      dispatch({ type: SET.videos,
+                 videos: _data.videos })
     })
   }
 }
@@ -43,6 +55,7 @@ const categoriesShow = (variables) => {
   }
 }
 
+// s
 const setBadge = (badgename) => {
   return (dispatch, getState) => {
     let url = `${config.apiUrl}/api/badges/${badgename}.json`
@@ -62,7 +75,7 @@ const setBreadcrumbs = (params) => {
   }
 }
 
-const setCategories = (cats) => {
+/* const setCategories = (cats) => {
   let url = `${config.apiUrl}/api/categories/${cats.join('/')}.json`
   return (dispatch, getState) => {
     fetch(url).then(r => r.json()).then(_data => {
@@ -70,7 +83,7 @@ const setCategories = (cats) => {
       dispatch({ type: SET.categories, categories: _data.categories })
     })
   }
-}
+} */
 
 const setChapters = () => {
   return (dispatch, getState) => {
@@ -164,14 +177,14 @@ const videosShowAction = (youtubeId) => {
 import { loginAction, logoutAction, profileAction, } from './profileActions'
 
 export default {
-  categoriesIndex,
+  categoriesIndex: categoriesAction,
   categoriesShow,
 
   locationAction,
   loginAction,
   logoutAction,
 
-  setCategories,
+  // setCategories,
   setChapters,
   setChapter,
   setBadge,

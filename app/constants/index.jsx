@@ -46,18 +46,19 @@ export const SET_PATH    = 'set path'
  * _vp_ 20171004
  */
 export const CONST = {
-  categories: 'const-categories-223',
-  chapter:  'chapter',
-  chapters: 'chapters',
-  chat:     'chat',
-  location: 'location',
+  categories:   'const-categories-223',
+  chapter:      'const-chapter',
+  chapters:     'const-chapters',
+  chat:         'const-chat',
+  location:     'const-location',
   locationShow: 'location-show-const',
-  locationMap: 'location-map-const',
-  map:      'map',
-  news:     'news',
-  quest:    'quest--or-badge-const',
-  tasks:    'tasks',
-  videos:   'videos',
+  locationMap:  'location-map-const', // same as map
+  map:          'location-map-const',
+  news:         'const-news',
+  quest:        'quest--or-badge-const',
+  tasks:        'const-tasks',
+  technique:    'const-categories-223', // same as categories
+  videos:       'const-videos',
 }
 
 /**
@@ -65,9 +66,14 @@ export const CONST = {
  * _vp_ 20171007
  */
 export const SET = {
+  category:   'set-category',
   categories: 'set-categories-set-sdga3fx',
+
   quest:    'set-quest-99',
+
   location: 'set-location-99',
+
   tasks:    'set-tasks-99',
+
   videos:   'set-videos-99',
 }

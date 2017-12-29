@@ -4,10 +4,13 @@ let BjjcRouter = {
   rootPath: '/tgm3',
 
   categoriesPath: '/tgm3/categories',
-  categoriesLink: () => { return `/tgm3/categories` },
-
-  categoryLink: (c) => { return `/categories/${c.path}` },
-  categoryPath: '/categories/:categoryPath',
+  categoriesLink: () => { 
+    return `/tgm3/categories/technique` 
+  },
+  categoryPath: '/tgm3/categories/:categoryPath',
+  categoryLink: (c) => { 
+    return `/tgm3/categories/technique/${c.path}` 
+  },
 
   chapterLink: (c) => { return `/tgm3/chapters/${c}` },
   chapterPath: '/tgm3/chapters/:chaptername',
@@ -43,7 +46,9 @@ let BjjcRouter = {
   videosShowPath: '/videos/view/:youtubeId',
   videosShowLink: (v) => { return `/videos/view/${v.youtube_id}` },
 
-  // formerly TgmApi
+  /**
+   * formerly TgmApi
+   */
   fbLogin:       `${config.apiUrl}/api/users/fb_sign_in`,
   profile:       `${config.apiUrl}/api/users/profile`,
   updateProfile: `${config.apiUrl}/api/users/profile/update`,

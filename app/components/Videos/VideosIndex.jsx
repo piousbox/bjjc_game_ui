@@ -1,24 +1,25 @@
 import React from 'react'
-import { Grid, Col, Row } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import { 
+  Grid, Row, Col, Panel,
+} from 'react-bootstrap'
 
 import Center from '../Center'
-
 import BjjcRouter from '../App/BjjcRouter'
 
-import { Link } from 'react-router'
-
-import { Panel } from 'react-bootstrap'
-
 class VideosIndex extends React.Component {
-
   constructor(props) {
     super(props)
+    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
   }
 
   componentWillReceiveProps (nextProps) {
   }
 
   render () {
+    console.log('+++ +++ VideosIndex render:', this.props, this.state)
+
     let videos = []
     let videosCount = this.props.nVideos
 
@@ -36,16 +37,23 @@ class VideosIndex extends React.Component {
     }
 
     return (
-      <div>
+      <Grid fluid>
         <Row>
           <Col sm={12}>
+            Videos Index
             { /* <Center>videos ({videosCount})</Center> */ }
             { videos }
           </Col>
         </Row>
-      </div>
+      </Grid>
     )
   }
 }
 
-export default VideosIndex
+const mapState = (state, ownProps) => {
+  return {
+    videos: state.videos,
+  }
+}
+
+export default connect(mapState)(VideosIndex)

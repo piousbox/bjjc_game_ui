@@ -25,6 +25,13 @@ import {
 
 import { CONST } from '../../constants'
 
+import { CategoriesIndex } from '../Categories'
+import {
+  LocationShow, LocationMap,
+} from '../Locations'
+import { Tasks }        from '../Tasks'
+import { VideosIndex }  from '../Videos'
+
 import Badge            from './Badge'
 import BjjcRouter       from './BjjcRouter'
 import BjjcBreadcrumbs  from './BjjcBreadcrumbs'
@@ -34,11 +41,6 @@ import FbConnect        from './FbConnect'
 import Headers          from './Headers'
 import Quest            from './Quest' // Story
 
-import {
-  LocationShow, LocationMap,
-} from '../Locations'
-import { Tasks }        from '../Tasks'
-import { Videos }       from '../Videos'
 
 class Tgm3 extends React.Component {
   constructor(props) {
@@ -50,13 +52,15 @@ class Tgm3 extends React.Component {
                       showLeft: CONST.chapters, // map
                       showRight: CONST.news,
                       leftFolds: [
-                        {key: CONST.chapters,    readable: 'Chapters'},
-                        // { key: CONST.chat, readable: 'Chat' },
-                        {key: CONST.locationMap, readable: 'Location Map' },
+                        { key: CONST.chapters,    readable: 'Chapters'},
+                        { key: CONST.chat, readable: 'Chat' },
+                        { key: CONST.locationMap, readable: 'Location Map' },
+                        { key: CONST.technique, readable: 'Technique' },
                       ],
-                      rightFolds: [ 
-                        // {key: CONST.news,         readable: 'News' },
-                        {key: CONST.locationShow, readable: 'This Location' },
+                      rightFolds: [
+                        { key: CONST.news,         readable: 'News' },
+                        { key: CONST.locationShow, readable: 'This Location' },
+                        { key: CONST.videos,       readable: 'Videos' },
                       ],
     };
 
@@ -90,7 +94,6 @@ class Tgm3 extends React.Component {
       nextState.showLeft = CONST.categories
       nextState.rightFolds.push( CONST.videos )
       nextState.showRight = CONST.videos
-
     }
      
     // chapters
@@ -234,12 +237,11 @@ class Tgm3 extends React.Component {
   }
 
   render () {
-    // console.log('+++ +++ Tgm3 render:', this.props, this.state)
+    console.log('+++ +++ Tgm3 render:', this.props, this.state)
     
     let leftPane = (<div><Panel>default leftPane</Panel></div>)
     switch (this.state.showLeft) {
-      case CONST.map: // @TODO: is this deprecated?
-      case CONST.locationMap:
+      case CONST.locationMap: // and map
         leftPane = (<LocationMap params={{ locationname: this.props.params.locationname }} />)
         break
       case CONST.chat:
@@ -251,8 +253,14 @@ class Tgm3 extends React.Component {
       case CONST.chapters:
         leftPane = (<Chapters chapters={this.props.chapters} />)
         break
-      case CONST.categories:
-        leftPane = (<CategoriesIndex categiesSlugs={ this.props.location.query.categoriesSlugs.split('/') } />)
+      case CONST.categories: // and technique
+        let slugs
+        if (this.props.location.query.categoriesSlugs) {
+          slugs = this.props.location.query.categoriesSlugs.split('/')
+        } else {
+          slugs = [ this.props.params.slug_0 ]
+        }
+        leftPane = (<CategoriesIndex categiesSlugs={ slugs } params={this.props.params} location={this.props.location} />)
         break
       default:
         if (this.props.location) {
@@ -266,7 +274,7 @@ class Tgm3 extends React.Component {
         rightPane = (<Quest badgename={this.props.params.badgename} />)
         break
       case CONST.videos:
-        rightPane = (<Videos videos={this.props.videos} />)
+        rightPane = (<VideosIndex videos={this.props.videos} />)
         break
       case CONST.tasks:
         rightPane = (<Tasks tasks={this.props.tasks} />)
@@ -300,7 +308,7 @@ class Tgm3 extends React.Component {
             </ul>
             <div className="tab-wrapper">
               <div className="tab-content">
-                <div className="tab-pane active" id="leftPane" style={{ overflow: 'hidden' }} >
+                <div className="tab-pane active" id="leftPane" >
                   { leftPane }
                 </div>
               </div>
@@ -345,19 +353,19 @@ function mapStateToProps(state, ownProps) {
   return {
     badge: state.badge,
 
-    categories: state.categories,
+    // categories: state.categories,
     chapter: state.chapter,
     chapters: state.chapters,
 
-    leftPane: state.leftPane,
+    // leftPane: state.leftPane,
     // location: state.location,
 
     path: state.path,
     profile: state.profile,
 
-    rightPane: state.rightPane,
+    // rightPane: state.rightPane,
 
-    videos: state.videos,
+    // videos: state.videos,
   }
 }
 

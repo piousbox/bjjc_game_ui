@@ -14,16 +14,18 @@ import config from 'config'
 
 function categoryReducer (state = {}, action) {
   switch (action.type) {
-    case SET_SHOW_CATEGORY:
+    case SET.category:
       console.log('+++ +++ category reducer:', action)
       return action.category
-    default: return state
+    default: 
+      return state
   }
 }
 
 function categoriesReducer (state = [], action) {
   switch (action.type) {
     case SET.categories:
+      console.log('+++ +++ categories reducer:', action)
       return action.categories
     default:
       return state

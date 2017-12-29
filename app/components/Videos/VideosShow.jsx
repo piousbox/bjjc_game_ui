@@ -6,7 +6,6 @@ import { Grid, Col, Row,
 import Center from '../Center'
 
 import BjjcRouter from '../App/BjjcRouter'
-import Leaderboard from '../App/Leaderboard'
 
 import { Link } from 'react-router'
 
@@ -45,7 +44,6 @@ class VideosShow extends React.Component {
 
     return (
       <Grid>
-        <Leaderboard />
         <Row>
           <Col xs={8} xsOffset={2}>
             <Panel>
