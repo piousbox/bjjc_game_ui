@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Router, Route, browserHistory, Redirect,
          IndexRoute,
 } from 'react-router'
-import { Provider, connect } from 'react-redux'
+import { connect } from 'react-redux'
 import 'whatwg-fetch'
 
 import config     from 'config'
@@ -13,7 +13,6 @@ import store      from '../../stores'
 
 import styles     from './_App.scss'
 import bg         from './images/noisy_grid.png'
-import Home       from './Home'
 import Profile    from './Profile'
 import BjjcRouter from './BjjcRouter'
 
@@ -69,11 +68,8 @@ const routes = [
 ]
 
 class App extends React.Component {
-
   constructor(props) {
     super(props)
-    // this.props.dispatch(citiesIndex())
-    // this.props.dispatch(profileAction())
   }
 
   componentDidMount() {
@@ -87,12 +83,7 @@ class App extends React.Component {
 
   render() {
     // console.log('+++ +++ App props:', this.props, this.state)
-
-    return (
-      <Provider store={store} >
-        <Router history={browserHistory} routes={routes} onUpdate={(e) => { window.scrollTo(0, 0) }} />
-      </Provider>
-    );
+    return (<Router history={browserHistory} routes={routes} onUpdate={(e) => { window.scrollTo(0, 0) }} />);
   }
 }
 

@@ -6,7 +6,7 @@ import { Grid, Row, Col,
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
-import { categoriesIndex } from '../../actions'
+import { categoriesAction } from '../../actions'
 
 import Center from '../Center'
 import Debug from '../Debug'
@@ -26,7 +26,7 @@ class CategoriesIndex extends React.Component {
     console.log('+++ +++ categoriesIndex constructor:', props)
 
     this.state = { categories: [] }
-    props.dispatch(categoriesIndex( props.categoriesSlug || props.params ))
+    props.dispatch(categoriesAction( props.params ))
     // props.dispatch({ type: SET_PATH, path: props.params }) // breadcrumb?
 
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this)
@@ -48,7 +48,7 @@ class CategoriesIndex extends React.Component {
     console.log('next, this paths:', nextPath, path)
 
     if (path !== nextPath) {
-      this.props.dispatch(categoriesIndex( nextProps.params ))
+      this.props.dispatch(categoriesAction( nextProps.params ))
     }
   }
 

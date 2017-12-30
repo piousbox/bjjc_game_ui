@@ -14,9 +14,10 @@ import arrowUp    from './images/16x16/arrow-top.png'
 import arrowDown  from './images/16x16/arrow-bottom.png'
 
 import {
+  categoriesAction,
+
   locationAction,
 
-  setCategories,
   setChapters,
   setChapter,
   setBadge,
@@ -88,8 +89,8 @@ class Tgm3 extends React.Component {
     }
 
     // categories
-    if (props.router.location.pathname === BjjcRouter.categoriesLink()) {
-      props.dispatch(setCategories([config.defaultCategory]))
+    if (props.params.slug_0) {
+      props.dispatch(categoriesAction(props.params))
       nextState.leftFolds.push({ key: CONST.categories, readable: 'Categories' })
       nextState.showLeft = CONST.categories
       nextState.rightFolds.push( CONST.videos )

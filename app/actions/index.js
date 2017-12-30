@@ -177,7 +177,7 @@ const videosShowAction = (youtubeId) => {
 import { loginAction, logoutAction, profileAction, } from './profileActions'
 
 export default {
-  categoriesIndex: categoriesAction,
+  categoriesAction,
   categoriesShow,
 
   locationAction,
