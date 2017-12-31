@@ -148,7 +148,6 @@ class FbConnect extends React.Component {
           You have { this.props.profile.n_stars } <img style={{ display: 'inline' }} src={ star } alt='star' />&#39;s. 
           <Button onClick={ () => {this.setState({ showBuyMore: true })} }>Buy More</Button>
           <button onClick={ () => {this.props.dispatch(logoutAction())} }>Logout</button>
-          <Link to={BjjcRouter.categoriesLink()}>Technique</Link>
         </div>
       )
     } else {
