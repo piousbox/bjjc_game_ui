@@ -2,7 +2,7 @@
 
 set -ex
 
-cd /home/ubuntu/projects/tgm_react
+cd /home/ubuntu/projects/bjjc_game_ui
 git reset origin/master --hard
 git pull
 sudo service apache2 reload

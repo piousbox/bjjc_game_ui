@@ -30,7 +30,7 @@ class Headers extends React.Component {
           <li><Link to="/shop">Shop</Link></li>
           <li><Link to="/profile">Profile</Link></li>
           <li><Link to={BjjcRouter.categoriesLink()}>Technique</Link></li>
-          <li>v0.1.8</li>
+          <li>v0.1.9</li>
         </ul>
         <div className="header-2" style={{ zIndex: 2 }} >
           <BjjcBreadcrumbs />
