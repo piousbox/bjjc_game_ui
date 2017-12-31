@@ -20,29 +20,40 @@ import {
 import config from 'config'
 
 // c
-const categoriesAction = (params={}) => {
-  console.log('+++ +++ categoriesAction params:', params)
-
+const categoriesAction = (params={}, category={}) => {
   let cats = []
   for (let i=0; i<8; i++) { 
     if (params[`slug_${i}`]) { cats.push( params[`slug_${i}`] ) } 
   }
 
-  return (dispatch, getState) => {
-    let url = `${config.apiUrl}/api/categories/${cats.join('/')}`
-    fetch(url).then(r => r.json()).then(_data => {
-      // console.log('+++ +++ action categoriesIndex:', _data)
-      dispatch({ type: SET.category, 
-                 category: _data })
-      dispatch({ type: SET.categories, 
-                 categories: _data.categories })
-      dispatch({ type: SET.videos,
-                 videos: _data.videos })
-    })
+  if (category.kind === 'thumb') {
+    return (dispatch, getState) => {
+      let url = `${config.apiUrl}/api/categories/${cats.join('/')}/${category.short_slug}`
+      fetch(url).then(r => r.json()).then(_data => {
+        dispatch({ type: SET.inlineCategories, 
+                   categories: _data.categories })
+        dispatch({ type: SET.inlinedCategory,
+                   category: _data })
+      })
+    }
+  } else {
+    return (dispatch, getState) => {
+      let url = `${config.apiUrl}/api/categories/${cats.join('/')}`
+      fetch(url).then(r => r.json()).then(_data => {
+        dispatch({ type: SET.category, 
+                   category: _data })
+        dispatch({ type: SET.categories, 
+                   categories: _data.categories })
+        if (_data.videos.length !== 0) {
+          dispatch({ type: SET.videos,
+                     videos: _data.videos })
+        }
+      })
+    }
   }
 }
 
-const categoriesShow = (variables) => {
+/* const categoriesShow = (variables) => {
   return (dispatch, getState) => {
     let state = getState()
     let url = `${config.apiUrl}/api/categories.json`    
@@ -53,7 +64,7 @@ const categoriesShow = (variables) => {
       })
     })
   }
-}
+} */
 
 // s
 const setBadge = (badgename) => {
@@ -162,6 +173,18 @@ const siteShow = () => {
   }
 }
 
+// v
+const videosAction = (category) => {
+  console.log('+++ +++ videoAction:', category)
+  return (dispatch, getState) => {
+    let url = `${config.apiUrl}/api/videos/in/${category.id}`
+    fetch(url).then(r => r.json()).then(_data => {
+      dispatch({ type: SET.videos,
+                 videos: _data.videos })
+    })
+  }
+}
+
 const videosShowAction = (youtubeId) => {
   return (dispatch, getState) => {
     let state = getState()
@@ -178,13 +201,12 @@ import { loginAction, logoutAction, profileAction, } from './profileActions'
 
 export default {
   categoriesAction,
-  categoriesShow,
+  // categoriesShow,
 
   locationAction,
   loginAction,
   logoutAction,
 
-  // setCategories,
   setChapters,
   setChapter,
   setBadge,
@@ -196,5 +218,6 @@ export default {
 
   questAction,
 
-  videosShowAction,
+  videosAction,
+  videosShowAction, // one video, actually videoAction
 }

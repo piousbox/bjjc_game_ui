@@ -91,9 +91,9 @@ class Tgm3 extends React.Component {
     // categories
     if (props.params.slug_0) {
       props.dispatch(categoriesAction(props.params))
-      nextState.leftFolds.push({ key: CONST.categories, readable: 'Categories' })
+      // nextState.leftFolds.push({ key: CONST.categories, readable: 'Categories' })
       nextState.showLeft = CONST.categories
-      nextState.rightFolds.push( CONST.videos )
+      // nextState.rightFolds.push( CONST.videos )
       nextState.showRight = CONST.videos
     }
      

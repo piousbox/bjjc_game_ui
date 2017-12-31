@@ -108,8 +108,6 @@ class CategoriesIndex extends React.Component {
             { categories }
           </Col>
         </Row>
-
-        { /* <Col sm={8}><VideosIndex videos={ this.props.videos } nVideos={ this.props.category.n_videos }/></Col> */ }
       </Grid>
     ) 
   }
@@ -122,8 +120,8 @@ const mapStateToProps = (store, ownprops) => {
   return {
     categories: store.categories,
     category: store.category,
-    videos: store.videos,
-    video: store.video,
+    // inlineCategories: store.inlineCategories,
+    // inlinedCategory: store.inlinedCategory,
   }
 }
 

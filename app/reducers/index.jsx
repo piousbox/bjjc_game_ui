@@ -1,4 +1,8 @@
 
+/**
+ * index reducer
+ */
+
 import { combineReducers } from 'redux'
 
 import {
@@ -64,6 +68,25 @@ function chapters (state=[], action) {
   switch (action.type) {
     case SET_CHAPTERS:
       return action.chapters
+    default:
+      return state
+  }
+}
+
+// i
+function inlineCategories (state=[], action) {
+  switch (action.type) {
+    case SET.inlineCategories:
+      console.log('+++ +++ inlineCategories reducer?', action)
+      return action.categories
+    default:
+      return state
+  }
+}
+function inlinedCategory (state={}, action) {
+  switch (action.type) {
+    case SET.inlinedCategory:
+      return action.category
     default:
       return state
   }
@@ -174,6 +197,9 @@ export default combineReducers({
   category: categoryReducer,
   chapter,
   chapters,
+
+  inlineCategories,
+  inlinedCategory,
   
   leftPane: leftPaneReducer,
   location,

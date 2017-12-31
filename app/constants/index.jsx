@@ -69,6 +69,9 @@ export const SET = {
   category:   'set-category',
   categories: 'set-categories-set-sdga3fx',
 
+  inlineCategories: 'set-inline-categories',
+  inlinedCategory: 'set-inlined-category',
+
   quest:    'set-quest-99',
 
   location: 'set-location-99',

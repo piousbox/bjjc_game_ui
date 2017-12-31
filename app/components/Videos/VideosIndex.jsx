@@ -29,7 +29,8 @@ class VideosIndex extends React.Component {
         videos.push(
           <Panel key={idx++} >
             <h2><Link to={ BjjcRouter.videosShowLink( video ) }>{ video.title }</Link></h2>
-            <iframe width="420" height="315" src={`https://www.youtube.com/embed/${video.youtube_id}`}></iframe>
+            { /* <iframe width="420" height="315" src={`https://www.youtube.com/embed/${video.youtube_id}`}></iframe> */ }
+            <img src={`https://img.youtube.com/vi/${video.youtube_id}/0.jpg`} alt='' />
             <div dangerouslySetInnerHTML={{ __html: video.descr }} />
           </Panel>
         )
