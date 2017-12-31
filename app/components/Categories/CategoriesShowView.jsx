@@ -29,7 +29,7 @@ class CategoriesShowView extends React.Component {
   }
 
   render () {
-    console.log('+++ +++ CategoriesShowView render:', this.props, this.state)
+    // console.log('+++ +++ CategoriesShowView render:', this.props, this.state)
 
     let link = null
     if (this.state.category.kind === 'thumb') {
