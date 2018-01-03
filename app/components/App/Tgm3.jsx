@@ -309,7 +309,7 @@ class Tgm3 extends React.Component {
             </ul>
             <div className="tab-wrapper">
               <div className="tab-content">
-                <div className="tab-pane active" id="leftPane" >
+                <div className="tab-pane active" id="leftPane" style={{ overflow: 'hidden' }} >
                   { leftPane }
                 </div>
               </div>

@@ -85,14 +85,15 @@ class LocationMap extends React.Component {
                     width: this.props.location.background_image_width*2 - oWidth,
                     height: this.props.location.background_image_height*2 - oHeight, 
                     top: -this.props.location.background_image_height + oHeight, 
-                    left: -this.props.location.background_image_width + oWidth, 
+                    left: -this.props.location.background_image_width + oWidth,
       }}>
         <Draggable bounds="parent" 
                    defaultPosition={{ x: 500, y: 500 }} >
           <div id="locationMap" style={{ height: this.props.location.background_image_height,
                                          width: this.props.location.background_image_width,
                                          background: `no-repeat url(${this.props.location.background_image_path})`,
-                                         position: 'relative' }}>
+                                         position: 'relative',
+          }}>
             { badges }
           </div>
         </Draggable>

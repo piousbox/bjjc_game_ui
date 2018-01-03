@@ -46,5 +46,5 @@
 0.1.8 - major changes, lets cleanup everything, trying to make it work 
         (although co tailors is an easier task)
         20171228 continue wiring in categories show
-
+        fixed scrolling of both map and technique
 
