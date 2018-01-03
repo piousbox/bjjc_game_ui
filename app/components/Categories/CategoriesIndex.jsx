@@ -97,18 +97,20 @@ class CategoriesIndex extends React.Component {
     }
 
     return (
-      <Grid fluid>
-        <Row>
-          <Col sm={12}>
-            <Center><h3>{ this.props.category.title } ({this.props.category.n_videos})</h3></Center>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={12}>
-            { categories }
-          </Col>
-        </Row>
-      </Grid>
+      <div style={{ overflow: 'auto', height: '100%' }} >
+        <Grid fluid>
+          <Row>
+            <Col sm={12}>
+              <Center><h3>{ this.props.category.title } ({this.props.category.n_videos})</h3></Center>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12}>
+              { categories }
+            </Col>
+          </Row>
+        </Grid>
+      </div>
     ) 
   }
 }
